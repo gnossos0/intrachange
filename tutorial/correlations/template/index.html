@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation Module - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../../img/icon.jpg">
+    <link rel="stylesheet" href="../../tutorial.css">
+    <link rel="stylesheet" href="../shared/correlations.css">
+    <link rel="stylesheet" href="module.css">
+</head>
+<body>
+    <a href="#move-details" class="skip-link">Skip to main content</a>
+    <div class="module-container">
+        <!-- Header -->
+        <div class="module-header">
+            <h2 class="text-white text-2xl font-semibold" id="correlation-header">Correlation #::#</h2>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="module-navigation" role="navigation" aria-label="Move navigation">
+            <button id="prev-btn" class="nav-btn" disabled aria-label="Previous move">← Previous</button>
+            <span id="move-counter" aria-live="polite">- of -</span>
+            <button id="next-btn" class="nav-btn" disabled aria-label="Next move">Next →</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="module-content" role="main">
+            <!-- Move Viewer -->
+            <section class="move-viewer" aria-labelledby="move-details">
+                <div id="move-image" class="move-image-container gov-chess" role="img" aria-label="Chess move visualization">
+                    <!-- Image will be loaded here -->
+                </div>
+                <div id="move-details" class="move-details gov-chess-details">
+                    <!-- Move information will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Side Panel -->
+            <aside class="explanation-panel" role="complementary" aria-label="Move explanation">
+                <section id="keywords-section" class="corr-section">
+                    <h2 class="corr-section-title">Keywords</h2>
+                    <div id="keywords-list" class="corr-section-body" role="list">
+                        <!-- Keywords will be loaded here -->
+                    </div>
+                </section>
+
+                <section id="interpretation-section" class="corr-section interp">
+                    <h2 class="corr-section-title">Interpretation</h2>
+                    <div id="interpretation-text" class="corr-section-body">
+                        <!-- Interpretation will be loaded here -->
+                    </div>
+                </section>
+            </aside>
+        </main>
+
+        <!-- Back Navigation -->
+        <footer class="module-footer">
+            <a href="../../index.html" class="back-button" aria-label="Return to main tutorial">← Back to Tutorial</a>
+        </footer>
+    </div>
+
+    <script type="module" src="module.js?v=2"></script>
+</body>
+</html>

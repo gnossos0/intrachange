@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reference Portal</title>
+  <link rel="icon" type="image/jpeg" href="../img/icon.jpg" />
+  <link rel="stylesheet" href="../assets/global.css" />
+  <link rel="stylesheet" href="ref.css" />
+</head>
+<body>
+  <div class="ref-shell">
+    <aside class="ref-nav" aria-label="Reference navigation">
+      <div class="nav-header">
+        <h1 class="nav-title">Reference Portal</h1>
+        <p class="nav-subtitle">Antechamber for inquiry</p>
+      </div>
+
+      <nav class="nav-list" role="tablist">
+        <button class="nav-item is-active" type="button" role="tab" aria-selected="true" data-target="home">Home</button>
+        <details class="nav-disclosure" id="hexagrams-section" open>
+          <summary class="nav-item" role="tab" aria-selected="false" data-target="hexagrams">
+            <span class="triangle" aria-hidden="true"></span>
+            Hexagrams
+          </summary>
+          <div class="disclosure-items" id="hexagram-list">
+            <p style="color: #888; font-style: italic;">Awaiting move data...</p>
+          </div>
+        </details>
+        
+        <div class="nav-categories">
+          <label class="dropdown-label" for="ref-categories">Categories</label>
+          <div class="dropdown-shell">
+            <details class="dropdown dropup" id="ref-categories">
+              <summary class="dropdown-select" aria-haspopup="listbox">
+                Categories
+                <span class="dropdown-icon" aria-hidden="true">▾</span>
+              </summary>
+              <div class="dropdown-menu" role="listbox" id="categories-dropdown-menu">
+                <!-- Categories will be populated dynamically from JSON data -->
+                <div class="dropdown-heading">Loading categories...</div>
+              </div>
+            </details>
+          </div>
+        </div>
+        
+        <div class="nav-search">
+          <p class="nav-search-title">Search</p>
+          <div class="nav-search-field">
+            <input type="text" aria-label="Search" />
+          </div>
+          <p class="nav-search-title">Filters:</p>
+          <label class="nav-filter">
+            <input type="checkbox" />
+            <span>Blog posts</span>
+          </label>
+          <label class="nav-filter">
+            <input type="checkbox" />
+            <span>Gallery</span>
+          </label>
+          <label class="nav-filter">
+            <input type="checkbox" />
+            <span>Wikipedia</span>
+          </label>
+          <label class="nav-filter">
+            <input type="checkbox" />
+            <span>AI Explainer</span>
+          </label>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="ref-content">
+
+     <section id="home" class="panel is-visible" role="tabpanel">
+        <div class="panel-inner"> 
+          <div id="reference-content"></div>
+          <p>This is a place to find correspondences.</p>
+          <p>Choose a path on the left.</p>
+          <p>Copy what resonates.</p>
+          <p>Close this window and paste it back into your move.</p>
+          
+          <!-- Blog Results Display Area -->
+          <div id="blog-results-section" style="display: none;">
+            <h3 id="blog-results-title">Blog Posts</h3>
+            <div id="blog-results-container"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="hexagrams" class="panel" role="tabpanel" hidden>
+        <div class="panel-inner">
+          <h2>Hexagrams</h2>
+          <p>Placeholders for symbolic pairings, line notes, and sequences.</p>
+          <p class="quiet">Copy-ready snippets will appear here.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Global API Base for Reference Portal - Must be defined first
+    if (!window.API_BASE) {
+      window.API_BASE = window.location.origin + '/';
+      console.log('API_BASE defined in ref portal as:', window.API_BASE);
+    }
+    
+    // Standardized fetch function with validation for Reference Portal
+    window.safeFetch = window.safeFetch || async function(endpoint, options = {}) {
+      const url = window.API_BASE + endpoint;
+      console.log('Fetching:', url);
+      
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+      
+      return response; // Return response object for flexible handling
+    };
+  </script>
+  <script src="ref.js"></script>
+  <script>
+    // REFERENCE PORTAL INITIALIZATION - ENFORCED DEFAULT STATE
+    // Home panel must remain visible until user explicitly navigates
+    // NO automatic hexagram loading based on URL parameters or any other trigger
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // ENFORCE: Home panel is always the default state
+      const homePanel = document.getElementById('home');
+      const hexagramsPanel = document.getElementById('hexagrams');
+      
+      // Ensure Home panel is visible, others are hidden
+      if (homePanel) {
+        homePanel.classList.add('is-visible');
+        homePanel.hidden = false;
+      }
+      if (hexagramsPanel) {
+        hexagramsPanel.classList.remove('is-visible');
+        hexagramsPanel.hidden = true;
+      }
+      
+      // Update sidebar display (for info only, NOT content loading)
+      setTimeout(updateSidebarDisplay, 100);
+      
+      console.log('✅ Reference Portal initialized in default Home state');
+    });
+    // Sidebar display update - shows hexagram info but does NOT load content
+    // This is for display purposes only, content loading requires explicit user interaction
+    async function updateSidebarDisplay() {
+      const params = new URLSearchParams(window.location.search);
+      const hexagramList = document.getElementById('hexagram-list');
+      const hexagramsSection = document.getElementById('hexagrams-section');
+      
+      if (!hexagramList) {
+        console.warn('hexagram-list element not found');
+        return;
+      }
+      
+      try {
+        // Import hexagram keyword mapping
+        const { getKeywordFromHex } = await import('./hexagrams.mjs');
+        const { hexByBinary: sequenceMap } = await import('../frontend/hexSequenceMap.mjs');
+        
+        const hexagrams = [];
+        const keywords = [];
+        
+        // Extract hexagrams from URL parameters (for sidebar display only)
+        const origin = params.get('origin');
+        const target = params.get('target');
+        const esoteric = params.get('esoteric');
+        
+        if (origin) {
+          hexagrams.push(parseInt(origin));
+          keywords.push(getKeywordFromHex(parseInt(origin)) || 'Unknown');
+        }
+        
+        if (target) {
+          hexagrams.push(parseInt(target));
+          keywords.push(getKeywordFromHex(parseInt(target)) || 'Unknown');
+        }
+        
+        if (esoteric) {
+          hexagrams.push(parseInt(esoteric));
+          keywords.push(getKeywordFromHex(parseInt(esoteric)) || 'Esoteric');
+        }
+        
+        // Generate clickable hexagram items for sidebar
+        if (hexagrams.length > 0) {
+          const items = hexagrams.map((hex, index) => {
+            const keyword = keywords[index] || 'Unknown';
+            const label = index === 0 ? 'Origin' : index === 1 ? 'Target' : 'Esoteric';
+            return `
+              <p style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0; padding: 6px; background: #f8f9fa; border-radius: 4px; font-size: 13px; color: #555; cursor: pointer; transition: background-color 0.2s ease;" 
+                 class="hexagram-entry" 
+                 data-binary-hex="${hex}"
+                 onmouseover="this.style.backgroundColor='#e8f4fd'"
+                 onmouseout="this.style.backgroundColor='#f8f9fa'">
+                <span style="font-weight: bold; color: #2c3e50;">${hex}</span>
+                <span style="color: #7f8c8d; font-style: italic; text-align: right; flex: 1; margin-left: 8px;">
+                  <small style="display: block; color: #95a5a6; font-size: 11px;">${label}</small>
+                  ${keyword}
+                </span>
+              </p>
+            `;
+          }).join('');
+          
+          hexagramList.innerHTML = items;
+          
+          // Wire click handlers for manual user-initiated loading
+          const hexagramEntries = hexagramList.querySelectorAll('.hexagram-entry');
+          hexagramEntries.forEach(entry => {
+            entry.addEventListener('click', (e) => {
+              const binaryHex = parseInt(e.currentTarget.dataset.binaryHex);
+              loadToltecPageOnUserClick(binaryHex, sequenceMap);
+            });
+          });
+          
+          console.log('✅ Sidebar display updated (no auto-loading):', { hexagrams, keywords });
+        } else {
+          hexagramList.innerHTML = '<p style="color: #888; font-style: italic; text-align: center; padding: 20px;">No hexagram data in URL parameters</p>';
+        }
+        
+        // Ensure the details section is open for display
+        if (hexagramsSection) {
+          hexagramsSection.open = true;
+        }
+        
+      } catch (error) {
+        console.error('Error updating sidebar display:', error);
+        hexagramList.innerHTML = '<p style="color: #e74c3c; font-style: italic;">Error loading hexagram data</p>';
+      }
+    }
+    
+    
+    // Load Toltec I Ching page - ONLY triggered by explicit user click
+    // This function only runs when user manually clicks a hexagram in the sidebar
+    async function loadToltecPageOnUserClick(binaryHex, sequenceMap) {
+      const contentContainer = document.getElementById('reference-content');
+      const homePanel = document.getElementById('home');
+      
+      if (!contentContainer || !sequenceMap[binaryHex]) {
+        console.warn(`Cannot load Toltec page for binary hex ${binaryHex}`);
+        return;
+      }
+      
+      // Get Toltec page number from mapping
+      const tticNumber = sequenceMap[binaryHex].ttic;
+      const toltecUrl = `./tolteciching/hex${tticNumber.toString().padStart(2, '0')}.html`;
+      
+      try {
+        // Show loading state
+        contentContainer.innerHTML = '<p style="color: #666; font-style: italic;">Loading Toltec I Ching content...</p>';
+        
+        // Ensure home panel is visible
+        homePanel.classList.add('is-visible');
+        homePanel.hidden = false;
+        
+        // Fetch the Toltec page using absolute path (not API_BASE)
+        console.log(`Fetching Toltec page from: ${toltecUrl}`);
+        const response = await fetch(toltecUrl);
+        console.log(`Toltec fetch response status: ${response.status}`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const html = await response.text();
+        
+        // Fix relative image paths to work from the portal's context
+        const fixedHtml = html.replace(/src="images\//g, 'src="tolteciching/images/')
+                             .replace(/src="\.\.\/\.\.\//g, 'src="../');
+        
+        // Inject the content
+        contentContainer.innerHTML = `
+          <div class="toltec-content">
+            <h3>Binary ${binaryHex} → Toltec I Ching ${tticNumber}</h3>
+            ${fixedHtml}
+          </div>
+        `;
+        
+        console.log(`✅ Loaded Toltec page: binary ${binaryHex} → ${toltecUrl}`);
+        
+      } catch (error) {
+        console.error(`Failed to load Toltec page ${toltecUrl}:`, error);
+        contentContainer.innerHTML = `
+          <div class="toltec-error">
+            <h3>Binary ${binaryHex} → Toltec I Ching ${tticNumber}</h3>
+            <p style="color: #e74c3c; font-style: italic;">Content not available: ${error.message}</p>
+            <p style="color: #666; font-size: 0.9rem;">Attempted to load: ${toltecUrl}</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Initialize sidebar when DOM is ready
+    // (Sidebar initialization moved to DOMContentLoaded above)
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+/* Correlation shared styles (approved minimal version) */
+
+.corr-container {
+  font-family: 'Inter', sans-serif;
+  padding: 1rem;
+}
+
+.corr-card {
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 12px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.corr-hover {
+  background-color: rgba(240, 240, 240, 0.5);
+}
+
+.corr-highlight {
+  outline: 2px solid rgba(0, 123, 255, 0.6);
+}
+
+.corr-selected {
+  outline: 2px solid rgba(255, 165, 0, 0.9);
+  background-color: rgba(255, 165, 0, 0.1);
+}
+
+.corr-dimmer {
+    opacity: 0.35;
+}
+
+.corr-section {
+    margin: 2rem 0;
+}
+
+.corr-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.corr-section-body {
+    line-height: 1.6;
+}
+
+.corr-card-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.corr-card-content {
+    line-height: 1.5;
+}
+
+.corr-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.corr-grid-item {
+    padding: 0.5rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+}

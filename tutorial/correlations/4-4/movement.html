@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation 4::4 - Movement - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../../img/icon.jpg">
+    <link rel="stylesheet" href="../../tutorial.css">
+    <link rel="stylesheet" href="../shared/correlations.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-button">← Tutorial Index</a>
+    
+    <!-- Navigation arrows -->
+    <div class="arrow arrow-left" onclick="prevPage()">←</div>
+    <div class="arrow arrow-right" onclick="nextPage()">→</div>
+
+    <div class="tutorial-container">
+        <div class="tutorial-header">
+            <h1>Correlation 4::4</h1>
+            <h2>Movement Dynamics</h2>
+        </div>
+        
+        <div class="tutorial-content">
+            <div class="archivist-welcome">
+                <p class="greeting"><strong><em>Movement in Correlation,</em></strong></p>
+                <p>When pieces share line 4 of their respective hexagrams, they create a resonant connection that influences movement potential. This correlation manifests in three primary ways:</p>
+                
+                <div class="correlation-section">
+                    <h3>Sympathetic Movement</h3>
+                    <p>Pieces in 4::4 correlation may influence each other's movement options, creating opportunities for coordinated positioning.</p>
+                    
+                    <h3>Resonant Timing</h3>
+                    <p>The correlation suggests optimal timing for sequential moves, where one piece's action enhances the other's potential.</p>
+                    
+                    <h3>Transformation Potential</h3>
+                    <p>Line 4 represents a point of balance and transition, making correlated moves particularly powerful for board transformation.</p>
+                </div>
+                
+                <p>Next, we will explore how to recognize these patterns in actual gameplay.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/correlations-utils.js"></script>
+    <script>
+        function prevPage() {
+            window.location.href = 'intro.html';
+        }
+        
+        function nextPage() {
+            window.location.href = 'patterns.html';
+        }
+    </script>
+</body>
+</html>

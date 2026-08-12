@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02c. Modification of Chess Rules - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        /* Increase font size and add spacing */
+        .tutorial-content {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .tutorial-content h3 {
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Modification of Chess Rules</h1>
+                <p class="subtitle">Page 3 of 3</p>
+            </div>
+            
+            <div class="tutorial-content">
+                <p></p>
+                
+                <h3>Deleted Rules</h3>
+                <ul>
+                    <li>Castling</li>
+                    <li>En passant</li>
+                    <li>Pawn promotion</li>
+                    <li>Check/Mate</li>
+                </ul>
+
+                <p></p>
+
+                <h3>Definitions</h3>
+                <ul>
+                    <li>Exoteric Move: Legal Chess move; half of all result in Esoteric Moves.</li>
+                    <li>Esoteric Move: Triggered when a Piece cannot occupy an Exoteric Square. Capture is determined at the Esoteric Square.</li>
+                </ul>
+
+                <p></p>
+
+                <p>With the rules clear, your next task is to explore the symbolic meaning of each Move.</p>
+            </div>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '03_symbolism_of_the_move.html';
+        }
+
+        function prevPage() {
+            window.location.href = '02b_modification_of_chess_rules.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

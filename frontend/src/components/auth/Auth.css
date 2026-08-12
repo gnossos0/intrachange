@@ -1,0 +1,265 @@
+/* Auth.css - Matching tutorial.css style */
+.auth-container {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #3a3a3a;
+  color: #ddd;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page {
+  width: 1200px;
+  height: 800px;
+  background: #6a6a6a;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  padding: 40px 60px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #f0f0f0;
+  text-align: center;
+  margin-top: 20px;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.auth-form-container {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-form-container h2 {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  color: #aaa;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ddd;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  background: #4a4a4a;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: gold;
+  background: #525252;
+}
+
+.form-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-group input::placeholder {
+  color: #999;
+}
+
+.form-hint {
+  display: block;
+  margin-top: 4px;
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.auth-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.auth-button.primary {
+  background: gold;
+  color: #333;
+}
+
+.auth-button.primary:hover:not(:disabled) {
+  background: #e6c200;
+  transform: translateY(-1px);
+}
+
+.auth-button.secondary {
+  background: transparent;
+  color: #aaa;
+  border: 1px solid #555;
+}
+
+.auth-button.secondary:hover:not(:disabled) {
+  color: gold;
+  border-color: gold;
+}
+
+.auth-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.forgot-link {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+  color: gold;
+}
+
+.error-message {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.5);
+  color: #f8d7da;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.success-container,
+.error-container,
+.loading-container {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.status-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.status-icon.success {
+  color: #28a745;
+}
+
+.status-icon.error {
+  color: #dc3545;
+}
+
+.status-message {
+  color: #aaa;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.highlight {
+  color: gold;
+  font-weight: 500;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner.large {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #333;
+  padding-top: 20px;
+}
+
+.nav-footer a {
+  color: #aaa;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-footer a:hover {
+  color: gold;
+}
+
+.nav-footer span {
+  color: #aaa;
+  font-size: 0.9rem;
+}

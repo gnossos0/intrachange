@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05b. Nature of the Game - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Nature of the Game</h1>
+                <p class="subtitle">Page 2 of 2</p>
+            </div>
+            
+            <div class="tutorial-content">
+                <p>Every move, whether Exoteric or Esoteric, is a negotiation of alignment and transformation, a moment in which the Player participates in the living architecture of the system itself. To master the Game is to perceive the hidden currents that shape each interaction, to recognize the interplay of stability and flux, correspondence and displacement that governs every square of the board.</p>
+                
+                <p>With the nature of the Game understood, the next lesson explains how the Archives preserve the wisdom of past Players and Orders.</p>
+            </div>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '06_archives_and_orders.html';
+        }
+
+        function prevPage() {
+            window.location.href = '05_nature_of_the_game.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

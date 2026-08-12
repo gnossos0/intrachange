@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02b. Modification of Chess Rules - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        /* Increase font size and add spacing */
+        .tutorial-content {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .tutorial-content h3 {
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Modification of Chess Rules</h1>
+                <p class="subtitle">Page 2 of 3</p>
+            </div>
+            
+            <div class="tutorial-content">
+                <p></p>
+                
+                <h3>Capture</h3>
+                <ul>
+                    <li>Opponent's Pieces are captured if they occupy the Esoteric Square your Piece moves into.</li>
+                    <li>Passing through an Exoteric Square does not capture a piece.</li>
+                </ul>
+
+                <p></p>
+
+                <h3>End of Game</h3>
+                <ul>
+                    <li>No Check or Checkmate. The Game ends only when a King is captured by an opponent's Esoteric Move.</li>
+                </ul>
+
+                <p></p>
+
+                <h3>Knight and Pawn Exceptions</h3>
+                <ul>
+                    <li>Knights cannot perform Esoteric Moves if any Piece blocks their path.</li>
+                    <li>Pawns capture via diagonal Exoteric Move into the 7th rank, then complete an Esoteric Move. Pawns return to the 1st rank after reaching the 7th rank; there is no promotion.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '02c_modification_of_chess_rules.html';
+        }
+
+        function prevPage() {
+            window.location.href = '02_modification_of_chess_rules.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

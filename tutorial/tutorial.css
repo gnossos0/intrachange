@@ -1,0 +1,383 @@
+/* Intrachange Tutorial Styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #3a3a3a;
+    color: #ffffff;
+    line-height: 1.6;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.tutorial-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+.main-content {
+    flex: 1;
+    background: #6a6a6a;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    height: calc(100vh - 40px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorial-sidebar {
+    width: 280px;
+    background: #6a6a6a;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+/* Header */
+.tutorial-header {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #5a5a5a;
+}
+
+.tutorial-header img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    border: 2px solid #d4af37;
+}
+
+.tutorial-header h1 {
+    color: #d4af37;
+    font-size: 2rem;
+    margin-bottom: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.tutorial-header .subtitle {
+    color: #cccccc;
+    font-style: italic;
+}
+
+/* Navigation */
+.tutorial-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+    padding: 15px 20px;
+    background: #5a5a5a;
+    border-radius: 8px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    background: #4a4a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #d4af37;
+    color: #2a2a2a;
+    transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
+    background: #3a3a3a;
+    color: #666666;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.page-info {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+/* Content */
+.tutorial-content h2 {
+    color: #d4af37;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif;
+}
+
+.tutorial-content p {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+/* Archivist Welcome Section with Background */
+.archivist-welcome {
+    background: rgba(90, 100, 90, 0.3) url('images/patio.png') no-repeat top center;
+    background-size: 600px 624px;
+    background-blend-mode: overlay;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    margin-top: 15px;
+    position: relative;
+    min-height: 650px;
+    height: auto;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.archivist-welcome .greeting {
+    position: relative;
+    z-index: 3;
+    color: #f5f5dc;
+    margin-bottom: 20px;
+}
+
+.archivist-welcome .scrolling-text {
+    position: relative;
+    z-index: 2;
+    color: #f5f5dc;
+    animation: scrollUpFromBottom 12s ease-in-out forwards;
+}
+
+@keyframes scrollUpFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+.archivist-welcome::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.archivist-welcome p {
+    position: relative;
+    z-index: 2;
+}
+
+/* Sidebar */
+.tutorial-sidebar h3 {
+    color: #d4af37;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.tutorial-toc {
+    list-style: none;
+}
+
+.tutorial-toc li {
+    margin-bottom: 8px;
+}
+
+.toc-link {
+    display: block;
+    padding: 10px 12px;
+    background: #5a5a5a;
+    color: #f5f5dc;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.toc-link:hover {
+    background: #4a4a4a;
+    transform: translateX(5px);
+}
+
+.toc-link.active {
+    background: #d4af37;
+    color: #2a2a2a;
+}
+
+/* Progress */
+.progress-container {
+    margin: 20px 0;
+    background: #5a5a5a;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 15px;
+    background: #4a4a4a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37 0%, #f4d03f 100%);
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    text-align: center;
+    margin-top: 8px;
+    color: #d4af37;
+    font-weight: bold;
+}
+
+/* Dashboard Button */
+.dashboard-button {
+    display: block;
+    margin: 30px auto 0 auto;
+    padding: 12px 20px;
+    cursor: pointer;
+    background-color: #6a6a6a;
+    color: #ffffff;
+    border: 2px solid #d4af37;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+    text-align: center;
+    width: fit-content;
+}
+
+.dashboard-button:hover {
+    background-color: #d4af37;
+    color: #2a2a2a;
+    transition: all 0.3s ease;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.tutorial-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #5a5a5a;
+    color: #cccccc;
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: #d4af37;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+/* Wrap chessboard, side pieces, and instructions *//* Horizontal wrapper */
+.tutorial-main-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;          /* space between columns */
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Chessboard (left) */
+.main-content {
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 25px;      /* preserve existing padding */
+}
+
+/* Side Pieces (middle/right) */
+.pieces-column {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Force the instructions column to occupy its intended space */
+.instructions-column {
+    width: 250px;          /* fixed width for visibility */
+    min-height: 100px;     /* ensures it’s not tiny if content is small */
+    display: flex;         /* allows inner messages to stack properly */
+    flex-direction: column;
+    gap: 8px;              /* space between messages */
+}
+}
+
+    .tutorial-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .esoteric-message {
+    min-height: 48px;
+    margin-bottom: 16px;
+    padding: 10px 14px;
+
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.4;
+
+    background-color: #f4f1e8;
+    border: 1px solid #c8bfae;
+    border-radius: 6px;
+
+    color: #2b2b2b;
+}

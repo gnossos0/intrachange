@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06. Archives and Orders - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Archives and Orders</h1>
+            </div>
+            
+            <div class="tutorial-content">
+                <h2>Archives and Orders</h2>
+                <p>All Games are recorded automatically, allowing Players to review the archives of others. Past Games, played in secrecy, remain protected — a matter of utmost importance to current and former Masters.</p>
+                
+                <p>The Game is ancient and has spawned numerous Orders. Ours is the oldest and largest, distinguished by the Three Levels: Game, Self-Realization, and Artistic-Creative.</p>
+                
+                <p>Although all Orders share the I Ching–Chess heritage and Esoteric Moves, other Orders interpret and prioritize differently:</p>
+                
+                <ul>
+                    <li>Gamut Monks: Use Pieces as a "computer" for projecting future outcomes.</li>
+                    <li>New Moon School: Focus on magic, power, and shamanic faculties.</li>
+                    <li>Illuminati: Attempted to harness the Game's forces to govern humanity.</li>
+                </ul>
+                
+                <p>All Orders share a common purpose: engaging in the perpetual exchange of ideas in pursuit of deeper insight.</p>
+                
+                <p>With the Archives and Orders in mind, you are now ready to test your comprehension with a brief quiz.</p>
+            </div>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = 'n_quiz1.html';
+        }
+
+        function prevPage() {
+            window.location.href = '05b_nature_of_the_game.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

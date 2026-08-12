@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01c. Explore Now - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        /* Closing quote styling */
+        .closing-quote {
+            text-align: center;
+            color: #d4af37;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Explore Now – Grasp Later</h1>
+                <p class="subtitle">Page 3 of 3</p>
+            </div>
+            
+            <div class="tutorial-content">
+                <h2>The Core Concept</h2>
+                
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="vertical-align: top; padding-right: 20px;">
+                            <p>The structures of the I Ching and Chess are identical; each enriches the other:</p>
+                            <ul>
+                                <li>The squares, pieces, and moves of Chess embody the hexagrams, lines, and changes of the I Ching.</li>
+                                <li>The hexagrams, lines, and changes of the I Ching imbue the squares, pieces, and moves of Chess with meaning.</li>
+                            </ul>
+                            <p></p>
+                            <p class="closing-quote"><strong><em>Chess spatializes the I Ching; the I Ching spiritualizes Chess.</em></strong></p>
+                            <p></p>
+                            <p>This fusion is what gives Intrachange its mystery and spontaneity. The esoteric moves aren't just a feature — they're the soul of the Game.</p>
+                            <p>Now you know how to begin exploring the Game, and you can return to this tutorial when curiosity brings you back.</p>
+                            <p></p>
+                            <p></p>
+                            <p>But be aware the rules of chess have been modified…</p>
+                        </td>
+                        <td style="vertical-align: top; text-align: center; width: 300px;">
+                            <img src="../images/chess_iching.jpg" alt="chess and iching" style="width: 280px; height: auto; border: 2px solid #d4af37; border-radius: 8px;">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '02_modification_of_chess_rules.html';
+        }
+
+        function prevPage() {
+            window.location.href = '01b_explore_now.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

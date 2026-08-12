@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game.php Verification Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Game.php Component Verification</h1>
+    
+    <div class="test-section">
+        <h3>1. File Structure Test</h3>
+        <button onclick="testFileStructure()">Test File Paths</button>
+        <div id="fileTest"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. Database Connection Test</h3>
+        <button onclick="testDatabase()">Test Database</button>
+        <div id="dbTest"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. JavaScript Module Test</h3>
+        <button onclick="testModules()">Test JS Modules</button>
+        <div id="moduleTest"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>4. CSS/Layout Test</h3>
+        <button onclick="testLayout()">Test Layout</button>
+        <div id="layoutTest"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>5. Game State Test</h3>
+        <button onclick="testGameState()">Test Game State</button>
+        <div id="gameStateTest"></div>
+    </div>
+
+    <script>
+        async function testFileStructure() {
+            const output = document.getElementById('fileTest');
+            output.innerHTML = '<p>Testing file structure...</p>';
+            
+            const files = [
+                'game.php',
+                'frontend/script.mjs',
+                'frontend/commentSystem.mjs',
+                'frontend/boardController.mjs',
+                'frontend/ui.mjs',
+                'frontend/hexagrams.mjs',
+                'img/icon.jpg',
+                'backend/db_connect.php'
+            ];
+            
+            let results = '';
+            for (const file of files) {
+                try {
+                    const response = await fetch(file, { method: 'HEAD' });
+                    if (response.ok) {
+                        results += `<span class="success">✅ ${file}</span><br>`;
+                    } else {
+                        results += `<span class="error">❌ ${file} (${response.status})</span><br>`;
+                    }
+                } catch (error) {
+                    results += `<span class="error">❌ ${file} (fetch error)</span><br>`;
+                }
+            }
+            
+            output.innerHTML = results;
+        }
+        
+        async function testDatabase() {
+            const output = document.getElementById('dbTest');
+            output.innerHTML = '<p>Testing database connection...</p>';
+            
+            try {
+                const response = await fetch('test_db_setup.php');
+                const text = await response.text();
+                output.innerHTML = text;
+            } catch (error) {
+                output.innerHTML = `<span class="error">❌ Database test failed: ${error.message}</span>`;
+            }
+        }
+        
+        function testModules() {
+            const output = document.getElementById('moduleTest');
+            output.innerHTML = '<p>Testing JavaScript modules...</p>';
+            
+            // Create a test iframe to load game.php and check modules
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'game.php';
+            
+            iframe.onload = () => {
+                setTimeout(() => {
+                    try {
+                        const win = iframe.contentWindow;
+                        let results = '';
+                        
+                        // Test if window.INTRACHANGE_STATE exists
+                        if (win.INTRACHANGE_STATE) {
+                            results += '<span class="success">✅ INTRACHANGE_STATE loaded</span><br>';
+                            results += `<span class="success">Game ID: ${win.INTRACHANGE_STATE.game_id}</span><br>`;
+                        } else {
+                            results += '<span class="error">❌ INTRACHANGE_STATE not found</span><br>';
+                        }
+                        
+                        // Test debug function
+                        if (typeof win.debugChessboard === 'function') {
+                            results += '<span class="success">✅ debugChessboard function available</span><br>';
+                            const debug = win.debugChessboard();
+                            results += `<span class="success">Table exists: ${debug.tableExists}</span><br>`;
+                            results += `<span class="success">Row count: ${debug.rowCount}</span><br>`;
+                        } else {
+                            results += '<span class="error">❌ debugChessboard function not found</span><br>';
+                        }
+                        
+                        // Test comment system
+                        if (win.commentSystem) {
+                            results += '<span class="success">✅ Comment system loaded</span><br>';
+                        } else {
+                            results += '<span class="warning">⚠️ Comment system not loaded (may load async)</span><br>';
+                        }
+                        
+                        output.innerHTML = results;
+                    } catch (error) {
+                        output.innerHTML = `<span class="error">❌ Module test failed: ${error.message}</span>`;
+                    }
+                    
+                    document.body.removeChild(iframe);
+                }, 2000); // Wait 2 seconds for modules to load
+            };
+            
+            iframe.onerror = () => {
+                output.innerHTML = '<span class="error">❌ Failed to load game.php</span>';
+                document.body.removeChild(iframe);
+            };
+            
+            document.body.appendChild(iframe);
+        }
+        
+        function testLayout() {
+            const output = document.getElementById('layoutTest');
+            output.innerHTML = '<p>Testing layout and responsive design...</p>';
+            
+            // Create test iframe
+            const iframe = document.createElement('iframe');
+            iframe.style.width = '100%';
+            iframe.style.height = '400px';
+            iframe.src = 'game.php';
+            
+            iframe.onload = () => {
+                setTimeout(() => {
+                    try {
+                        const win = iframe.contentWindow;
+                        const doc = iframe.contentDocument;
+                        
+                        let results = '';
+                        
+                        // Test main container
+                        const mainContainer = doc.getElementById('main-container');
+                        if (mainContainer) {
+                            results += '<span class="success">✅ Main container found</span><br>';
+                            const style = win.getComputedStyle(mainContainer);
+                            results += `<span class="success">Display: ${style.display}</span><br>`;
+                        } else {
+                            results += '<span class="error">❌ Main container not found</span><br>';
+                        }
+                        
+                        // Test chessboard
+                        const chessboard = doc.getElementById('chessboard');
+                        if (chessboard) {
+                            results += '<span class="success">✅ Chessboard found</span><br>';
+                            const rows = chessboard.querySelectorAll('tr');
+                            results += `<span class="success">Rows: ${rows.length}</span><br>`;
+                        } else {
+                            results += '<span class="error">❌ Chessboard not found</span><br>';
+                        }
+                        
+                        // Test sidebar
+                        const sidebar = doc.getElementById('commentSidebar');
+                        if (sidebar) {
+                            results += '<span class="success">✅ Comment sidebar found</span><br>';
+                            results += `<span class="success">Classes: ${sidebar.className}</span><br>`;
+                        } else {
+                            results += '<span class="error">❌ Comment sidebar not found</span><br>';
+                        }
+                        
+                        output.innerHTML = results + iframe.outerHTML;
+                    } catch (error) {
+                        output.innerHTML = `<span class="error">❌ Layout test failed: ${error.message}</span>`;
+                    }
+                }, 1000);
+            };
+            
+            output.innerHTML = '<p>Loading layout test...</p>';
+        }
+        
+        async function testGameState() {
+            const output = document.getElementById('gameStateTest');
+            output.innerHTML = '<p>Testing game state...</p>';
+            
+            try {
+                // Test direct access to game.php
+                const response = await fetch('game.php');
+                const html = await response.text();
+                
+                let results = '';
+                
+                // Check if INTRACHANGE_STATE is in the HTML
+                if (html.includes('window.INTRACHANGE_STATE')) {
+                    results += '<span class="success">✅ INTRACHANGE_STATE found in HTML</span><br>';
+                    
+                    // Extract the JSON
+                    const match = html.match(/window\.INTRACHANGE_STATE\s*=\s*({[^;]+});/);
+                    if (match) {
+                        try {
+                            const gameState = JSON.parse(match[1]);
+                            results += '<span class="success">✅ Game state JSON is valid</span><br>';
+                            results += `<span class="success">Game ID: ${gameState.game_id}</span><br>`;
+                            results += `<span class="success">User ID: ${gameState.user_id}</span><br>`;
+                            results += `<span class="success">Moves count: ${gameState.moves.length}</span><br>`;
+                            results += `<span class="success">Single player: ${gameState.is_singleplayer}</span><br>`;
+                        } catch (e) {
+                            results += '<span class="error">❌ Game state JSON is invalid</span><br>';
+                        }
+                    }
+                } else {
+                    results += '<span class="error">❌ INTRACHANGE_STATE not found in HTML</span><br>';
+                }
+                
+                // Check if modules are loaded
+                if (html.includes('frontend/script.mjs')) {
+                    results += '<span class="success">✅ script.mjs included</span><br>';
+                } else {
+                    results += '<span class="error">❌ script.mjs not included</span><br>';
+                }
+                
+                if (html.includes('frontend/commentSystem.mjs')) {
+                    results += '<span class="success">✅ commentSystem.mjs included</span><br>';
+                } else {
+                    results += '<span class="error">❌ commentSystem.mjs not included</span><br>';
+                }
+                
+                output.innerHTML = results;
+            } catch (error) {
+                output.innerHTML = `<span class="error">❌ Game state test failed: ${error.message}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>

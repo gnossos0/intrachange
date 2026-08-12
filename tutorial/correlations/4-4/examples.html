@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation 4::4 - Examples - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../../img/icon.jpg">
+    <link rel="stylesheet" href="../../tutorial.css">
+    <link rel="stylesheet" href="../shared/correlations.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-button">← Tutorial Index</a>
+    
+    <!-- Navigation arrows -->
+    <div class="arrow arrow-left" onclick="prevPage()">←</div>
+    <div class="arrow arrow-right" onclick="nextPage()">→</div>
+
+    <div class="tutorial-container">
+        <div class="tutorial-header">
+            <h1>Correlation 4::4</h1>
+            <h2>Practical Examples</h2>
+        </div>
+        
+        <div class="tutorial-content">
+            <div class="archivist-welcome">
+                <p class="greeting"><strong><em>Theory into Practice,</em></strong></p>
+                <p>Observe these documented examples from the Archives, where Master Players have successfully identified and utilized 4::4 correlations:</p>
+                
+                <div class="example-section">
+                    <h3>Example 1: The Balanced Opening</h3>
+                    <p>White Rook on d4 (Hexagram 63: Existence) correlates with Black Knight on f6 (Hexagram 27: Provocation). Both pieces share line 4 as their point of equilibrium, creating tactical opportunities for positional exchange.</p>
+                    
+                    <h3>Example 2: Mid-Game Resonance</h3>
+                    <p>Queen placement establishing 4::4 correlation with opponent's Bishop, leading to a powerful sequence where each move amplifies the other's strategic impact.</p>
+                    
+                    <h3>Example 3: Endgame Precision</h3>
+                    <p>King and Pawn correlations in line 4 creating winning tempo advantages through synchronized advancement patterns.</p>
+                </div>
+                
+                <div class="practice-note">
+                    <p><strong>Practice:</strong> Study these patterns in your own games. With time, recognizing 4::4 correlations becomes intuitive, opening new dimensions of strategic possibility.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/correlations-utils.js"></script>
+    <script>
+        function prevPage() {
+            window.location.href = 'patterns.html';
+        }
+        
+        function nextPage() {
+            window.location.href = 'quiz.html';
+        }
+    </script>
+</body>
+</html>

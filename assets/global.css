@@ -1,0 +1,35 @@
+/* Global Intrachange Styles */
+
+/* Set sans-serif fonts globally for all elements */
+* {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+/* Specific styling for common elements */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+    color: #2c2c2c;
+    margin: 0;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+/* Common button styling */
+.btn, button, input[type="submit"] {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Form elements */
+input, textarea, select {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Links */
+a {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

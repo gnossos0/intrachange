@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01b. Explore Now - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        /* Lesson Image positioning */
+        .lesson-image {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 450px;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Explore Now – Grasp Later</h1>
+                <p class="subtitle">Page 2 of 3</p>
+            </div>
+            
+            <div class="tutorial-content">
+                <h2>Symbolism of the Move</h2>
+                <p>After each move, you'll be prompted to write a short reflection inspired by the hexagram keywords your piece touched. These are called the Symbolism of the Move and often begin with phrases like:</p>
+                <p><em>"This reminds me of…"</em></p>
+                <p><em>"I see similarities between…"</em></p>
+                <p><em>"Sometimes I marvel that…"</em></p>
+                <p>Your reflections are entirely subjective — meant to capture your personal insight.</p>
+                <p>You can also include links or images that expand on your idea.</p>
+            </div>
+            
+            <!-- Lesson Image positioned in bottom right -->
+            <img src="../images/n_lesson01b.png" alt="Symbolism of the Move Example" class="lesson-image">
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '01c_explore_now.html';
+        }
+
+        function prevPage() {
+            window.location.href = '01a_explore_now.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

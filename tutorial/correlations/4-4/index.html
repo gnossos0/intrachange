@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation Module - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../../img/icon.jpg">
+    <link rel="stylesheet" href="../../tutorial.css">
+    <link rel="stylesheet" href="../shared/correlations.css">
+    <link rel="stylesheet" href="module.css">
+</head>
+<body>
+    <a href="#move-details" class="skip-link TESTCLASS123">Skip to main content</a>
+    <div class="module-container">
+        <!-- Header -->
+        <div class="module-header">
+            <h2 class="text-white text-2xl font-semibold" id="correlation-header">Correlation 4::4</h2>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="module-navigation" role="navigation" aria-label="Move navigation">
+            <button id="prev-btn" class="nav-btn" disabled aria-label="Previous move">← Previous</button>
+            <span id="move-counter" aria-live="polite">- of -</span>
+            <button id="next-btn" class="nav-btn" disabled aria-label="Next move">Next →</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="module-content" role="main">
+            <!-- Move Viewer -->
+            <section class="move-viewer" aria-labelledby="move-details">
+                <div id="move-image" class="move-image-container gov-chess" role="img" aria-label="Chess move visualization">
+                    <div class="image-placeholder">Chess board area</div>
+                </div>
+                <div id="move-details" class="move-details gov-chess-details">
+                    <p>As energy flows between the system's Dipoles, it does not simply move; it transforms. This process — <strong>Enantiodromia</strong> — is the phenomenon of one thing turning into its opposite. Within Intrachange, this is the mechanism by which the very identity of a piece, in relation to its square, can provoke a shift in position.</p>
+                </div>
+            </section>
+
+            <!-- Side Panel -->
+            <aside class="explanation-panel" role="complementary" aria-label="Move explanation">
+                <section id="keywords-section" class="corr-section">
+                    <h2 class="corr-section-title">Keywords</h2>
+                    <div id="keywords-list" class="corr-section-body" role="list">
+                        <div class="keywords-grid">
+                            <div class="corr-card" style="text-align: center; display: flex; align-items: center; justify-content: center;">
+                                <img id="taijitu" src="../shared/images/patterns/regenerating_taijitu.gif" alt="Regenerating Taijitu" style="max-width: 100%; max-height: 150px; object-fit: contain;" />
+                            </div>
+                            <div class="corr-card">
+                                <!-- Right block empty for now -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="interpretation-section" class="corr-section interp">
+                    <h2 class="corr-section-title">Interpretation</h2>
+                    <div id="interpretation-text" class="corr-section-body">
+                        <!-- Left blank as requested -->
+                    </div>
+                </section>
+            </aside>
+        </main>
+
+        <!-- Back Navigation -->
+        <footer class="module-footer">
+            <a href="../../index.html" class="back-button" aria-label="Return to main tutorial">← Back to Tutorial</a>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const img = document.getElementById("taijitu");
+                if (img) {
+                    img.src = "../shared/images/patterns/regenerating_taijitu_final.png";
+                }
+            }, 5000); // 5 seconds
+        });
+    </script>
+    <script type="module" src="module.js?v=4"></script>
+</body>
+</html>

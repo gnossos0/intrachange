@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation 4::4 - Introduction - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../../img/icon.jpg">
+    <link rel="stylesheet" href="../../tutorial.css">
+    <link rel="stylesheet" href="../shared/correlations.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-button">← Tutorial Index</a>
+    
+    <!-- Navigation arrows -->
+    <div class="arrow arrow-right" onclick="nextPage()">→</div>
+
+    <div class="tutorial-container">
+        <div class="tutorial-header">
+            <h1>Correlation 4::4</h1>
+            <h2>Introduction to Pattern Recognition</h2>
+        </div>
+        
+        <div class="tutorial-content">
+            <div class="archivist-welcome">
+                <p class="greeting"><strong><em>Master Player,</em></strong></p>
+                <p>The Correlation 4::4 represents one of the most fundamental pattern relationships in our Game. When two pieces occupy squares that share the same line number in their respective hexagrams, a correlation emerges that transcends the visible board.</p>
+                
+                <p>This tutorial module will guide you through:</p>
+                <ul>
+                    <li>Understanding the 4::4 correlation pattern</li>
+                    <li>Recognizing movement implications</li>
+                    <li>Identifying correlation opportunities</li>
+                    <li>Practical application examples</li>
+                </ul>
+                
+                <p>Prepare to see the Game through new eyes.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/correlations-utils.js"></script>
+    <script>
+        function nextPage() {
+            window.location.href = 'movement.html';
+        }
+    </script>
+</body>
+</html>

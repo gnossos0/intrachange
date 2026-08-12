@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01a. Explore Now - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        /* Table layout styling */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .content-table td {
+            vertical-align: top;
+            padding: 0;
+        }
+
+        .text-column {
+            width: 60%;
+            padding-right: 20px;
+        }
+
+        .video-column {
+            width: 40%;
+        }
+
+        /* Video styling */
+        .lesson-video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Explore Now – Grasp Later</h1>
+                <p class="subtitle">Page 1 of 3</p>
+            </div>
+            
+            <div class="content">
+                <div class="video-container">
+            
+            <table class="content-table">
+                <tr>
+                    <td class="text-column">
+                        <div class="tutorial-content">
+                            <p>For most new Players, the most striking thing about Intrachange is how the <br>I Ching–Chess correlation transforms the familiar rules of chess. <p>Don't worry — you don't need to grasp all the mechanics immediately.</p>
+                            <p>The game only allows legal moves, and most complex operations happen automatically. <p>You'll learn as you play.</p>
+                            <p>Legal moves are highlighted in green, and if there's a resulting esoteric move, it's highlighted in orange. <p>After moving, you'll see this prompt asking for the Symbolism of the Move.</p>
+                        </div>
+                    </td>
+                    <td class="video-column">
+                        <video class="lesson-video" autoplay loop muted controls preload="auto">
+                            <source src="../images/n_lesson01a.mov" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '01b_explore_now.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+
+        // Delay video start by 4 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.lesson-video');
+            if (video) {
+                video.pause();
+                setTimeout(function() {
+                    video.play();
+                }, 4000);
+            }
+        });
+    </script>
+</body>
+</html>

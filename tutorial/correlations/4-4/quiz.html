@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation 4::4 - Assessment - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../../img/icon.jpg">
+    <link rel="stylesheet" href="../../tutorial.css">
+    <link rel="stylesheet" href="../shared/correlations.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .quiz-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            border-radius: 5px;
+        }
+
+        .quiz-question {
+            margin: 1.5rem 0;
+            font-weight: bold;
+        }
+
+        .quiz-options {
+            margin: 1rem 0;
+            padding-left: 1rem;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin: 0.5rem 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-button">← Tutorial Index</a>
+    
+    <!-- Navigation arrows -->
+    <div class="arrow arrow-left" onclick="prevPage()">←</div>
+
+    <div class="tutorial-container">
+        <div class="tutorial-header">
+            <h1>Correlation 4::4</h1>
+            <h2>Knowledge Assessment</h2>
+        </div>
+        
+        <div class="tutorial-content">
+            <div class="archivist-welcome">
+                <p class="greeting"><strong><em>Test Your Understanding,</em></strong></p>
+                <p>Complete this brief assessment to confirm your grasp of 4::4 correlation principles:</p>
+                
+                <div class="quiz-section">
+                    <div class="quiz-question">1. What defines a 4::4 correlation?</div>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q1" value="a"> Two pieces on the same rank</label>
+                        <label><input type="radio" name="q1" value="b"> Pieces sharing line 4 in their hexagrams</label>
+                        <label><input type="radio" name="q1" value="c"> Pieces of the same type</label>
+                        <label><input type="radio" name="q1" value="d"> Pieces with matching colors</label>
+                    </div>
+                    
+                    <div class="quiz-question">2. Line 4 in I Ching represents:</div>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q2" value="a"> Beginning of action</label>
+                        <label><input type="radio" name="q2" value="b"> Point of balance and transition</label>
+                        <label><input type="radio" name="q2" value="c"> End of the sequence</label>
+                        <label><input type="radio" name="q2" value="d"> Static position</label>
+                    </div>
+                    
+                    <div class="quiz-question">3. How do 4::4 correlations influence gameplay?</div>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q3" value="a"> They have no practical effect</label>
+                        <label><input type="radio" name="q3" value="b"> They create sympathetic movement and timing opportunities</label>
+                        <label><input type="radio" name="q3" value="c"> They only affect piece values</label>
+                        <label><input type="radio" name="q3" value="d"> They change the rules of chess</label>
+                    </div>
+                </div>
+                
+                <div class="completion-note">
+                    <p><strong>Congratulations!</strong> You have completed the Correlation 4::4 tutorial module. This knowledge forms the foundation for recognizing more complex correlation patterns in advanced play.</p>
+                    <p>Return to the main tutorial to continue your studies, or begin practicing these concepts in actual gameplay.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/correlations-utils.js"></script>
+    <script>
+        function prevPage() {
+            window.location.href = 'examples.html';
+        }
+    </script>
+</body>
+</html>

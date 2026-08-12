@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Management - Intrachange</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f0;
+        }
+        .container {
+            background: #fafcfa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(90,100,90,0.1);
+        }
+        h1 {
+            color: #5a645a;
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #5a645a;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d0d8d0;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fafcfa;
+            color: #4a554a;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #8a9d8a;
+            box-shadow: 0 0 0 2px rgba(138, 157, 138, 0.2);
+        }
+        button {
+            background-color: #8a9d8a;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #7a8d7a;
+        }
+        .delete-btn {
+            background-color: #b8a8a8;
+        }
+        .delete-btn:hover {
+            background-color: #a89898;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #f0f5f0;
+            color: #4a654a;
+            border: 1px solid #c8d8c8;
+        }
+        .error {
+            background-color: #f5f0f0;
+            color: #654a4a;
+            border: 1px solid #d8c8c8;
+        }
+        .game-list {
+            margin-top: 30px;
+        }
+        .game-item {
+            background: #f8faf8;
+            border: 1px solid #e0e8e0;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .game-info {
+            flex-grow: 1;
+        }
+        .game-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .game-actions button {
+            padding: 8px 12px;
+            font-size: 14px;
+            min-width: 80px;
+        }
+        .archived {
+            opacity: 0.6;
+        }
+        .archived .game-info::after {
+            content: " [ARCHIVED]";
+            color: #7a9d7a;
+            font-weight: bold;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(90,100,90,0.4);
+        }
+        
+        .modal-content {
+            background-color: #fafcfa;
+            margin: 10% auto;
+            padding: 30px;
+            border: none;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(90,100,90,0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e8e0;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #5a645a;
+        }
+        
+        .close {
+            color: #8a9d8a;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .close:hover {
+            color: #5a645a;
+        }
+        
+        .game-info-modal {
+            background: #f5f8f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #8a9d8a;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+        
+        .btn-cancel {
+            background-color: #a8b5a8;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #98a598;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <img src="img/icon.jpg" alt="Intrachange" class="icon">
+            Intrachange Game Management
+        </h1>
+        
+        <div id="result" class="result"></div>
+        
+        <div class="game-list">
+            <h2>Available Games</h2>
+            <div id="gamesList">Loading games...</div>
+            <button onclick="loadGames()" style="background-color: #8a9d8a; margin-top: 15px;">🔄 Refresh Game List</button>
+        </div>
+        
+        <div class="game-list">
+            <h2>Archived Games</h2>
+            <div id="archivedGamesList">Loading archived games...</div>
+        </div>
+    </div>
+
+    <!-- Archive Modal -->
+    <div id="archiveModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Archive Game</h2>
+                <span class="close" onclick="closeArchiveModal()">&times;</span>
+            </div>
+            
+            <div id="gameInfoModal" class="game-info-modal">
+                <!-- Game info will be populated here -->
+            </div>
+            
+            <div class="form-group">
+                <label for="modalGameName">Game Name (Optional):</label>
+                <input type="text" id="modalGameName" placeholder="Give this game a memorable name..." maxlength="255">
+            </div>
+            
+            <div class="form-group">
+                <label for="modalGameResult">Game Result:</label>
+                <select id="modalGameResult">
+                    <option value="WHITE_WINS">White Wins</option>
+                    <option value="BLACK_WINS">Black Wins</option>
+                    <option value="DRAW" selected>Draw</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="modalEndReason">End Reason:</label>
+                <select id="modalEndReason">
+                    <option value="mutual_agreement" selected>Mutual Agreement</option>
+                    <option value="esoteric_king_capture">Esoteric King Capture</option>
+                    <option value="insufficient_material">Insufficient Material</option>
+                    <option value="no_legal_moves">No Legal Moves</option>
+                    <option value="resignation">Resignation</option>
+                    <option value="timeout">Timeout</option>
+                    <option value="abandoned">Abandoned</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="modalTestMode">
+                    <input type="checkbox" id="modalTestMode"> Mark as Test Game
+                </label>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeArchiveModal()">Cancel</button>
+                <button onclick="confirmArchive()">Archive Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variable to store current game for archiving
+        let currentGameToArchive = null;
+
+        // Load games on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGames();
+            loadArchivedGames();
+        });
+
+        function showArchiveModal(gameId) {
+            // Find the game in the current games list
+            fetch(`backend/get_available_games.php?_=${Date.now()}`)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success && result.games) {
+                        const game = result.games.find(g => g.id === gameId);
+                        if (game) {
+                            currentGameToArchive = game;
+                            
+                            // Populate game info
+                            document.getElementById('gameInfoModal').innerHTML = `
+                                <strong>Game #${game.id}</strong><br>
+                                <strong>Players:</strong> ${game.white_player_name} (White) vs ${game.black_player_name} (Black)<br>
+                                <strong>Status:</strong> ${game.status} | <strong>Moves:</strong> ${game.move_count}<br>
+                                <strong>Created:</strong> ${new Date(game.created_at).toLocaleString()}
+                            `;
+                            
+                            // Set default result based on winner if available
+                            if (game.status === 'completed' && game.winner_id) {
+                                if (game.winner_id === game.white_player_id) {
+                                    document.getElementById('modalGameResult').value = 'WHITE_WINS';
+                                } else if (game.winner_id === game.black_player_id) {
+                                    document.getElementById('modalGameResult').value = 'BLACK_WINS';
+                                }
+                            }
+                            
+                            // Show modal
+                            document.getElementById('archiveModal').style.display = 'block';
+                        }
+                    }
+                })
+                .catch(error => {
+                    showResult(`Error loading game details: ${error.message}`, 'error');
+                });
+        }
+
+        function closeArchiveModal() {
+            document.getElementById('archiveModal').style.display = 'none';
+            currentGameToArchive = null;
+            
+            // Reset form to defaults
+            document.getElementById('modalGameName').value = '';
+            document.getElementById('modalGameResult').value = 'DRAW';
+            document.getElementById('modalEndReason').value = 'mutual_agreement';
+            document.getElementById('modalTestMode').checked = false;
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('archiveModal');
+            if (event.target === modal) {
+                closeArchiveModal();
+            }
+        }
+
+        async function confirmArchive() {
+            if (!currentGameToArchive) {
+                showResult('No game selected for archiving', 'error');
+                return;
+            }
+            
+            const gameName = document.getElementById('modalGameName').value.trim();
+            const gameResult = document.getElementById('modalGameResult').value;
+            const endReason = document.getElementById('modalEndReason').value;
+            const testMode = document.getElementById('modalTestMode').checked;
+            
+            const data = {
+                game_id: currentGameToArchive.id,
+                game_name: gameName || null,
+                game_result: gameResult,
+                end_reason: endReason,
+                test_mode: testMode
+            };
+            
+            try {
+                const response = await fetch('backend/archive_game_complete.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'ok') {
+                    showResult(`✅ ${result.message}<br>Archive ID: ${result.archive_id}<br>Summary: ${result.game_summary}`, 'success');
+                    closeArchiveModal();
+                    loadGames(); // Refresh the games list
+                    loadArchivedGames(); // Refresh archived games list
+                } else {
+                    showResult(`❌ ${result.message}`, 'error');
+                }
+            } catch (error) {
+                showResult(`❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function deleteGame(gameId) {
+            if (!gameId) {
+                showResult('Invalid game ID for deletion', 'error');
+                return;
+            }
+            
+            // Confirm deletion
+            if (!confirm(`Are you sure you want to permanently delete Game #${gameId}? This action cannot be undone.`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('backend/delete_game_complete.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        game_id: parseInt(gameId)
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'ok') {
+                    showResult(`✅ ${result.message}`, 'success');
+                    loadGames(); // Refresh the games list
+                    loadArchivedGames(); // Refresh archived games list
+                } else {
+                    showResult(`❌ ${result.message}`, 'error');
+                }
+            } catch (error) {
+                showResult(`❌ Network error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function loadGames() {
+            try {
+                document.getElementById('gamesList').innerHTML = '<p>Loading games...</p>';
+                
+                const response = await fetch('backend/get_available_games.php?_=' + Date.now());
+                const result = await response.json();
+                
+                if (result.success && result.games) {
+                    const gamesHtml = result.games.map(game => `
+                        <div class="game-item">
+                            <div class="game-info">
+                                <strong>Game #${game.id}</strong> - 
+                                ${game.white_player_name} vs ${game.black_player_name}<br>
+                                <small>${game.move_count} moves - Status: ${game.status} - Current turn: ${game.current_turn}</small><br>
+                                <small>Created: ${new Date(game.created_at).toLocaleString()}</small>
+                            </div>
+                            <div class="game-actions">
+                                <button onclick="showArchiveModal(${game.id})">📦 Archive</button>
+                                <button onclick="deleteGame(${game.id})" class="delete-btn">🗑️ Delete</button>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('gamesList').innerHTML = gamesHtml || '<p>No active games found.</p>';
+                } else {
+                    document.getElementById('gamesList').innerHTML = '<p>No active games found.</p>';
+                }
+            } catch (error) {
+                document.getElementById('gamesList').innerHTML = `<p>Error loading games: ${error.message}</p>`;
+            }
+        }
+        
+        async function loadArchivedGames() {
+            try {
+                document.getElementById('archivedGamesList').innerHTML = '<p>Loading archived games...</p>';
+                
+                const response = await fetch('backend/get_archived_games_mysqli.php?include_test=true&_=' + Date.now());
+                const result = await response.json();
+                
+                if (result.success && result.games) {
+                    const gamesHtml = result.games.map(game => `
+                        <div class="game-item archived">
+                            <div class="game-info">
+                                <strong>${game.game_name ? game.game_name : `Game #${game.game_id}`}</strong> - 
+                                ${game.white_player.username} vs ${game.black_player.username}<br>
+                                <small>${game.game_summary}</small><br>
+                                <small>Result: ${game.game_result} (${game.end_reason}) - ${game.move_count} moves</small><br>
+                                <small>Archived: ${new Date(game.archived_at).toLocaleString()}</small>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('archivedGamesList').innerHTML = gamesHtml || '<p>No archived games found.</p>';
+                } else {
+                    document.getElementById('archivedGamesList').innerHTML = '<p>No archived games found.</p>';
+                }
+            } catch (error) {
+                document.getElementById('archivedGamesList').innerHTML = `<p>Error loading archived games: ${error.message}</p>`;
+            }
+        }
+        
+        function showResult(message, type) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = `result ${type}`;
+            resultDiv.innerHTML = message;
+            resultDiv.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                resultDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

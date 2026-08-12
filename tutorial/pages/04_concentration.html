@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. Concentration - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Navigation arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Concentration</h1>
+            </div>
+            
+            <div class="tutorial-content">
+                <h2>Concentration</h2>
+                <p>Intrachange contains few formal exercises, yet the Game trains a singular skill: concentration. Holding two or three keywords in mind simultaneously — and letting their meanings resonate across the board, pieces, hexagrams, and previous moves — is chordal thinking: perceiving multiple points of meaning simultaneously, like hearing several notes combine into a harmonious chord.</p>
+                
+                <p>In a world overflowing with distraction, the Game offers a rare pause. It invites Players to focus, reflect, and generate significance in the midst of the ordinary. Concentration here is not strain; it is alignment — gathering attention into a coherent field where thought, intuition, and symbolism converge.</p>
+                
+                <p>Master-level Players recognize that cultivating this capacity is among the Game's deepest rewards. They leverage I Ching interpretations, Correlations, and Keywords to shape the full meaning of their Moves, transforming every action into an orchestration of insight and intention.</p>
+                
+                <p>With concentration honed, you are ready to perceive the deeper architecture of the Game itself.</p>
+            </div>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '05_nature_of_the_game.html';
+        }
+
+        function prevPage() {
+            window.location.href = '03_symbolism_of_the_move.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

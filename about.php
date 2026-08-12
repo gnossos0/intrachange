@@ -1,0 +1,202 @@
+<?php
+// Function to make player names linkable
+function linkPlayerName($text) {
+    // Database connection for looking up players
+    try {
+        require_once __DIR__ . '/backend/db_connect.php';
+        
+        // Define known players with their usernames
+        $players = [
+            'Gail O\'Sullivan' => 'gail',  // Gail's actual username is 'gail'
+            'Gail Ann O\'Sullivan' => 'gail'
+        ];
+        
+        foreach ($players as $fullName => $username) {
+            // Get user ID for this username
+            $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($row = $result->fetch_assoc()) {
+                $userId = $row['id'];
+                $linkedName = '<a href="player_profile.php?id=' . $userId . '" style="color: #8a9d8a; text-decoration: none; border-bottom: 1px solid #8a9d8a;">' . htmlspecialchars($fullName) . '</a>';
+                $text = str_replace($fullName, $linkedName, $text);
+            }
+            $stmt->close();
+        }
+        
+        $conn->close();
+        return $text;
+    } catch (Exception $e) {
+        // If database fails, return original text
+        return $text;
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Intrachange</title>
+    <link rel="icon" type="image/jpeg" href="img/icon.jpg">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+            min-height: 100vh;
+            color: #4a554a;
+            line-height: 1.6;
+        }
+
+        .about-header {
+            background: #fafcfa;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(90,100,90,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .about-header h1 {
+            color: #5a645a;
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .about-header .subtitle {
+            color: #6a746a;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .about-content {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(90,100,90,0.1);
+            margin-bottom: 30px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a554a;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .back-to-dashboard {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background-color: #8a9d8a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #7a8d7a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(90,100,90,0.2);
+        }
+
+        .decorative-line {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #8a9d8a, #7a8d7a);
+            margin: 30px auto;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .about-header {
+                padding: 25px;
+            }
+            
+            .about-header h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                padding: 25px;
+            }
+            
+            .about-text {
+                font-size: 1rem;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-header">
+        <h1>About Intrachange</h1>
+        <p class="subtitle">A Journey of Fifty Years by William Douglas Horden</p>
+    </div>
+
+    <div class="about-content">
+        <div class="about-text">
+            <p>This modest work holds an especially dear place in my heart.</p>
+            
+            <p>It was a three-page précis of the present version that I carried to the I Ching Institute and Taoist Sanctuary in 1970 and hesitantly presented to its founder, Master Khigh Alx Dhiegh. And it was that three-page précis that moved Master Khigh to take me on as his lineage student.</p>
+            
+            <p>At that stage, it was an exercise in correlative thinking and the notion of an actual game with rules was still fairly abstract. A few years later, however, I read Hesse's <a href="https://ia600302.us.archive.org/21/items/MagisterLudi-TheGlassBeadGame-HermanHesse/hesseludi.pdf" target="_blank" style="color: #8a9d8a; text-decoration: none; border-bottom: 1px solid #8a9d8a;"><em>Magister Ludi: Glass Bead Game</em></a> and, though it provided no concrete clues as to what the game ought look like, it inspired me to work out how the marriage of Chess and the I Ching might result in an authentic and playable Game.</p>
+            
+            <div style="float: right; margin: 0 0 20px 30px; max-width: 300px;">
+                <img src="tutorial/images/william_path.png" alt="William's Path" style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(90,100,90,0.3); border: 2px solid #8a9d8a;">
+            </div>
+            
+            <p><?php echo linkPlayerName('Having fulfilled my curiosity, the project was set aside for some twenty years, until a time in 1996 when I presented some of my thoughts on an internet discussion group dedicated to the <em>Glass Bead Game</em>. It was in this manner that I met Gail O\'Sullivan, who was an active proponent of modern versions of the GBG. After emailing back and forth a bit, Gail moved from Oklahoma to Oregon and stayed in our home until she had organized me and the material into a website with the working name, but the web was not yet ready for interactivity. I had named it <em>Intrachange</em> after a suggestion by Master Khigh and so it remained on the internet in its original form due to the kindness of someone in Europe who kept it on a server all these years.'); ?></p>
+            
+            <div class="decorative-line"></div>
+            
+            <p>Now, fifty years later, it feels fitting to bring this, my first researches on the I Ching, to completion.</p>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://www.amazon.com/intrachange-Ching-Chess-Researches-Toltec/dp/1985674068/ref=sr_1_1?s=books&ie=UTF8&qid=1522698627&sr=1-1" target="_blank" style="color: #8a9d8a; font-weight: 600; text-decoration: none; border-bottom: 2px solid #8a9d8a; padding-bottom: 2px; transition: all 0.3s ease;">
+                    Purchase print version online ↗
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-dashboard">
+        <a href="dashboard.php" class="btn">← Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Add any future interactive features here
+        console.log('About page loaded');
+    </script>
+</body>
+</html>

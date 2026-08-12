@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intrachange - The Ancient Game Reunited</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url('img/front_logo.png');
+      background-size: 500px auto;
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: #ffffff;
+      color: #000000;
+      font-family: Arial, Helvetica, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background overlay for text readability */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: transparent;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Subtle texture overlay for depth */
+    body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(90, 100, 90, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      z-index: 2;
+    }
+
+    .block {
+      opacity: 0;
+      position: absolute;
+      left: 40px;
+      top: 40vh;
+      width: 45%;
+      max-width: 600px;
+      transition: opacity 0.8s ease-in-out;
+      font-size: 1.4rem;
+      line-height: 1.6;
+      letter-spacing: 0.3px;
+      text-shadow: none;
+      color: #000000;
+      background: transparent;
+      padding: 2rem;
+      border-radius: 12px;
+      backdrop-filter: none;
+      border: none;
+      text-align: left;
+      box-sizing: border-box;
+    }
+
+    .block p {
+      margin-bottom: 1.2em;
+    }
+
+    .block.active {
+      opacity: 1;
+    }
+
+    .block.exiting {
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      /* Slide out animations for east/west lines */
+      .slide-west, .slide-east {
+        display: inline-block;
+        transition: transform 1.2s cubic-bezier(0.77,0,0.18,1), opacity 1.2s cubic-bezier(0.77,0,0.18,1);
+      }
+      .block.exiting .slide-west {
+        transform: translateX(-120vw);
+        opacity: 0;
+      }
+      .block.exiting .slide-east {
+        transform: translateX(120vw);
+        opacity: 0;
+      }
+    }
+
+    /* Emphasis for key phrases */
+    .block em {
+      color: #c0c5c0;
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .controls {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      z-index: 10;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .controls a {
+      color: #000000;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      border: 1px solid transparent;
+    }
+
+    .controls a:hover {
+      color: #000000;
+      border-color: #cccccc;
+      background-color: #f0f0f0;
+    }
+
+    .controls a:focus {
+      outline: 2px solid #8a9d8a;
+      outline-offset: 2px;
+    }
+
+    .skip-container {
+      position: absolute;
+      bottom: 35px;
+      right: 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    #skip {
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid #6a746a;
+      color: #a8b5a8;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    #skip:hover {
+      color: #e8e8e8;
+      border-color: #8a9d8a;
+      background: rgba(30, 30, 30, 0.9);
+      transform: translateY(-1px);
+    }
+
+    #skip:focus {
+      outline: 2px solid #8a9d8a;
+      outline-offset: 2px;
+    }
+
+    .progress-indicator {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #3a3a3a;
+      transition: background-color 0.3s ease;
+    }
+
+    .progress-dot.active {
+      background-color: #8a9d8a;
+    }
+
+    .progress-dot.completed {
+      background-color: #6a746a;
+    }
+
+    /* Accessibility improvements */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Responsive design */
+    @media (max-width: 1200px) {
+      .block {
+        font-size: 1.3rem;
+        width: 85%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+      
+      .block {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        width: 90%;
+      }
+      
+      .controls {
+        top: 20px;
+        right: 20px;
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .skip-container {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      #skip {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .block {
+        font-size: 1rem;
+        line-height: 1.5;
+        width: 95%;
+      }
+      
+      .controls {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    /* Fade-in animation for initial load */
+    .container {
+      animation: fadeIn 1s ease-out;
+    }
+
+    .controls, .skip-container {
+      animation: fadeIn 1.5s ease-out 0.5s both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="controls" role="navigation" aria-label="Account access">
+    <a href="login.php" aria-label="Login to existing account">Login</a>
+    <a href="register.php" aria-label="Create new account">Register</a>
+  </nav>
+
+  <main class="container" role="main">
+    <h1 class="sr-only">Intrachange: The Ancient Game Reunited</h1>
+    
+    <div class="block active" role="region" aria-live="polite" data-block="0">
+  In&nbsp;an&nbsp;age&nbsp;when&nbsp;the&nbsp;world&nbsp;was&nbsp;whole,<br>
+  there&nbsp;was&nbsp;a&nbsp;game&nbsp;of&nbsp;such&nbsp;perfect&nbsp;proportions<br>
+  that&nbsp;it&nbsp;could&nbsp;capture&nbsp;any&nbsp;idea.
+    </div>
+    
+    <div class="block" role="region" aria-live="polite" data-block="1">
+  Art,&nbsp;science,&nbsp;and&nbsp;religion&nbsp;were&nbsp;understood&nbsp;as&nbsp;one,<br>
+  woven&nbsp;together&nbsp;by&nbsp;a&nbsp;pattern&nbsp;<br>that&nbsp;mirrored&nbsp;life&nbsp;and&nbsp;mind&nbsp;itself.
+    </div>
+    
+    <div class="block" role="region" aria-live="polite" data-block="2">
+  Yet&nbsp;wholeness&nbsp;did&nbsp;not&nbsp;last.
+    </div>
+    
+    <div class="block" role="region" aria-live="polite" data-block="3">
+  Division&nbsp;entered&nbsp;the&nbsp;world,<br>
+  and&nbsp;with&nbsp;it&nbsp;the&nbsp;Game&nbsp;split&nbsp;itself&nbsp;in&nbsp;two:
+    </div>
+    
+    <div class="block" role="region" aria-live="polite" data-block="4">
+  Its&nbsp;body&nbsp;journeyed&nbsp;West&nbsp;and&nbsp;<br>became&nbsp;known&nbsp;as&nbsp;<strong>Chess</strong>,<br>
+  while&nbsp;its&nbsp;spirit&nbsp;traveled&nbsp;East&nbsp;and&nbsp;<br>was&nbsp;called&nbsp;the&nbsp;<strong>I&nbsp;Ching</strong>.
+    </div>
+    
+    <div class="block" role="region" aria-live="polite" data-block="5">
+  Now,&nbsp;at&nbsp;last,&nbsp;their&nbsp;long&nbsp;<br>separation&nbsp;draws&nbsp;to&nbsp;a&nbsp;close.<br>
+  In&nbsp;Intrachange,&nbsp;body&nbsp;and&nbsp;spirit&nbsp;meet&nbsp;again.<br>
+  The&nbsp;Game&nbsp;returns&nbsp;to&nbsp;itself.
+    </div>
+  </main>
+
+  <div class="skip-container">
+    <div class="progress-indicator" aria-label="Story progress">
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+    </div>
+    <button id="skip" aria-label="Skip introduction and go to dashboard">Skip Intro</button>
+  </div>
+
+  <script>
+    const blocks = document.querySelectorAll('.block');
+    const progressDots = document.querySelectorAll('.progress-dot');
+    let current = 0;
+    // Different timing for each block: blocks 1,2,5,6 = 3.5s, blocks 3,4 = 2.5s
+    const displayDurations = [3500, 3500, 2500, 2500, 3500, 3500]; // milliseconds for each block
+    const fadeDuration = 800; // 800ms for fade transitions (matches CSS)
+    const pauseBetweenBlocks = 500; // 500ms pause between blocks
+    let timeoutId;
+
+    function updateProgress() {
+      progressDots.forEach((dot, index) => {
+        dot.classList.remove('active', 'completed');
+        if (index < current) {
+          dot.classList.add('completed');
+        } else if (index === current) {
+          dot.classList.add('active');
+        }
+      });
+    }
+
+    function showNextBlock() {
+      if (current < blocks.length - 1) {
+        // Fade out current block
+        blocks[current].classList.add('exiting');
+        
+        setTimeout(() => {
+          // Remove current block and move to next
+          blocks[current].classList.remove('active', 'exiting');
+          current++;
+          
+          // Pause before showing next block
+          setTimeout(() => {
+            if (current < blocks.length) {
+              blocks[current].classList.add('active');
+              updateProgress();
+              
+              // Schedule next transition using current block's duration
+              const currentDuration = displayDurations[current] || 2500;
+              timeoutId = setTimeout(showNextBlock, currentDuration);
+            }
+          }, pauseBetweenBlocks);
+          
+        }, fadeDuration);
+      } else {
+        // Final block - wait then redirect to login index
+        setTimeout(() => {
+          window.location.href = 'login_index.html';
+        }, 3000);
+      }
+    }
+
+    // Start the sequence
+    updateProgress();
+    const initialDuration = displayDurations[0] || 2500;
+    timeoutId = setTimeout(showNextBlock, initialDuration);
+
+    // Skip functionality
+    function skipIntro() {
+      clearTimeout(timeoutId);
+      window.location.href = 'login_index.html';
+    }
+
+    document.getElementById('skip').addEventListener('click', skipIntro);
+
+    // Keyboard accessibility
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === ' ') {
+        e.preventDefault();
+        skipIntro();
+      }
+    });
+
+    // Pause on focus (accessibility)
+    let isPaused = false;
+    let remainingTime;
+    let pauseStartTime;
+
+    document.addEventListener('focusin', () => {
+      if (!isPaused) {
+        clearTimeout(timeoutId);
+        pauseStartTime = Date.now();
+        remainingTime = displayDurations[current] || 2500;
+        isPaused = true;
+      }
+    });
+
+    document.addEventListener('focusout', () => {
+      if (isPaused) {
+        const elapsed = Date.now() - pauseStartTime;
+        remainingTime = Math.max(500, remainingTime - elapsed);
+        timeoutId = setTimeout(showNextBlock, remainingTime);
+        isPaused = false;
+      }
+    });
+
+    // Prevent accidental navigation away
+    window.addEventListener('beforeunload', (e) => {
+      // Only show warning if user is in middle of story
+      if (current > 0 && current < blocks.length - 1) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+  </script>
+</body>
+</html>

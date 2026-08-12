@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="img/icon.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange - I Ching Chess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            color: #1a1a1a;
+            font-size: 2.8rem;
+            font-weight: bold;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            letter-spacing: 1px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header p {
+            color: #4a4a4a;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            font-style: italic;
+        }
+        
+        .auth-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .auth-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .auth-btn {
+            background: #1a1a1a;
+            color: #f4f1e8;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .auth-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .auth-btn.secondary {
+            background: transparent;
+            color: #1a1a1a;
+            border: 2px solid #1a1a1a;
+        }
+        
+        .auth-btn.secondary:hover {
+            background: #1a1a1a;
+            color: #f4f1e8;
+        }
+        
+        .divider {
+            margin: 20px 0;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="img/icon.jpg" alt="Intrachange Icon">
+        <h1>Intrachange</h1>
+        <p>I Ching Chess</p>
+        <h3 style="color: #4a4a4a; font-weight: 400; font-style: italic; margin-top: 20px; margin-bottom: 25px; line-height: 1.5;">
+            Esteemed Player,<br>
+            As your humble Archivist, it is my privilege to welcome you to the latest version of our Game, formerly known as Esoteric Chess.<br> Because the secrecy surrounding it need no longer be maintained, I have placed this information in the public arena for the first time.
+        </h3>
+    </div>
+    
+    <div class="auth-container">
+        <h2 style="color: #1a1a1a; margin-bottom: 30px;">Welcome</h2>
+        
+        <div class="auth-options">
+            <a href="login.php" class="auth-btn">Login</a>
+            
+            <div class="divider">or</div>
+            
+            <a href="register.php" class="auth-btn secondary">Create New Account</a>
+        </div>
+    </div>
+</body>
+</html>

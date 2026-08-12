@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>I Ching and Chess Correlation 4::4 - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+
+    <style>
+        /* Sandbox drag-and-drop and highlight styles */
+        .square.valid-target {
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+            transition: box-shadow 0.15s ease;
+        }
+
+        .square {
+            position: relative;
+        }
+
+        .sandbox-piece {
+            cursor: grab;
+        }
+
+        .sandbox-piece.dragging {
+            cursor: grabbing;
+            opacity: 0.85;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .content-table {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 32px;
+        }
+
+        .instructions-column {
+            width: 100%;
+            padding-left: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.05em;
+            line-height: 1.6;
+            max-width: 340px;
+            min-width: 180px;
+            flex: 1 1 0;
+        }
+
+        .content-table td {
+            vertical-align: top;
+            padding: 0;
+        }
+
+        .board-column {
+            width: auto;
+            text-align: center;
+            min-width: 480px;
+            margin-right: 0;
+        }
+
+        .pieces-column {
+            width: auto;
+            padding-left: 0;
+            margin-right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            min-width: 160px;
+            max-width: 200px;
+        }
+
+        .chessboard {
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .piece-list {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .piece-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .piece-list strong {
+            color: #d4af37;
+        }
+    </style>
+    <!-- Chessboard styles imported from review_game.php for sandbox consistency -->
+    <style>
+        .board-column {
+            background: white;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            border-right: 1px solid #e8f1e8;
+        }
+
+        .board-container {
+            position: relative;
+            display: inline-block;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            border: 2px solid #34495e;
+            padding: 0.5rem;
+        }
+
+        #reviewChessboard {
+            border-collapse: collapse;
+            width: 464px !important;
+            height: 464px !important;
+            table-layout: fixed;
+            background: #fff;
+            aspect-ratio: 1;
+        }
+
+        #reviewChessboard td {
+            width: 58px !important;
+            height: 58px !important;
+            box-sizing: border-box;
+            position: relative;
+            border: 1px solid #333;
+            text-align: center;
+            vertical-align: middle;
+            font-family: sans-serif;
+            font-size: 9px;
+            line-height: 1.1;
+            padding: 0;
+            cursor: pointer;
+            user-select: none;
+            background-color: #f0d9b5 !important;
+            color: #000;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        #reviewChessboard td.white {
+            background-color: #f0d9b5 !important;
+            color: #000;
+        }
+
+        #reviewChessboard td.black {
+            background-color: #b58863 !important;
+            color: #fff;
+        }
+
+        #reviewChessboard td:hover {
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        #reviewChessboard td.highlight-from {
+            background-color: rgba(255, 235, 59, 0.8) !important;
+            box-shadow: 0 0 8px rgba(255, 193, 7, 0.8), inset 0 0 0 2px #ff6b35;
+        }
+
+        #reviewChessboard td.highlight-to {
+            background-color: rgba(76, 175, 80, 0.7) !important;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.8), inset 0 0 0 2px #2d8f2d;
+        }
+
+        #reviewChessboard td.highlight-path {
+            background-color: #b3d9ff !important;
+            box-shadow: inset 0 0 0 1px #4a90e2;
+        }
+
+        .coord-label {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            font-size: 7px;
+            color: rgba(0,0,0,0.6);
+            user-select: none;
+            z-index: 12;
+            font-weight: bold;
+        }
+
+        #reviewChessboard td.black .coord-label {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .hexNum {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            font-weight: bold;
+            font-size: 8px;
+            color: rgba(0,0,0,0.8);
+            z-index: 12;
+        }
+
+        #reviewChessboard td.black .hexNum {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .hex-keyword {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1.1;
+            user-select: none;
+            pointer-events: none;
+            color: rgba(0,0,0,0.9);
+            z-index: 11;
+            text-align: center;
+            width: 100%;
+        }
+
+        #reviewChessboard td.black .hex-keyword {
+            color: rgba(0,0,0,0.9);
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation 4::4</h1>
+                <p class="subtitle">Sandbox View</p>
+            </div>
+
+<div class="content">
+    <div class="content-table">
+        <!-- Chessboard on the left -->
+        <div class="board-column">
+            <table id="reviewChessboard">
+<tr>
+<td class="white" data-row="0" data-col="0" data-index="0"><div class="coord-label">a8</div><div class="hexNum">49</div></td>
+<td class="black" data-row="0" data-col="1" data-index="1"><div class="coord-label">b8</div><div class="hexNum">50</div></td>
+<td class="white" data-row="0" data-col="2" data-index="2"><div class="coord-label">c8</div><div class="hexNum">52</div></td>
+<td class="black" data-row="0" data-col="3" data-index="3"><div class="coord-label">d8</div><div class="hexNum">55</div></td>
+<td class="white" data-row="0" data-col="4" data-index="4"><div class="coord-label">e8</div><div class="hexNum">48</div></td>
+<td class="black" data-row="0" data-col="5" data-index="5"><div class="coord-label">f8</div><div class="hexNum">51</div></td>
+<td class="white" data-row="0" data-col="6" data-index="6"><div class="coord-label">g8</div><div class="hexNum">53</div></td>
+<td class="black" data-row="0" data-col="7" data-index="7"><div class="coord-label">h8</div><div class="hexNum">54</div></td>
+</tr>
+
+<tr>
+<td class="black" data-row="1" data-col="0" data-index="8"><div class="coord-label">a7</div><div class="hexNum">41</div></td>
+<td class="white" data-row="1" data-col="1" data-index="9"><div class="coord-label">b7</div><div class="hexNum">42</div></td>
+<td class="black" data-row="1" data-col="2" data-index="10"><div class="coord-label">c7</div><div class="hexNum">44</div></td>
+<td class="white" data-row="1" data-col="3" data-index="11"><div class="coord-label">d7</div><div class="hexNum">47</div></td>
+<td class="black" data-row="1" data-col="4" data-index="12"><div class="coord-label">e7</div><div class="hexNum">40</div></td>
+<td class="white" data-row="1" data-col="5" data-index="13"><div class="coord-label">f7</div><div class="hexNum">43</div></td>
+<td class="black" data-row="1" data-col="6" data-index="14"><div class="coord-label">g7</div><div class="hexNum">45</div></td>
+<td class="white" data-row="1" data-col="7" data-index="15"><div class="coord-label">h7</div><div class="hexNum">46</div></td>
+</tr>
+
+<tr>
+<td class="white" data-row="2" data-col="0" data-index="16"><div class="coord-label">a6</div><div class="hexNum">25</div></td>
+<td class="black" data-row="2" data-col="1" data-index="17"><div class="coord-label">b6</div><div class="hexNum">26</div></td>
+<td class="white" data-row="2" data-col="2" data-index="18"><div class="coord-label">c6</div><div class="hexNum">28</div></td>
+<td class="black" data-row="2" data-col="3" data-index="19"><div class="coord-label">d6</div><div class="hexNum">31</div></td>
+<td class="white" data-row="2" data-col="4" data-index="20"><div class="coord-label">e6</div><div class="hexNum">24</div></td>
+<td class="black" data-row="2" data-col="5" data-index="21"><div class="coord-label">f6</div><div class="hexNum">27</div></td>
+<td class="white" data-row="2" data-col="6" data-index="22"><div class="coord-label">g6</div><div class="hexNum">29</div></td>
+<td class="black" data-row="2" data-col="7" data-index="23"><div class="coord-label">h6</div><div class="hexNum">30</div></td>
+</tr>
+
+<tr>
+<td class="black" data-row="3" data-col="0" data-index="24"><div class="coord-label">a5</div><div class="hexNum">1</div></td>
+<td class="white" data-row="3" data-col="1" data-index="25"><div class="coord-label">b5</div><div class="hexNum">2</div></td>
+<td class="black" data-row="3" data-col="2" data-index="26"><div class="coord-label">c5</div><div class="hexNum">4</div></td>
+<td class="white" data-row="3" data-col="3" data-index="27"><div class="coord-label">d5</div><div class="hexNum">7</div></td>
+<td class="black" data-row="3" data-col="4" data-index="28"><div class="coord-label">e5</div><div class="hexNum">0</div></td>
+<td class="white" data-row="3" data-col="5" data-index="29"><div class="coord-label">f5</div><div class="hexNum">3</div></td>
+<td class="black" data-row="3" data-col="6" data-index="30"><div class="coord-label">g5</div><div class="hexNum">5</div></td>
+<td class="white" data-row="3" data-col="7" data-index="31"><div class="coord-label">h5</div><div class="hexNum">6</div></td>
+</tr>
+
+<tr>
+<td class="white" data-row="4" data-col="0" data-index="32"><div class="coord-label">a4</div><div class="hexNum">57</div></td>
+<td class="black" data-row="4" data-col="1" data-index="33"><div class="coord-label">b4</div><div class="hexNum">58</div></td>
+<td class="white" data-row="4" data-col="2" data-index="34"><div class="coord-label">c4</div><div class="hexNum">60</div></td>
+<td class="black" data-row="4" data-col="3" data-index="35"><div class="coord-label">d4</div><div class="hexNum">63</div></td>
+<td class="white" data-row="4" data-col="4" data-index="36"><div class="coord-label">e4</div><div class="hexNum">56</div></td>
+<td class="black" data-row="4" data-col="5" data-index="37"><div class="coord-label">f4</div><div class="hexNum">59</div></td>
+<td class="white" data-row="4" data-col="6" data-index="38"><div class="coord-label">g4</div><div class="hexNum">61</div></td>
+<td class="black" data-row="4" data-col="7" data-index="39"><div class="coord-label">h4</div><div class="hexNum">62</div></td>
+</tr>
+
+<tr>
+<td class="black" data-row="5" data-col="0" data-index="40"><div class="coord-label">a3</div><div class="hexNum">33</div></td>
+<td class="white" data-row="5" data-col="1" data-index="41"><div class="coord-label">b3</div><div class="hexNum">34</div></td>
+<td class="black" data-row="5" data-col="2" data-index="42"><div class="coord-label">c3</div><div class="hexNum">36</div></td>
+<td class="white" data-row="5" data-col="3" data-index="43"><div class="coord-label">d3</div><div class="hexNum">39</div></td>
+<td class="black" data-row="5" data-col="4" data-index="44"><div class="coord-label">e3</div><div class="hexNum">32</div></td>
+<td class="white" data-row="5" data-col="5" data-index="45"><div class="coord-label">f3</div><div class="hexNum">35</div></td>
+<td class="black" data-row="5" data-col="6" data-index="46"><div class="coord-label">g3</div><div class="hexNum">37</div></td>
+<td class="white" data-row="5" data-col="7" data-index="47"><div class="coord-label">h3</div><div class="hexNum">38</div></td>
+</tr>
+
+<tr>
+<td class="white" data-row="6" data-col="0" data-index="48"><div class="coord-label">a2</div><div class="hexNum">17</div></td>
+<td class="black" data-row="6" data-col="1" data-index="49"><div class="coord-label">b2</div><div class="hexNum">18</div></td>
+<td class="white" data-row="6" data-col="2" data-index="50"><div class="coord-label">c2</div><div class="hexNum">20</div></td>
+<td class="black" data-row="6" data-col="3" data-index="51"><div class="coord-label">d2</div><div class="hexNum">23</div></td>
+<td class="white" data-row="6" data-col="4" data-index="52"><div class="coord-label">e2</div><div class="hexNum">16</div></td>
+<td class="black" data-row="6" data-col="5" data-index="53"><div class="coord-label">f2</div><div class="hexNum">19</div></td>
+<td class="white" data-row="6" data-col="6" data-index="54"><div class="coord-label">g2</div><div class="hexNum">21</div></td>
+<td class="black" data-row="6" data-col="7" data-index="55"><div class="coord-label">h2</div><div class="hexNum">22</div></td>
+</tr>
+
+<tr>
+<td class="black" data-row="7" data-col="0" data-index="56"><div class="coord-label">a1</div><div class="hexNum">9</div></td>
+<td class="white" data-row="7" data-col="1" data-index="57"><div class="coord-label">b1</div><div class="hexNum">10</div></td>
+<td class="black" data-row="7" data-col="2" data-index="58"><div class="coord-label">c1</div><div class="hexNum">12</div></td>
+<td class="white" data-row="7" data-col="3" data-index="59"><div class="coord-label">d1</div><div class="hexNum">15</div></td>
+<td class="black" data-row="7" data-col="4" data-index="60"><div class="coord-label">e1</div><div class="hexNum">8</div></td>
+<td class="white" data-row="7" data-col="5" data-index="61"><div class="coord-label">f1</div><div class="hexNum">11</div></td>
+<td class="black" data-row="7" data-col="6" data-index="62"><div class="coord-label">g1</div><div class="hexNum">13</div></td>
+<td class="white" data-row="7" data-col="7" data-index="63"><div class="coord-label">h1</div><div class="hexNum">14</div></td>
+</tr>
+            </table>
+
+            <div id="esotericMessage" class="esoteric-message"></div>
+        </div>
+                    <!-- Chess pieces in the middle -->
+    <div class="pieces-column">
+                      <table style="border-collapse:collapse; margin:0; padding:0;">
+    <tr>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_kdt45.svg" alt="Black King" class="sandbox-piece" data-piece="BK" data-color="black" data-line="6" draggable="true">
+        </td>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_klt45.svg" alt="White King" class="sandbox-piece" data-piece="WK" data-color="white" data-line="6" draggable="true">
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_qdt45.svg" alt="Black Queen" class="sandbox-piece" data-piece="BQ" data-color="black" data-line="5" draggable="true">
+        </td>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_qlt45.svg" alt="White Queen" class="sandbox-piece" data-piece="WQ" data-color="white" data-line="5" draggable="true">
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_bdt45.svg" alt="Black Bishop" class="sandbox-piece" data-piece="BB" data-color="black" data-line="4" draggable="true">
+        </td>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_blt45.svg" alt="White Bishop" class="sandbox-piece" data-piece="WB" data-color="white" data-line="4" draggable="true">
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_ndt45.svg" alt="Black Knight" class="sandbox-piece" data-piece="BN" data-color="black" data-line="3" draggable="true">
+        </td>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_nlt45.svg" alt="White Knight" class="sandbox-piece" data-piece="WN" data-color="white" data-line="3" draggable="true">
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_rdt45.svg" alt="Black Rook" class="sandbox-piece" data-piece="BR" data-color="black" data-line="2" draggable="true">
+        </td>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_rlt45.svg" alt="White Rook" class="sandbox-piece" data-piece="WR" data-color="white" data-line="2" draggable="true">
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_pdt45.svg" alt="Black Pawn" class="sandbox-piece" data-piece="BP" data-color="black" data-line="1" draggable="true">
+        </td>
+        <td style="padding:2px;">
+            <img src="../images/pieces/Chess_plt45.svg" alt="White Pawn" class="sandbox-piece" data-piece="WP" data-color="white" data-line="1" draggable="true">
+        </td>
+    </tr>
+</table>                    
+</div>
+              <!-- Instructions/text on the right -->
+<div class="instructions-column">
+    <div>
+        <p>
+            Hover a selected piece over the board to reveal its hidden 
+            <strong>esoteric moves</strong>.
+        </p>
+        <p id="pieceContextMessage"></p>
+        <img src="../images/two_hexagrams.png" 
+             alt="Two Hexagrams" 
+             style="width:50%;height:auto;">
+    </div>
+</div>
+
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+        </div> <!-- close content-table -->
+    </div> <!-- close content -->
+    </div> <!-- close main-content -->
+    </div> <!-- close tutorial-container -->
+
+    <script type="module" src="../js/sandbox_esoteric_moves.mjs"></script>
+        <script type="module">
+        import { initializeSandbox } from '../js/sandbox_esoteric_moves.mjs';
+        let selectedPiece = null;
+        window.selectedPiece = selectedPiece; // for debugging
+        function patchPieceSelection() {
+            const pieces = document.querySelectorAll('.sandbox-piece');
+            pieces.forEach(piece => {
+                piece.style.cursor = 'pointer';
+                piece.addEventListener('click', e => {
+                    e.stopPropagation();
+                    const code = piece.dataset.piece;
+                    selectedPiece = { code, element: piece };
+                    window.selectedPiece = selectedPiece; // for debugging
+                    console.log('Piece selected:', code);
+                });
+            });
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeSandbox();
+            patchPieceSelection();
+        });
+        </script>
+
+</body>
+</html>

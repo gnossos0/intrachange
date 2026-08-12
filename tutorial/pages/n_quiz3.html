@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novice Quiz 3 - Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        /* Quiz specific styles */
+        .quiz-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-progress {
+            background-color: #6a6a6a;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #d4af37;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .question-container {
+            background-color: #6a6a6a;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .answer-option {
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #5a5a5a;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .answer-option:hover {
+            background-color: #4a4a4a;
+        }
+
+        .answer-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .answer-option label {
+            cursor: pointer;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+        }
+
+        .quiz-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .quiz-btn {
+            padding: 12px 20px;
+            margin: 0 10px;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1em;
+        }
+
+        .quiz-btn:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+        }
+
+        .quiz-btn:disabled {
+            background-color: #4a4a4a;
+            color: #888;
+            border-color: #666;
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+        }
+
+        .feedback.correct {
+            background-color: #2d5a2d;
+            border: 2px solid #4a8a4a;
+        }
+
+        .feedback.incorrect {
+            background-color: #5a2d2d;
+            border: 2px solid #8a4a4a;
+        }
+
+        .feedback h3 {
+            margin-top: 0;
+            color: #d4af37;
+            font-family: Georgia, serif;
+        }
+
+        /* Back button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+        }
+
+        /* Ensure all text is white */
+        body, p, div, span {
+            color: #ffffff;
+        }
+
+        h1, h2, h3 {
+            color: #d4af37;
+            font-family: Georgia, serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">← Back to Tutorial</button>
+
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <img src="../../img/icon.jpg" alt="Intrachange Icon" style="width: 60px; margin-bottom: 10px;">
+        </div>
+
+        <div class="quiz-progress">
+            Question 3 of 6
+        </div>
+
+        <div class="question-container">
+            <div class="question-text">
+                <strong>Lesson 3:</strong> How would you describe the Symbolism of the Move?
+            </div>
+
+            <div class="answer-option">
+                <input type="radio" id="answerA" name="question3" value="A">
+                <label for="answerA">A. It mirrors the Player's inner state at the moment of choice.</label>
+            </div>
+
+            <div class="answer-option">
+                <input type="radio" id="answerB" name="question3" value="B">
+                <label for="answerB">B. It must be expressed with symbols or images.</label>
+            </div>
+
+            <div class="answer-option">
+                <input type="radio" id="answerC" name="question3" value="C">
+                <label for="answerC">C. It can only be detected by consulting the I Ching.</label>
+            </div>
+
+            <div class="answer-option">
+                <input type="radio" id="answerD" name="question3" value="D">
+                <label for="answerD">D. It randomizes the interplay of a piece's action.</label>
+            </div>
+        </div>
+
+        <div class="quiz-buttons">
+            <button class="quiz-btn" id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
+            <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()" style="display: none;">Next Question</button>
+        </div>
+
+        <div id="feedback" class="feedback">
+            <h3 id="feedbackTitle"></h3>
+            <p id="feedbackText"></p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswer = 'A';
+        let answered = false;
+
+        function submitAnswer() {
+            if (answered) return;
+
+            const selectedAnswer = document.querySelector('input[name="question3"]:checked');
+            
+            if (!selectedAnswer) {
+                alert('Please select an answer before submitting.');
+                return;
+            }
+
+            answered = true;
+            const feedback = document.getElementById('feedback');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackText = document.getElementById('feedbackText');
+            const submitBtn = document.getElementById('submitBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Disable all radio buttons
+            document.querySelectorAll('input[name="question3"]').forEach(input => {
+                input.disabled = true;
+            });
+
+            if (selectedAnswer.value === correctAnswer) {
+                feedback.className = 'feedback correct';
+                feedbackTitle.textContent = '✅ Correct!';
+                feedbackText.textContent = 'Exactly! The Symbolism of the Move is a reflection of the Player\'s heart and mind - their inner state at the moment of choice, inspired by hexagram keywords.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedbackTitle.textContent = '❌ Not quite.';
+                feedbackText.innerHTML = 'The correct answer is <strong>A. It mirrors the Player\'s inner state at the moment of choice.</strong><br><br>The Symbolism of the Move captures personal insights and reflections that arise from the player\'s inner state, inspired by the hexagram keywords their piece touched.';
+            }
+
+            feedback.style.display = 'block';
+            submitBtn.style.display = 'none';
+            nextBtn.style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            window.location.href = 'n_quiz4.html';
+        }
+
+        function goBack() {
+            window.location.href = '06_archives_and_orders.html';
+        }
+
+        // Allow clicking on answer options to select radio button
+        document.querySelectorAll('.answer-option').forEach(option => {
+            option.addEventListener('click', function() {
+                if (!answered) {
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

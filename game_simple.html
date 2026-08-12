@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Chess Game</title>
+    <link rel="stylesheet" href="frontend/style.css">
+    <style>
+        /* Ensure table and pieces are visible */
+        #chessboard {
+            border-collapse: collapse;
+            border: 2px solid #333;
+            margin: 20px;
+        }
+        #chessboard td {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid #999;
+            font-size: 32px;
+        }
+        #chessboard .white { background-color: #f0d9b5; }
+        #chessboard .black { background-color: #b58863; }
+        
+        .coord-label {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .hexNum {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #666;
+        }
+        
+        .keyword {
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            font-size: 8px;
+            color: #666;
+            max-width: 50px;
+            word-wrap: break-word;
+        }
+        
+        .piece-slot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            z-index: 10;
+        }
+        
+        #controls {
+            margin: 20px;
+        }
+        
+        .highlight-legal {
+            background-color: #90EE90 !important;
+        }
+        
+        .highlight-capture {
+            background-color: #FFB6C1 !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <h1>Intrachange Chess</h1>
+        <label>
+            <input type="checkbox" id="toggleHexagrams" checked> Show Hexagrams
+        </label>
+    </div>
+    
+    <div id="game-container">
+        <table id="chessboard">
+            <!-- Will be populated by JavaScript -->
+        </table>
+    </div>
+
+    <script>
+        // Expose game state globally
+        window.INTRACHANGE_STATE = {
+            game_id: 1,
+            moves: [],
+            current_player: 1,
+            user_id: 1,
+            is_singleplayer: true
+        };
+        
+        console.log('🎯 Intrachange Game Page Loaded');
+        console.log('💡 Game state:', window.INTRACHANGE_STATE);
+    </script>
+    
+    <!-- Load the main script -->
+    <script type="module">
+        import { initializeBoard } from './frontend/boardController.mjs';
+        import { renderBoard } from './frontend/ui.mjs';
+        import { hexagrams } from './frontend/hexagrams.mjs';
+        
+        let boardState;
+        
+        function onSquareClick(row, col) {
+            console.log('Square clicked:', row, col);
+        }
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🎮 Initializing board...');
+            
+            // Create the chessboard table structure
+            const chessboard = document.getElementById('chessboard');
+            chessboard.innerHTML = '';
+            
+            for (let row = 0; row < 8; row++) {
+                const tr = document.createElement('tr');
+                for (let col = 0; col < 8; col++) {
+                    const td = document.createElement('td');
+                    td.className = (row + col) % 2 === 0 ? 'white' : 'black';
+                    tr.appendChild(td);
+                }
+                chessboard.appendChild(tr);
+            }
+            
+            console.log('✅ Chessboard table created');
+            
+            // Initialize the board state and pieces
+            try {
+                boardState = initializeBoard();
+                console.log('✅ Board initialized:', boardState);
+                
+                renderBoard(boardState, onSquareClick, hexagrams);
+                console.log('✅ Board rendered with pieces');
+                
+            } catch (error) {
+                console.error('❌ Error initializing board:', error);
+            }
+        });
+    </script>
+</body>
+</html>

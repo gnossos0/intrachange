@@ -1,0 +1,73 @@
+{
+  "title": "Correlation X::X Template",
+  "description": "Understanding pattern relationships between hexagram lines.",
+  "moves": [
+    {
+      "id": 1,
+      "hexagrams": {
+        "from": 12,
+        "to": 45
+      },
+      "coordinates": {
+        "from": "c1",
+        "to": "g2"
+      },
+      "keywords": {
+        "from": "Authenticity",
+        "to": "Uncertainty"
+      },
+      "interpretation": "This move demonstrates the transformation from fixed positions to fluid possibilities, showing how correlation patterns create strategic opportunities."
+    },
+    {
+      "id": 2,
+      "hexagrams": {
+        "from": 28,
+        "to": 60
+      },
+      "coordinates": {
+        "from": "c6",
+        "to": "c4"
+      },
+      "keywords": {
+        "from": "Regeneration",
+        "to": "Reintegration"
+      },
+      "interpretation": "The correlation between regenerative and integrative energies reveals how pattern recognition guides optimal piece positioning.",
+      "image": "move-02.png"
+    },
+    {
+      "id": 3,
+      "hexagrams": {
+        "from": 39,
+        "to": 61
+      },
+      "coordinates": {
+        "from": "d3",
+        "to": "g4"
+      },
+      "keywords": {
+        "from": "Individuation",
+        "to": "Habituation"
+      },
+      "interpretation": "This sequence illustrates how individual expression can establish lasting patterns through correlation-based movement.",
+      "image": "move-03.png"
+    },
+    {
+      "id": 4,
+      "hexagrams": {
+        "from": 15,
+        "to": 51
+      },
+      "coordinates": {
+        "from": "d1",
+        "to": "f8"
+      },
+      "keywords": {
+        "from": "Emancipation",
+        "to": "Concentration"
+      },
+      "interpretation": "The final correlation demonstrates how liberation through understanding leads to focused application of pattern principles.",
+      "image": "move-04.png"
+    }
+  ]
+}

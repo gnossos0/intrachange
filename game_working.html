@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Chess Game - Working Version</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #main-container { display: flex; gap: 20px; }
+        
+        /* Chessboard styles */
+        #chessboard-container { flex-shrink: 0; }
+        #chessboard {
+            border-collapse: collapse;
+            border: 2px solid #333;
+            background: #fff;
+        }
+        #chessboard td {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid #999;
+            font-size: 32px;
+        }
+        #chessboard .white { background-color: #f0d9b5; }
+        #chessboard .black { background-color: #b58863; }
+        
+        .coord-label {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #333;
+            background: rgba(255,255,255,0.8);
+            padding: 1px 2px;
+            border-radius: 2px;
+        }
+        
+        .hexNum {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #666;
+            background: rgba(255,255,255,0.8);
+            padding: 1px 2px;
+            border-radius: 2px;
+        }
+        
+        .keyword {
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            font-size: 8px;
+            color: #666;
+            max-width: 50px;
+            word-wrap: break-word;
+            background: rgba(255,255,255,0.8);
+            padding: 1px;
+            border-radius: 2px;
+        }
+        
+        .piece-slot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            z-index: 10;
+            color: #000;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+        
+        #controls {
+            margin-bottom: 20px;
+        }
+        
+        .highlight-legal {
+            background-color: #90EE90 !important;
+        }
+        
+        .highlight-capture {
+            background-color: #FFB6C1 !important;
+        }
+        
+        .highlight {
+            background-color: #FFD700 !important;
+        }
+        
+        /* Comment sidebar */
+        #commentSidebar {
+            width: 300px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        #moveHistory {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        
+        .move-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 8px;
+            background-color: #fff;
+        }
+        
+        .move-readout {
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <h1>🏛️ Intrachange Chess</h1>
+        <label>
+            <input type="checkbox" id="toggleHexagrams" checked> Show Hexagrams
+        </label>
+    </div>
+    
+    <div id="main-container">
+        <div id="chessboard-container">
+            <table id="chessboard"></table>
+        </div>
+        
+        <div id="commentSidebar">
+            <h3>Move History</h3>
+            <div id="moveHistory">
+                <p>Make a move to see it here!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chess piece symbols
+        const pieceSymbols = {
+            WP: '♙', WR: '♖', WN: '♘', WB: '♗', WQ: '♕', WK: '♔',
+            BP: '♟', BR: '♜', BN: '♞', BB: '♝', BQ: '♛', BK: '♚',
+        };
+        
+        // Hexagram data (simplified)
+        const hexagrams = {
+            a8: { hexNum: 49, keyword: 'Communication' },
+            b8: { hexNum: 50, keyword: 'Recollection' },
+            c8: { hexNum: 52, keyword: 'Self-Sufficiency' },
+            d8: { hexNum: 55, keyword: 'Nonspecialization' },
+            e8: { hexNum: 48, keyword: 'Internalization' },
+            f8: { hexNum: 51, keyword: 'Concentration' },
+            g8: { hexNum: 53, keyword: 'Disorientation' },
+            h8: { hexNum: 54, keyword: 'Extinction' },
+            a7: { hexNum: 41, keyword: 'Gratification' },
+            b7: { hexNum: 42, keyword: 'Irrationality' },
+            c7: { hexNum: 44, keyword: 'Improvisation' },
+            d7: { hexNum: 47, keyword: 'Synchronization' },
+            e7: { hexNum: 40, keyword: 'Confrontation' },
+            f7: { hexNum: 43, keyword: 'Nonsublimation' },
+            g7: { hexNum: 45, keyword: 'Uncertainty' },
+            h7: { hexNum: 46, keyword: 'Specialization' },
+            a6: { hexNum: 25, keyword: 'Persuasion' },
+            b6: { hexNum: 26, keyword: 'Ambition' },
+            c6: { hexNum: 28, keyword: 'Regeneration' },
+            d6: { hexNum: 31, keyword: 'Transcendence' },
+            e6: { hexNum: 24, keyword: 'Participation' },
+            f6: { hexNum: 27, keyword: 'Provocation' },
+            g6: { hexNum: 29, keyword: 'Eradication' },
+            h6: { hexNum: 30, keyword: 'Evolution' },
+            a5: { hexNum: 1, keyword: 'Revelation' },
+            b5: { hexNum: 2, keyword: 'Intuition' },
+            c5: { hexNum: 4, keyword: 'Identification' },
+            d5: { hexNum: 7, keyword: 'Orientation' },
+            e5: { hexNum: 0, keyword: 'Essence' },
+            f5: { hexNum: 3, keyword: 'Emanation' },
+            g5: { hexNum: 5, keyword: 'Interpretation' },
+            h5: { hexNum: 6, keyword: 'Cultivation' },
+            a4: { hexNum: 57, keyword: 'Celebration' },
+            b4: { hexNum: 58, keyword: 'Compliance' },
+            c4: { hexNum: 60, keyword: 'Reintegration' },
+            d4: { hexNum: 63, keyword: 'Existence' },
+            e4: { hexNum: 56, keyword: 'Recapitulation' },
+            f4: { hexNum: 59, keyword: 'Inspiration' },
+            g4: { hexNum: 61, keyword: 'Habituation' },
+            h4: { hexNum: 62, keyword: 'Disintegration' },
+            a3: { hexNum: 33, keyword: 'Compulsion' },
+            b3: { hexNum: 34, keyword: 'Reflection' },
+            c3: { hexNum: 36, keyword: 'Resilience' },
+            d3: { hexNum: 39, keyword: 'Individuation' },
+            e3: { hexNum: 32, keyword: 'Experience' },
+            f3: { hexNum: 35, keyword: 'Propagation' },
+            g3: { hexNum: 37, keyword: 'Potentiality' },
+            h3: { hexNum: 38, keyword: 'Utilization' },
+            a2: { hexNum: 17, keyword: 'Congruity' },
+            b2: { hexNum: 18, keyword: 'Certainty' },
+            c2: { hexNum: 20, keyword: 'Tradition' },
+            d2: { hexNum: 23, keyword: 'Noninterference' },
+            e2: { hexNum: 16, keyword: 'Conceptualization' },
+            f2: { hexNum: 19, keyword: 'Instruction' },
+            g2: { hexNum: 21, keyword: 'Rationality' },
+            h2: { hexNum: 22, keyword: 'Preconception' },
+            a1: { hexNum: 9, keyword: 'Sensitization' },
+            b1: { hexNum: 10, keyword: 'Incongruity' },
+            c1: { hexNum: 12, keyword: 'Authenticity' },
+            d1: { hexNum: 15, keyword: 'Emancipation' },
+            e1: { hexNum: 8, keyword: 'Devotion' },
+            f1: { hexNum: 11, keyword: 'Projection' },
+            g1: { hexNum: 13, keyword: 'Induction' },
+            h1: { hexNum: 14, keyword: 'Inhibition' },
+        };
+        
+        // Starting board state
+        const startingBoardState = [
+            ['BR','BN','BB','BQ','BK','BB','BN','BR'],
+            ['BP','BP','BP','BP','BP','BP','BP','BP'],
+            [null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null],
+            ['WP','WP','WP','WP','WP','WP','WP','WP'],
+            ['WR','WN','WB','WQ','WK','WB','WN','WR']
+        ];
+        
+        let boardState = JSON.parse(JSON.stringify(startingBoardState));
+        let selectedSquare = null;
+        
+        const files = 'abcdefgh';
+        const ranks = '87654321';
+        
+        function createChessboard() {
+            const chessboard = document.getElementById('chessboard');
+            chessboard.innerHTML = '';
+            
+            for (let row = 0; row < 8; row++) {
+                const tr = document.createElement('tr');
+                for (let col = 0; col < 8; col++) {
+                    const td = document.createElement('td');
+                    td.className = (row + col) % 2 === 0 ? 'white' : 'black';
+                    td.dataset.row = row;
+                    td.dataset.col = col;
+                    td.onclick = () => handleSquareClick(row, col);
+                    tr.appendChild(td);
+                }
+                chessboard.appendChild(tr);
+            }
+            console.log('✅ Chessboard created: 8x8 grid');
+        }
+        
+        function renderBoard() {
+            const chessboard = document.getElementById('chessboard');
+            const showHexagrams = document.getElementById('toggleHexagrams').checked;
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = files[col] + ranks[row];
+                    const td = chessboard.rows[row].cells[col];
+                    
+                    // Clear previous content
+                    td.innerHTML = '';
+                    td.classList.remove('highlight-legal', 'highlight-capture', 'highlight');
+                    
+                    // Add coordinate label
+                    const coordLabel = document.createElement('div');
+                    coordLabel.className = 'coord-label';
+                    coordLabel.textContent = square;
+                    td.appendChild(coordLabel);
+                    
+                    // Add hexagram info if enabled
+                    if (showHexagrams && hexagrams[square]) {
+                        const hexNum = hexagrams[square].hexNum;
+                        const keyword = hexagrams[square].keyword;
+                        
+                        const hexNumDiv = document.createElement('div');
+                        hexNumDiv.className = 'hexNum';
+                        hexNumDiv.textContent = hexNum;
+                        td.appendChild(hexNumDiv);
+                        
+                        const keywordDiv = document.createElement('div');
+                        keywordDiv.className = 'keyword';
+                        keywordDiv.textContent = keyword;
+                        td.appendChild(keywordDiv);
+                    }
+                    
+                    // Add piece if present
+                    const piece = boardState[row][col];
+                    if (piece && pieceSymbols[piece]) {
+                        const pieceDiv = document.createElement('div');
+                        pieceDiv.className = 'piece-slot';
+                        pieceDiv.textContent = pieceSymbols[piece];
+                        td.appendChild(pieceDiv);
+                    }
+                }
+            }
+        }
+        
+        function calculateEsotericSquares(piece, fromSquare, toSquare) {
+            const midSquares = [];
+            const fromFile = fromSquare[0], fromRank = parseInt(fromSquare[1]);
+            const toFile = toSquare[0], toRank = parseInt(toSquare[1]);
+            if (piece === 'WP' && fromFile === toFile && toRank - fromRank > 1) {
+                for (let r = fromRank + 1; r < toRank; r++) midSquares.push(fromFile + r);
+            }
+            if (piece === 'BP' && fromFile === toFile && fromRank - toRank > 1) {
+                for (let r = fromRank - 1; r > toRank; r--) midSquares.push(fromFile + r);
+            }
+            return midSquares;
+        }
+        
+        function handleSquareClick(row, col) {
+            const piece = boardState[row][col];
+            if (selectedSquare) {
+                // Make a move
+                const fromRow = selectedSquare.row;
+                const fromCol = selectedSquare.col;
+                const fromSquare = files[fromCol] + ranks[fromRow];
+                const toSquare = files[col] + ranks[row];
+                const movingPiece = boardState[fromRow][fromCol];
+
+                // Dynamic esoteric move detection
+                let squaresArray = [fromSquare, toSquare];
+                const midSquares = calculateEsotericSquares(movingPiece, fromSquare, toSquare);
+                if (midSquares.length > 0) {
+                    squaresArray = [fromSquare, ...midSquares, toSquare];
+                }
+                console.log('Squares array:', squaresArray);
+
+                // Move the piece
+                boardState[row][col] = movingPiece;
+                boardState[fromRow][fromCol] = null;
+                selectedSquare = null;
+
+                // Log the move
+                console.log(`Move: ${squaresArray.join(' → ')} (${movingPiece})`);
+
+                // Add to move history
+                addMoveToHistory(movingPiece, squaresArray);
+                renderBoard();
+            } else if (piece) {
+                // Select a piece
+                selectedSquare = { row, col };
+                console.log(`Selected: ${files[col]}${ranks[row]} (${piece})`);
+                
+                // Highlight the selected square
+                const chessboard = document.getElementById('chessboard');
+                chessboard.rows[row].cells[col].classList.add('highlight');
+            }
+        }
+        
+        function addMoveToHistory(piece, squares) {
+            const moveHistory = document.getElementById('moveHistory');
+            const moveCard = document.createElement('div');
+            moveCard.className = 'move-card';
+
+            // Build dynamic move text
+            let moveParts = squares.map(square => {
+                const hex = hexagrams[square];
+                if (hex) {
+                    return `${hex.hexNum} (${hex.keyword})`;
+                } else {
+                    return square;
+                }
+            });
+            let moveText = `${piece} ` + moveParts.join(' → ');
+
+            moveCard.innerHTML = `
+                <div class="move-readout">${moveText}</div>
+                <div style="font-size: 12px; color: #666;">${new Date().toLocaleTimeString()}</div>
+            `;
+
+            // Add to top of history
+            if (moveHistory.firstChild && moveHistory.firstChild.tagName) {
+                moveHistory.insertBefore(moveCard, moveHistory.firstChild);
+            } else {
+                moveHistory.innerHTML = '';
+                moveHistory.appendChild(moveCard);
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🎮 Initializing Intrachange Chess...');
+            createChessboard();
+            renderBoard();
+            
+            // Set up hexagram toggle
+            document.getElementById('toggleHexagrams').addEventListener('change', renderBoard);
+            
+            console.log('✅ Game ready! Click pieces to select and move them.');
+        });
+        
+        // Manual test block for addMoveToHistory
+        window.addEventListener('DOMContentLoaded', () => {
+            // Manual test: 2-step move
+            addMoveToHistory('WP', ['d2', 'd4']);
+            // Manual test: 3-step esoteric move
+            addMoveToHistory('WP', ['d2', 'd4', 'd6']);
+            addMoveToHistory('BP', ['c7', 'c5', 'c3']);
+        });
+        
+        // Global game state for debugging
+        window.INTRACHANGE_STATE = {
+            game_id: 1,
+            boardState: () => boardState,
+            hexagrams: hexagrams
+        };
+    </script>
+</body>
+</html>

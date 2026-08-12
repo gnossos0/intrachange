@@ -1,0 +1,229 @@
+/* TEMP: Make comment panel wider for keyword display test */
+.comment-panel {
+  width: 650px !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+/* Highlight esoteric move target (red) */
+.highlight-esoteric {
+  background-color: #b6e388 !important;
+  border: 2px solid #6bbf59 !important;
+  box-shadow: 0 0 8px 2px #b6e388, 0 0 0 3px #b6e388 inset !important;
+  z-index: 22 !important;
+}
+/* Reset and base styles */
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  margin: 0;
+  height: 100vh;
+  justify-content: center;
+}
+
+h1, h2 {
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+table#chessboard {
+  border-collapse: collapse;
+  min-width: 480px;
+  min-height: 480px;
+  margin: 20px auto;
+  table-layout: fixed;
+  box-sizing: border-box;
+  border: 2px solid #333;
+  user-select: none;
+  width: 480px;
+  height: 480px;
+}
+
+/* Each cell */
+td {
+  width: 60px;
+  height: 60px;
+  position: relative; /* required for children absolute positioning */
+  border: 1px solid #333;
+  text-align: center;
+  vertical-align: middle;
+  font-family: sans-serif;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 4px;
+  cursor: pointer;
+  user-select: none;
+  background-color: #f0d9b5; /* default light square */
+  color: #000;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Dark squares */
+td.dark {
+  background-color: #b58863;
+  color: #fff;
+}
+
+/* Coordinates label */
+.coord-label {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 9px;
+  color: rgba(0,0,0,0.9) !important;
+  user-select: none;
+  z-index: 12; /* above pieces and highlights */
+  font-weight: bold;
+  background: rgba(255,255,255,0.7);
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+
+/* Hexagram number (top-right) */
+.hexNum {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 9px;
+  font-weight: bold;
+  color: rgba(0,0,0,0.9) !important;
+  user-select: none;
+  z-index: 12; /* above pieces and highlights */
+  background: rgba(255,255,255,0.7);
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+
+/* Hexagram keyword under coordinates, centered horizontally */
+.hex-keyword {
+  position: absolute;
+  top: 16px; /* slightly below coord-label */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-style: italic;
+  line-height: 1.1;
+  user-select: none;
+  pointer-events: none;
+  color: rgba(0,0,0,0.8) !important;
+  z-index: 11; /* above pieces but below coord-label */
+  text-align: center;
+  width: 100%;
+  background: rgba(255,255,255,0.5);
+  padding: 1px;
+  border-radius: 2px;
+}
+
+/* Hexagram image */
+.hex-img {
+  position: static;
+  height: 50px;
+  width: auto;
+  pointer-events: none;
+}
+
+/* Container for chess piece */
+.piece-slot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 10; /* pieces above hex images but below coord-label */
+}
+
+/* Chess piece style */
+.piece {
+  font-size: 3em;
+  line-height: 1;
+  user-select: none;
+  color: inherit;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Explicit piece colors */
+.white-piece {
+  color: white !important;
+  text-shadow: 1px 1px 3px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black;
+}
+.black-piece {
+  color: black !important;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+}
+
+/* Highlight legal moves */
+.highlight-legal {
+  background-color: #b6e388 !important;
+  border: 2px solid #6bbf59 !important;
+  box-shadow: 0 0 8px 2px #b6e388, 0 0 0 3px #b6e388 inset !important;
+  z-index: 30 !important;
+}
+
+/* Highlight capture moves */
+.highlight-capture {
+  background-color: rgba(255,0,0,0.3) !important;
+  border: 3px solid #ff0000 !important;
+  box-shadow: 0 0 0 4px rgba(255,0,0,0.5) inset !important;
+  z-index: 20 !important;
+}
+
+/* Highlight selected square (the piece you clicked) */
+.highlight {
+  background-color: transparent;
+  z-index: 21; /* above legal/capture highlights and pieces */
+}
+
+.square {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+/* Commented out: square-index is obsolete since we now use chess coordinates */
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  table#chessboard {
+    width: 100vw;
+    height: 100vw;
+  }
+  td {
+    width: 12vw;
+    height: 12vw;
+    font-size: 9px;
+    padding: 2px;
+  }
+  .piece-slot {
+    font-size: 5vw;
+  }
+  .hex-keyword {
+    font-size: 7px;
+  }
+  .coord-label {
+    font-size: 6px;
+  }
+  .hex-img {
+    height: 8vw;
+  }
+}
+
+/* Reference Section Styles */
+.reference-section.hidden {
+  display: none;
+}
+
+.reference-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #444;
+}

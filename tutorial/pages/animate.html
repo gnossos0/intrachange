@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Correlation 8::8 Animation</title>
+<style>
+  body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    background: #f5f5f5;
+  }
+  table {
+    border-collapse: collapse;
+    width: 700px;
+    table-layout: fixed;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  td, th {
+    border: 1px solid #ccc;
+    width: 78px;
+    height: 78px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    background: #fff;
+  }
+  .trigram {
+    width: 68px;
+    height: 34px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.5s, top 0.8s, bottom 0.8s, box-shadow 0.3s;
+  }
+  .top {
+    top: 5px;
+  }
+  .bottom {
+    bottom: 5px;
+  }
+  .glow {
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+  }
+</style>
+</head>
+<body>
+
+<table id="trigramTable">
+  <thead>
+    <tr>
+      <th></th>
+      <!-- Column labels will go here -->
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Rows will go here -->
+  </tbody>
+</table>
+
+<script>
+const topTrigrams = ["lake","fire","wind","moon","sun","lightning","water","mountain"];
+const bottomTrigrams = ["mountain","water","lightning","sun","moon","wind","fire","lake"];
+
+const table = document.getElementById("trigramTable");
+const theadRow = table.querySelector("thead tr");
+const tbody = table.querySelector("tbody");
+
+// Add top trigram labels
+topTrigrams.forEach(name => {
+  const th = document.createElement("th");
+  th.textContent = name;
+  theadRow.appendChild(th);
+});
+
+// Build rows
+for (let r = 0; r < 8; r++) {
+  const tr = document.createElement("tr");
+
+  // Leftmost label
+  const th = document.createElement("th");
+  th.textContent = bottomTrigrams[r];
+  tr.appendChild(th);
+
+  // Cells
+  for (let c = 0; c < 8; c++) {
+    const td = document.createElement("td");
+
+    // Top trigram img
+    const topImg = document.createElement("img");
+    topImg.src = `../images/trigrams/${topTrigrams[c]}.png`;
+    topImg.classList.add("trigram", "top");
+    td.appendChild(topImg);
+
+    // Bottom trigram img
+    const bottomImg = document.createElement("img");
+    bottomImg.src = `../images/trigrams/${bottomTrigrams[r]}.png`;
+    bottomImg.classList.add("trigram", "bottom");
+    td.appendChild(bottomImg);
+
+    tr.appendChild(td);
+  }
+
+  tbody.appendChild(tr);
+}
+
+// Animation: sequential fade-in with glow, then merge
+function animateTrigrams() {
+  const tops = table.querySelectorAll(".trigram.top");
+  const bottoms = table.querySelectorAll(".trigram.bottom");
+
+  // Animate top trigrams column by column
+  topTrigrams.forEach((_, col) => {
+    setTimeout(() => {
+      for (let r = 0; r < 8; r++) {
+        const img = tops[r*8 + col];
+        img.style.opacity = 1;
+        img.classList.add("glow");
+        setTimeout(() => img.classList.remove("glow"), 500); // remove glow after fade-in
+      }
+    }, col * 500); // 500ms per column
+  });
+
+  // Animate bottom trigrams row by row after tops
+  setTimeout(() => {
+    bottomTrigrams.forEach((_, row) => {
+      setTimeout(() => {
+        for (let c = 0; c < 8; c++) {
+          const img = bottoms[row*8 + c];
+          img.style.opacity = 1;
+          img.classList.add("glow");
+          setTimeout(() => img.classList.remove("glow"), 500);
+        }
+      }, row * 500);
+    });
+  }, 8 * 500 + 500); // Start after top columns animation
+
+  // Merge top and bottom halves into hexagram after all fade-ins
+  setTimeout(() => {
+    tops.forEach(img => img.style.top = "12px");       // move top images down
+    bottoms.forEach(img => img.style.bottom = "12px"); // move bottom images up
+  }, 8*500 + 8*500 + 1000); // after both column and row animations
+}
+
+window.onload = animateTrigrams;
+</script>
+
+</body>
+</html>

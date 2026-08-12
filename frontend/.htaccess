@@ -1,0 +1,12 @@
+# Allow access to all
+Options +Indexes
+DirectoryIndex index.html
+
+# Allow all user-agents
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+</IfModule>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="../img/icon.jpg">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intrachange Chessboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- <style>
+    table {
+      border-collapse: collapse;
+      width: 480px;
+      height: 480px;
+      margin: 20px auto;
+      table-layout: fixed;
+    }
+    td {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #333;
+      text-align: center;
+      vertical-align: middle;
+      font-family: sans-serif;
+      font-size: 11px;
+      line-height: 1.2;
+      padding: 4px;
+      background-color: #f0d9b5;
+      position: relative;
+      user-select: none;
+    }
+    .dark {
+      background-color: #b58863;
+      color: #fff;
+    }
+    .coord-label {
+      position: absolute;
+      bottom: 2px;
+      left: 2px;
+      font-size: 8px;
+      color: rgba(0,0,0,0.4);
+      user-select: none;
+    }
+    .hexNum {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 2px;
+      line-height: 1.1;
+    }
+    .hex-keyword {
+      font-size: 10px;
+      font-style: italic;
+      line-height: 1.1;
+    }
+  </style> -->
+</head>
+<body>
+
+  <!-- Comment Sidebar -->
+  <div id="commentSidebar" class="comment-panel" style="position:fixed; right:0; top:0; height:100vh; width:350px; background:#222; color:#fff; z-index:1001; box-shadow:-2px 0 12px rgba(0,0,0,0.25); padding:18px 12px 12px 18px; overflow-y:auto; display:block;">
+    <button id="toggleSidebar" style="position:absolute; left:-32px; top:20px; width:28px; height:28px; background:#444; color:#fff; border:none; border-radius:50%; font-size:18px; cursor:pointer; z-index:1002;">←</button>
+    <h3 style="margin-top:0;">Symbolism of the Move</h3>
+    <div id="commentStatus" class="status-message" style="display:none;"></div>
+    <form id="commentForm" style="margin-bottom:10px;">
+      <input type="hidden" id="moveId" name="moveId">
+      <input type="hidden" id="hexFrom" name="hexFrom">
+      <input type="hidden" id="hexTo" name="hexTo">
+      <input type="hidden" id="keywordFrom" name="keywordFrom">
+      <input type="hidden" id="keywordTo" name="keywordTo">
+      <textarea id="commentText" name="commentText" rows="3" style="width:100%; margin-bottom:6px;" placeholder="Select a move to see details" disabled></textarea>
+      <div style="display:flex; gap:8px;">
+        <button type="button" id="referenceToggle" style="flex:1; background:#007bff; color:#fff; border:none; border-radius:6px; padding:6px 0; font-weight:bold;">Reference</button>
+        <button type="submit" id="saveComment" style="flex:1; background:#28a745; color:#fff; border:none; border-radius:6px; padding:6px 0; font-weight:bold;">Submit Comment</button>
+      </div>
+    </form>
+
+    <!-- Collapsible Reference Section -->
+    <div id="referenceSection" class="reference-section hidden" style="margin-top:15px; padding-top:15px; border-top:1px solid #444;">
+      <div id="referenceContent" style="color:#ccc; font-size:14px;">
+        <!-- Dynamic reference content loads here -->
+      </div>
+    </div>
+
+    <div id="historyEntries" style="margin-top:18px;"></div>
+  </div>
+
+  <h2 style="text-align:center;">Intrachange</h2>
+  <div style="text-align:center; margin-bottom:12px;">
+    <label style="font-size:16px;">
+      <input type="checkbox" id="toggleHexagrams" style="vertical-align:middle;">
+      Show Hexagrams
+    </label>
+  </div>
+  <table id="chessboard">
+    <tbody>
+      <!-- Table structure will be populated by JavaScript -->
+    </tbody>
+  </table>
+
+  <!-- JavaScript will create the proper 8x8 grid structure -->
+  <script>
+    // Create the basic 8x8 table structure
+    function createChessboardTable() {
+      const table = document.getElementById('chessboard');
+      const tbody = table.querySelector('tbody');
+      tbody.innerHTML = ''; // Clear any existing content
+      
+      for (let row = 0; row < 8; row++) {
+        const tr = document.createElement('tr');
+        tr.dataset.row = 8 - row; // Chess notation: rank 8 at top, rank 1 at bottom
+        
+        for (let col = 0; col < 8; col++) {
+          const td = document.createElement('td');
+          // Add alternating light/dark square pattern
+          if ((row + col) % 2 === 1) {
+            td.classList.add('dark');
+          }
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+    }
+    
+    // Create table structure immediately when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', createChessboardTable);
+    } else {
+      createChessboardTable();
+    }
+  </script>
+
+  <table id="chessboard-backup" style="display: none;">
+  <tbody>
+    <!-- Rank 8 -->
+    <tr data-row="8">
+      <td class="dark">
+        <div class="hexNum">49</div>
+        <div class="hex-keyword">Communication</div>
+        <div class="coord-label">a8</div>
+      </td>
+      <td>
+        <div class="hexNum">50</div>
+        <div class="hex-keyword">Recollection</div>
+        <div class="coord-label">b8</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">52</div>
+        <div class="hex-keyword">Self-Sufficiency</div>
+        <div class="coord-label">c8</div>
+      </td>
+      <td>
+        <div class="hexNum">55</div>
+        <div class="hex-keyword">Nonspecialization</div>
+        <div class="coord-label">d8</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">48</div>
+        <div class="hex-keyword">Internalization</div>
+        <div class="coord-label">e8</div>
+      </td>
+      <td>
+        <div class="hexNum">51</div>
+        <div class="hex-keyword">Concentration</div>
+        <div class="coord-label">f8</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">53</div>
+        <div class="hex-keyword">Disorientation</div>
+        <div class="coord-label">g8</div>
+      </td>
+      <td>
+        <div class="hexNum">54</div>
+        <div class="hex-keyword">Extinction</div>
+        <div class="coord-label">h8</div>
+      </td>
+    </tr>
+    <!-- Rank 7 -->
+    <tr data-row="7">
+      <td>
+        <div class="hexNum">41</div>
+        <div class="hex-keyword">Gratification</div>
+        <div class="coord-label">a7</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">42</div>
+        <div class="hex-keyword">Irrationality</div>
+        <div class="coord-label">b7</div>
+      </td>
+      <td>
+        <div class="hexNum">44</div>
+        <div class="hex-keyword">Improvisation</div>
+        <div class="coord-label">c7</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">47</div>
+        <div class="hex-keyword">Synchronization</div>
+        <div class="coord-label">d7</div>
+      </td>
+      <td>
+        <div class="hexNum">40</div>
+        <div class="hex-keyword">Confrontation</div>
+        <div class="coord-label">e7</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">43</div>
+        <div class="hex-keyword">Nonsublimation</div>
+        <div class="coord-label">f7</div>
+      </td>
+      <td>
+        <div class="hexNum">45</div>
+        <div class="hex-keyword">Uncertainty</div>
+        <div class="coord-label">g7</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">46</div>
+        <div class="hex-keyword">Specialization</div>
+        <div class="coord-label">h7</div>
+      </td>
+    </tr>
+    <!-- Rank 6 -->
+    <tr data-row="6">
+      <td class="dark">
+        <div class="hexNum">25</div>
+        <div class="hex-keyword">Persuasion</div>
+        <div class="coord-label">a6</div>
+      </td>
+      <td>
+        <div class="hexNum">26</div>
+        <div class="hex-keyword">Ambition</div>
+        <div class="coord-label">b6</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">28</div>
+        <div class="hex-keyword">Regeneration</div>
+        <div class="coord-label">c6</div>
+      </td>
+      <td>
+        <div class="hexNum">31</div>
+        <div class="hex-keyword">Transcendence</div>
+        <div class="coord-label">d6</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">24</div>
+        <div class="hex-keyword">Participation</div>
+        <div class="coord-label">e6</div>
+      </td>
+      <td>
+        <div class="hexNum">27</div>
+        <div class="hex-keyword">Provocation</div>
+        <div class="coord-label">f6</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">29</div>
+        <div class="hex-keyword">Eradication</div>
+        <div class="coord-label">g6</div>
+      </td>
+      <td>
+        <div class="hexNum">30</div>
+        <div class="hex-keyword">Evolution</div>
+        <div class="coord-label">h6</div>
+      </td>
+    </tr>
+    <!-- Rank 5 -->
+    <tr data-row="5">
+      <td>
+        <div class="hexNum">1</div>
+        <div class="hex-keyword">Revelation</div>
+        <div class="coord-label">a5</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">2</div>
+        <div class="hex-keyword">Intuition</div>
+        <div class="coord-label">b5</div>
+      </td>
+      <td>
+        <div class="hexNum">4</div>
+        <div class="hex-keyword">Identification</div>
+        <div class="coord-label">c5</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">7</div>
+        <div class="hex-keyword">Orientation</div>
+        <div class="coord-label">d5</div>
+      </td>
+      <td>
+        <div class="hexNum">0</div>
+        <div class="hex-keyword">Essence</div>
+        <div class="coord-label">e5</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">3</div>
+        <div class="hex-keyword">Emanation</div>
+        <div class="coord-label">f5</div>
+      </td>
+      <td>
+        <div class="hexNum">5</div>
+        <div class="hex-keyword">Interpretation</div>
+        <div class="coord-label">g5</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">6</div>
+        <div class="hex-keyword">Cultivation</div>
+        <div class="coord-label">h5</div>
+      </td>
+    </tr>
+    <!-- Rank 4 -->
+    <tr data-row="4">
+      <td class="dark">
+        <div class="hexNum">57</div>
+        <div class="hex-keyword">Celebration</div>
+        <div class="coord-label">a4</div>
+      </td>
+      <td>
+        <div class="hexNum">58</div>
+        <div class="hex-keyword">Compliance</div>
+        <div class="coord-label">b4</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">60</div>
+        <div class="hex-keyword">Reintegration</div>
+        <div class="coord-label">c4</div>
+      </td>
+      <td>
+        <div class="hexNum">63</div>
+        <div class="hex-keyword">Existence</div>
+        <div class="coord-label">d4</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">56</div>
+        <div class="hex-keyword">Recapitulation</div>
+        <div class="coord-label">e4</div>
+      </td>
+      <td>
+        <div class="hexNum">59</div>
+        <div class="hex-keyword">Inspiration</div>
+        <div class="coord-label">f4</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">61</div>
+        <div class="hex-keyword">Habituation</div>
+        <div class="coord-label">g4</div>
+      </td>
+      <td>
+        <div class="hexNum">62</div>
+        <div class="hex-keyword">Disintegration</div>
+        <div class="coord-label">h4</div>
+      </td>
+    </tr>
+    <!-- Rank 3 -->
+    <tr data-row="3">
+      <td>
+        <div class="hexNum">33</div>
+        <div class="hex-keyword">Compulsion</div>
+        <div class="coord-label">a3</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">34</div>
+        <div class="hex-keyword">Reflection</div>
+        <div class="coord-label">b3</div>
+      </td>
+      <td>
+        <div class="hexNum">36</div>
+        <div class="hex-keyword">Resilience</div>
+        <div class="coord-label">c3</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">39</div>
+        <div class="hex-keyword">Individuation</div>
+        <div class="coord-label">d3</div>
+      </td>
+      <td>
+        <div class="hexNum">32</div>
+        <div class="hex-keyword">Experience</div>
+        <div class="coord-label">e3</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">35</div>
+        <div class="hex-keyword">Propagation</div>
+        <div class="coord-label">f3</div>
+      </td>
+      <td>
+        <div class="hexNum">37</div>
+        <div class="hex-keyword">Potentiality</div>
+        <div class="coord-label">g3</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">38</div>
+        <div class="hex-keyword">Utilization</div>
+        <div class="coord-label">h3</div>
+      </td>
+    </tr>
+    <!-- Rank 2 -->
+    <tr data-row="2">
+      <td class="dark">
+        <div class="hexNum">17</div>
+        <div class="hex-keyword">Congruity</div>
+        <div class="coord-label">a2</div>
+      </td>
+      <td>
+        <div class="hexNum">18</div>
+        <div class="hex-keyword">Certainty</div>
+        <div class="coord-label">b2</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">20</div>
+        <div class="hex-keyword">Tradition</div>
+        <div class="coord-label">c2</div>
+      </td>
+      <td>
+        <div class="hexNum">23</div>
+        <div class="hex-keyword">Noninterference</div>
+        <div class="coord-label">d2</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">16</div>
+        <div class="hex-keyword">Conceptualization</div>
+        <div class="coord-label">e2</div>
+      </td>
+      <td>
+        <div class="hexNum">19</div>
+        <div class="hex-keyword">Instruction</div>
+        <div class="coord-label">f2</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">21</div>
+        <div class="hex-keyword">Rationality</div>
+        <div class="coord-label">g2</div>
+      </td>
+      <td>
+        <div class="hexNum">22</div>
+        <div class="hex-keyword">Preconception</div>
+        <div class="coord-label">h2</div>
+      </td>
+    </tr>
+    <!-- Rank 1 -->
+    <tr data-row="1">
+      <td>
+        <div class="hexNum">9</div>
+        <div class="hex-keyword">Sensitization</div>
+        <div class="coord-label">a1</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">10</div>
+        <div class="hex-keyword">Incongruity</div>
+        <div class="coord-label">b1</div>
+      </td>
+      <td>
+        <div class="hexNum">12</div>
+        <div class="hex-keyword">Authenticity</div>
+        <div class="coord-label">c1</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">15</div>
+        <div class="hex-keyword">Emancipation</div>
+        <div class="coord-label">d1</div>
+      </td>
+      <td>
+        <div class="hexNum">8</div>
+        <div class="hex-keyword">Devotion</div>
+        <div class="coord-label">e1</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">11</div>
+        <div class="hex-keyword">Projection</div>
+        <div class="coord-label">f1</div>
+      </td>
+      <td>
+        <div class="hexNum">13</div>
+        <div class="hex-keyword">Induction</div>
+        <div class="coord-label">g1</div>
+      </td>
+      <td class="dark">
+        <div class="hexNum">14</div>
+        <div class="hex-keyword">Inhibition</div>
+        <div class="coord-label">h1</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  <script type="module" src="./script.mjs"></script>
+  <script type="module" src="./commentSystem.mjs"></script>
+</body>
+</html>
