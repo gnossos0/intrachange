@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .main-content {
+            background-color: #4a4a4a !important;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            font-size: 10pt;
+        }
+
+        .lesson-content h2 {
+            font-size: 12pt;
+        }
+
+        .move-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 5px 0;
+            border: 1px solid #d4af37;
+        }
+
+        .move-table td {
+            padding: 6px;
+            border: 1px solid #d4af37;
+            text-align: left;
+            font-size: 10pt;
+        }
+
+        .move-image-cell {
+            width: 30%;
+            text-align: center !important;
+            vertical-align: middle;
+            background-color: #5a5a5a;
+        }
+
+        .move-image-cell img {
+            width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+
+        .notes {
+            margin: 8px 0;
+            padding: 8px;
+            background-color: #dcdcdc;
+            border-left: 4px solid #d4af37;
+            font-size: 10pt;
+            line-height: 1;
+        }
+
+        .notes p {
+            margin: 0 0 4px 0;
+            font-size: 10pt;
+        }
+
+        .notes h3 {
+            margin: 0;
+            color: #6a102f;
+            font-size: 10pt;
+            font-weight: normal;
+        }
+
+        .historical {
+            margin-top: 8px;
+            padding: 6px;
+            background-color: #6a6a6a;
+            border-left: 3px solid #6a102f;
+            font-size: 10pt;
+            line-height: 1;
+        }
+
+        .historical p {
+            margin: 0;
+        }
+
+        .intro {
+            font-size: 10pt;
+            font-weight: 500;
+            margin: 6px 0;
+        }
+
+        section section {
+            margin-left: 10px;
+            font-size: 10pt;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "Pattern of Esoteric Moves (Page 5 of 6)";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Pattern of Esoteric Moves</h1>
+                <p class="subtitle">5 of 6</p>
+            </div>
+
+            <div class="content">
+                <div class="tutorial-content lesson-content">
+
+                    <section id="queens">
+                        <h2>Queens</h2>
+
+                        <table class="move-table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>White</strong></td>
+                                    <td><strong>Black</strong></td>
+                                    <td class="move-image-cell" rowspan="9">
+                                        <img src="../images/pieces/queens.png" alt="Queen move pattern">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>QR Exoteric</td>
+                                    <td>KR Exoteric</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>QN Esoteric: K</strong></td>
+                                    <td><strong>KN Esoteric: Q</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>QB Exoteric</td>
+                                    <td>KB Exoteric</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Q Esoteric: KN</strong></td>
+                                    <td><strong>K Esoteric: QN</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>K Exoteric</td>
+                                    <td>Q Exoteric</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>KB Esoteric: QR</strong></td>
+                                    <td><strong>QB Esoteric: KR</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>KN Exoteric</td>
+                                    <td>QN Exoteric</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>KR Esoteric: QB</strong></td>
+                                    <td><strong>QR Esoteric: KB</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="notes">
+                            <h2 class="notes-title">Notes</h2>
+
+                            <aside class="historical">
+                                <p>
+                                    Because the Queen moves in an uninterrupted line horizontally, vertically, and diagonally, it remains a powerful force, both offensively and defensively, in the Game. As can be seen by its pattern of moves, only horizontal and diagonal Exoteric Moves result in Esoteric Moves, each of which total either three-square or five-square shifts to the right or left of the Exoteric Square.  [Historically-minded Players note that in the Game, much unlike Chess, the Queen is a significant but not dominant force: the ascendancy of the Queen in the evolution of Chess has, many say, provoked undue psychological hardships on master-level Chess players.]
+                                </p>
+                            </aside>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '21.html';
+        }
+
+        function prevPage() {
+            window.location.href = '19.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

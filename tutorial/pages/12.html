@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            line-height: 1.75;
+        }
+
+        .lesson-content p,
+        .lesson-content li {
+            font-size: 1.18rem !important; /* Bumped up layout size inline with page 09 standards */
+            line-height: 1.5;
+        }
+
+        .split-layout {
+            display: flex;
+            align-items: flex-start; /* Pulled text column up to sit flush/even with image-column top edge */
+            gap: 32px;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+        }
+
+        .text-column {
+            flex: 0 0 40%;
+            max-width: 40%;
+            min-width: 0;
+        }
+
+        .image-column {
+            flex: 0 0 60%;
+            max-width: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cycle-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+        }
+
+        .side-note {
+            margin-top: 16px;
+        }
+
+        /* Set direct explicit margin layout on paragraphs for page 12 to make gaps perfectly uniform */
+        .tutorial-content p {
+            margin-bottom: 16px !important;
+            margin-top: 0 !important;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .title-row h2 {
+            margin-bottom: 0 !important;
+        }
+
+        .title-row h2.subhead {
+            margin-bottom: 0 !important;
+            margin-top: 0 !important;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "I Ching and Chess Correlation (6 of 9) - 4 :: 4 — Enantiodromia";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation</h1>
+                <p class="subtitle">6 of 9</p>
+            </div>
+
+            <div class="content">
+                <div class="lesson-content">
+                    <div class="title-row">
+                        <h2>4 :: 4 — Enantiodromia</h2>
+                        <h2 class="subhead">Transformation Through Opposition</h2>
+                    </div>
+
+                    <div class="split-layout">
+                        <div class="tutorial-content text-column">
+                            <p>This is the confluence of correlations that creates moves within Chess that are parallel to the line changes within the I Ching.</p>
+
+                            <p>As energy flows between the system's Dipoles, it does not simply move; it transforms. This process — <b>Enantiodromia</b> — is the phenomenon of one thing turning into its opposite. Within Intrachange, this is the mechanism by which the very identity of a piece, in relation to its square, can provoke a shift in position.</p>
+
+                            <div class="side-note">
+                                <p>In the I Ching, lines formed by a <b>7</b> or <b>8</b> are stable, while those formed by a <b>6</b> or <b>9</b> are changing lines that transform into their opposites. This cycle of transformation is the principle behind <b>Esoteric Moves</b> in Intrachange.</p>
+                            </div>
+                        </div>
+
+                        <div class="image-column">
+                            <img class="cycle-image" src="../images/cycle.jpg" alt="Cycle diagram for Enantiodromia">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '13.html';
+        }
+
+        function prevPage() {
+            window.location.href = '11.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

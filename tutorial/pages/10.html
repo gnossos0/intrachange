@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 12px 0 4px;
+            line-height: 1.75;
+        }
+
+        .lesson-content p,
+        .lesson-content li {
+            font-size: 1.35rem !important;
+            line-height: 1.55;
+        }
+
+        .split-layout {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 24px 0;
+        }
+
+        .text-column {
+            display: table-cell;
+            width: 38%;
+            vertical-align: top;
+            text-align: left;
+        }
+
+        .text-column h2 {
+            white-space: nowrap;
+            margin-bottom: 16px;
+        }
+
+        .animation-column {
+            display: table-cell;
+            vertical-align: top;
+            text-align: center;
+            width: 62%;
+        }
+
+        .animation-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 14px;
+            width: 100%;
+            max-width: 860px;
+            min-width: 0;
+            margin: 0 0 0 auto;
+            padding: 10px 0 6px;
+        }
+
+        .animation-frame {
+            width: min(100%, 860px);
+            max-width: 100%;
+            min-height: 0;
+            border: 0;
+            background: transparent;
+            display: block;
+            overflow: hidden;
+        }
+
+        .replay-button {
+            padding: 8px 16px;
+            background: #4a4a4a;
+            color: #ffffff;
+            border: 1px solid #d4af37;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .replay-button:hover {
+            background: #d4af37;
+            color: #2a2a2a;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "I Ching and Chess Correlation (4 of 9) - 6 :: 6 — Agents in Motion";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation</h1>
+                <p class="subtitle">4 of 9</p>
+            </div>
+
+            <div class="content">
+                <div class="lesson-content split-layout">
+                    <div class="tutorial-content text-column">
+                        <h2>6 :: 6 — Agents in Motion</h2>
+
+                        <h2 class="subhead">Stages</h2>
+
+                        <p>Each hexagram in the I Ching is composed of six horizontal lines, stacked vertically to form a complete structure. In Intrachange, this structure finds its direct analogue in the six distinct chess pieces. Each line is a stage of action, and each piece embodies the dynamic qualities of its corresponding line.</p>
+                    </div>
+
+                    <div class="animation-column">
+                        <div class="animation-inner">
+                            <iframe id="correlationSixAnimation" class="animation-frame" src="../correlations/6.html" title="Correlation 6 by 6 animation" scrolling="no" onload="sizeAnimationFrame()"></iframe>
+                            <button class="replay-button" type="button" onclick="replayAnimation()">REPLAY</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+
+        function nextPage() {
+            window.location.href = '11.html';
+        }
+
+        function prevPage() {
+            window.location.href = '09.html';
+        }
+
+        function sizeAnimationFrame() {
+            const frame = document.getElementById('correlationSixAnimation');
+
+            try {
+                const doc = frame.contentDocument || frame.contentWindow.document;
+                if (!doc) {
+                    return;
+                }
+
+                const body = doc.body;
+                const html = doc.documentElement;
+                const width = Math.max(body.scrollWidth, body.offsetWidth, html.scrollWidth, html.offsetWidth);
+                const height = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight);
+                const parentWidth = frame.parentElement ? frame.parentElement.clientWidth : width;
+                const availableWidth = parentWidth > 0 ? parentWidth : width;
+                const scale = Math.min(1, availableWidth / width);
+
+                frame.style.width = `${Math.round(width * scale)}px`;
+                frame.style.height = `${Math.round(height * scale)}px`;
+            } catch (error) {
+                console.error('Unable to size animation frame', error);
+            }
+        }
+
+        function replayAnimation() {
+            const frame = document.getElementById('correlationSixAnimation');
+            frame.onload = sizeAnimationFrame;
+            frame.src = frame.src;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            requestAnimationFrame(sizeAnimationFrame);
+            window.addEventListener('load', sizeAnimationFrame, { once: true });
+        });
+    </script>
+</body>
+</html>

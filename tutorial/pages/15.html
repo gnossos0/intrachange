@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            overflow: auto;
+        }
+
+        .hand-lesson {
+            display: flex;
+            justify-content: center;
+            padding-top: 12px;
+        }
+
+        .hand-stage {
+            position: relative;
+            width: min(75%, 990px);
+            background-color: white;
+        }
+
+        .hand-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: opacity 1.2s ease;
+        }
+
+        .hand-open {
+            opacity: 1;
+        }
+
+        .hand-closed {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hand-label {
+            position: absolute;
+            color: #6a102f;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            line-height: 1.1;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.6s ease, visibility 1.6s ease;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+            pointer-events: none;
+        }
+
+        .hand-label.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hand-label.hiding {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            transition-delay: 0s !important;
+        }
+
+        .label-pinky {
+            top: 31.5%;
+            left: 50.6%;
+            transform: translateX(-50%);
+            font-size: 1.35rem;
+            transition-delay: 0.2s;
+        }
+
+        .label-ring {
+            top: 42.4%;
+            left: 50.2%;
+            transform: translateX(-50%);
+            font-size: 1.3875rem;
+            transition-delay: 0.95s;
+        }
+
+        .label-middle {
+            top: 51.2%;
+            left: 49.7%;
+            transform: translateX(-50%);
+            font-size: 1.36875rem;
+            transition-delay: 1.7s;
+        }
+
+        .label-index {
+            top: 65.6%;
+            left: 49.6%;
+            transform: translateX(-50%);
+            font-size: 1.36875rem;
+            transition-delay: 2.45s;
+        }
+
+        .label-thumbs {
+            bottom: 4.1%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.275rem;
+            transition-delay: 3.2s;
+        }
+
+        .intrachange-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #6a102f;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            pointer-events: none;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "I Ching and Chess Correlation (Page 9 of 9) - Esoteric Moves";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation</h1>
+                <p class="subtitle">9 of 9</p>
+            </div>
+
+            <div class="content">
+                <div class="tutorial-content lesson-content">
+                    <div class="hand-lesson">
+                        <figure class="hand-stage" id="handStage">
+                            <img class="hand-img hand-open" src="../images/hand_blank.png" alt="Open hands">
+                            <img class="hand-img hand-closed" src="../images/hands_closed.png" alt="Closed hands">
+                            <figcaption class="hand-label label-pinky">Chess — 1 :: 1 — I Ching</figcaption>
+                            <figcaption class="hand-label label-ring">Black White — 2 :: 2 — Yin Yang</figcaption>
+                            <figcaption class="hand-label label-middle">Pieces — 6 :: 6 — Lines</figcaption>
+                            <figcaption class="hand-label label-index">Rank/file — 8 :: 8 — Trigrams</figcaption>
+                            <figcaption class="hand-label label-thumbs">Squares on the Chessboard — 64 :: 64 — Hexagrams in the I Ching</figcaption>
+                            <div class="intrachange-overlay">Intrachange</div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const openHands = document.querySelector('.hand-open');
+            const closedHands = document.querySelector('.hand-closed');
+            const labels = document.querySelectorAll('.hand-label');
+            const overlay = document.querySelector('.intrachange-overlay');
+
+            // 2000ms: Show labels
+            setTimeout(() => {
+                console.log('2000ms: Showing labels');
+                labels.forEach(label => label.classList.add('visible'));
+            }, 2000);
+
+            // 7200ms: Hide labels (all disappear at once)
+            setTimeout(() => {
+                console.log('7200ms: Hiding labels');
+                labels.forEach(label => {
+                    label.classList.remove('visible');
+                    label.classList.add('hiding');
+                });
+            }, 7200);
+
+            // 7600ms: Fade open hands out, closed hands in
+            setTimeout(() => {
+                console.log('7600ms: Starting hand transition');
+                openHands.style.opacity = '0';
+                closedHands.style.opacity = '1';
+            }, 7600);
+
+            // 9000ms: Fade in Intrachange text
+            setTimeout(() => {
+                console.log('9000ms: Fading in Intrachange');
+                overlay.style.opacity = '1';
+            }, 9000);
+        });
+
+        function nextPage() {
+            window.location.href = '16.html';
+        }
+
+        function prevPage() {
+            window.location.href = '14.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+            window.location.href = '16.html';
+        }
+
+        function prevPage() {
+            window.location.href = '14.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

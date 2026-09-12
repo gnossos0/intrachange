@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>02. Modification of Chess Rules - Intrachange Tutorial</title>
@@ -58,14 +66,53 @@
             position: relative;
         }
 
+        /* Increase font sizing for Novice Lesson */
+        .tutorial-content p,
+        .tutorial-content li {
+            font-size: 1.35rem !important;
+            line-height: 1.55;
+        }
+
         /* Increase font size and add spacing */
         .tutorial-content {
             font-size: 1.1em;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tutorial-content h2 {
+            font-family: 'Space Grotesk', Arial, Helvetica, sans-serif !important;
+            font-size: 1.45rem !important;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 14px;
         }
 
         .tutorial-content h3 {
             margin-top: 2em;
+        }
+
+        .footnote-block {
+            margin-top: auto;
+            padding-top: 18px;
+            font-size: 0.88em;
+            line-height: 1.4;
+            color: #d8d0b7;
+        }
+
+        .footnote-block p {
+            margin: 0 0 6px;
+        }
+
+        .footnote-block a {
+            color: #d4af37;
+            text-decoration: underline;
+        }
+
+        .automation-note-title {
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -94,16 +141,30 @@
                     <li>Half of all Exoteric Moves result in an Esoteric Move, which automatically transfers the Piece to its Esoteric Square.</li>
                     <li>A Piece cannot move into a Square occupied by a Piece of its own color.</li>
                 </ul>
+
+                <p></p> <p></p>
+
+                <p class="automation-note-title"><strong>A Note on Automation</strong></p>
+                Every Esoteric Move in Intrachange is calculated automatically by the software. In the original physical game, Players consulted charts to determine whether a Move was Exoteric or Esoteric and, if necessary, to locate the destination Square. Automating this process preserves the mathematics of the Game while allowing the Player to focus on its strategy and symbolism. You’re welcome.
+
+                <div class="footnote-block">
+                    <p>To learn more about Esoteric Moves, see the Master Level: <a href="16.html">Patterns of Esoteric Moves</a>.</p>
+                </div>
             </div>
         </div>
 
         <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
         <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
     </div>
 
     <script>
         function nextPage() {
             window.location.href = '02b_modification_of_chess_rules.html';
+        }
+
+        function prevPage() {
+            window.location.href = '01c_explore_now.html';
         }
 
         function goBack() {

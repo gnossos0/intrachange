@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            line-height: 1.75;
+        }
+
+        .lesson-content .body-list li {
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .lesson-content p,
+        .lesson-content li {
+            font-size: 1.35rem !important;
+            line-height: 1.55;
+        }
+
+        .lesson-content .closing {
+            font-weight: 700;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .lesson-figure {
+            float: right;
+            margin: 180px 0 14px 20px;
+            width: min(42%, 300px);
+        }
+
+        .lesson-figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "I Ching and Chess Correlation (1 of 9) - 1 :: 1 — Identity";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation</h1>
+                <p class="subtitle">1 of 9</p>
+            </div>
+
+            <div class="content">
+                <div class="tutorial-content lesson-content">
+                    <div class="lesson-figure">
+                        <img src="../../img/front_logo_rising_from_board_v3.png" alt="Intrachange logo rising from chessboard">
+                    </div>
+
+                    <h2>1 :: 1 — Identity</h2>
+
+                    <h2 class="subhead">Chess :: I Ching</h2>
+
+                    <p class="lead">Because the structure of the I Ching and the structure of Chess are identical, Esoteric Chess rests on two principal features:</p>
+
+                    <ol>
+                        <li>Chess gives form and substance to the Hexagrams and Line Changes of the I Ching.</li>
+                        <li>The Hexagrams, and Line Changes of the I Ching give meaning and value to Chess.</li>
+                    </ol>
+
+                    <p></p>
+
+                    <p></p>
+
+                    <p>The two systems interlock with a natural coherence that feels remembered rather than invented.</p>
+
+                    <p>In other words, the synergism of the Game results from</p>
+
+                    <p class="closing">Chess spatializing the I Ching, and the I Ching spiritualizing Chess.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '08.html';
+        }
+
+        function prevPage() {
+            window.location.href = '../index.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

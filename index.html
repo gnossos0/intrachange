@@ -1,142 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Intrachange - The Ancient Game Reunited</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+    :root {
+      --graphic-settle-duration: 30000ms;
+    }
+
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      background-image: url('img/front_logo.png');
-      background-size: 500px auto;
-      background-position: right center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-color: #ffffff;
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f4f1e8 0%, #e8e0d0 100%);
       color: #000000;
-      font-family: Arial, Helvetica, sans-serif;
-      height: 100vh;
-      overflow: hidden;
+      font-family: 'Manrope', Arial, Helvetica, sans-serif;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px;
+      overflow: auto;
       position: relative;
     }
 
-    /* Background overlay for text readability */
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: transparent;
-      pointer-events: none;
-      z-index: 1;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Space Grotesk', Arial, Helvetica, sans-serif;
     }
 
-    /* Subtle texture overlay for depth */
-    body::after {
+    .stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto auto auto auto;
+      align-content: start;
+      gap: clamp(16px, 2vh, 28px) 28px;
+      width: min(100%, 960px);
+      min-height: calc(100vh - 40px);
+      padding: clamp(20px, 3vw, 34px);
+      isolation: isolate;
+    }
+    .hero-spacer {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      height: clamp(26px, 4vh, 44px);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .background-graphic {
+      position: relative;
+      grid-column: 1 / -1;
+      grid-row: 3;
+      justify-self: center;
+      margin-top: clamp(0px, 0.7vh, 10px);
+      width: min(100%, 460px, 42vh);
+      aspect-ratio: 921 / 614;
+      height: auto;
+      background-image: url('img/front_logo_rising_from_board_v3.png?v=1');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .background-graphic::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(90, 100, 90, 0.05) 0%, transparent 70%);
+      inset: 0;
+      background-image: url('img/front_logo_rising_from_board_v3.png?v=1');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.32;
+      animation: graphicSettle var(--graphic-settle-duration) linear forwards;
+    }
+
+    .hero-wordmark {
+      position: relative;
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: clamp(6px, 1.2vh, 14px);
+      z-index: 4;
       pointer-events: none;
+    }
+
+    .hero-wordmark-title {
+      margin: 0;
+      color: #2a241d;
+      line-height: 1.02;
+      text-wrap: balance;
+      font-family: 'Space Grotesk', Arial, Helvetica, sans-serif;
+      font-size: clamp(1.8rem, 3.7vw, 3.1rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+    }
+
+    .background-graphic-label {
+      position: absolute;
+      top: 12%;
+      left: 10%;
+      margin: 0;
+      font-family: 'Space Grotesk', Arial, Helvetica, sans-serif;
+      font-size: clamp(0.82rem, 1.15vw, 1.08rem);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 232, 0.98);
+      text-shadow:
+        0 1px 0 rgba(34, 22, 8, 0.54),
+        0 2px 6px rgba(22, 14, 5, 0.5),
+        0 0 10px rgba(244, 241, 232, 0.16);
       z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes graphicSettle {
+      from {
+        opacity: 0.32;
+      }
+
+      to {
+        opacity: 0;
+      }
     }
 
     .container {
       position: relative;
-      width: 100%;
-      height: 100vh;
+      grid-column: 1;
+      grid-row: 4;
+      align-self: end;
+      width: min(100%, 430px);
+      min-height: 180px;
       z-index: 2;
+      display: flex;
+      align-items: flex-end;
     }
 
-    .block {
-      opacity: 0;
+    .container::before {
+      content: '';
       position: absolute;
-      left: 40px;
-      top: 40vh;
-      width: 45%;
-      max-width: 600px;
-      transition: opacity 0.8s ease-in-out;
-      font-size: 1.4rem;
-      line-height: 1.6;
-      letter-spacing: 0.3px;
-      text-shadow: none;
-      color: #000000;
-      background: transparent;
-      padding: 2rem;
-      border-radius: 12px;
-      backdrop-filter: none;
-      border: none;
-      text-align: left;
-      box-sizing: border-box;
-    }
-
-    .block p {
-      margin-bottom: 1.2em;
-    }
-
-    .block.active {
-      opacity: 1;
-    }
-
-    .block.exiting {
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-      /* Slide out animations for east/west lines */
-      .slide-west, .slide-east {
-        display: inline-block;
-        transition: transform 1.2s cubic-bezier(0.77,0,0.18,1), opacity 1.2s cubic-bezier(0.77,0,0.18,1);
-      }
-      .block.exiting .slide-west {
-        transform: translateX(-120vw);
-        opacity: 0;
-      }
-      .block.exiting .slide-east {
-        transform: translateX(120vw);
-        opacity: 0;
-      }
-    }
-
-    /* Emphasis for key phrases */
-    .block em {
-      color: #c0c5c0;
-      font-style: normal;
-      font-weight: 500;
+      inset: -20px -18px -18px -24px;
+      background:
+        radial-gradient(circle at 28% 42%, rgba(244, 233, 210, 0.44) 0%, rgba(244, 233, 210, 0.2) 32%, rgba(244, 233, 210, 0) 72%),
+        radial-gradient(circle at 62% 64%, rgba(222, 196, 156, 0.12) 0%, rgba(222, 196, 156, 0) 68%);
+      filter: blur(14px);
+      opacity: 0.75;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .controls {
-      position: absolute;
-      top: 25px;
-      right: 35px;
+      position: relative;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      align-self: start;
       display: flex;
       gap: 1.5rem;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       z-index: 10;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Manrope', Arial, Helvetica, sans-serif;
+      opacity: 0.74;
     }
 
     .controls a {
-      color: #000000;
+      color: #4a4338;
       text-decoration: none;
       transition: all 0.3s ease;
-      padding: 0.5rem 1rem;
+      padding: 0.45rem 0.85rem;
       border-radius: 4px;
-      border: 1px solid transparent;
+      border: 1px solid rgba(74, 67, 56, 0.08);
+      background-color: rgba(244, 241, 232, 0.28);
     }
 
     .controls a:hover {
       color: #000000;
-      border-color: #cccccc;
-      background-color: #f0f0f0;
+      border-color: rgba(74, 67, 56, 0.22);
+      background-color: rgba(244, 241, 232, 0.7);
     }
 
     .controls a:focus {
@@ -144,65 +203,131 @@
       outline-offset: 2px;
     }
 
+    .block {
+      opacity: 0;
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      min-height: 150px;
+      transition: opacity 0.8s ease-in-out;
+      font-size: 1.2rem;
+      line-height: 1.48;
+      letter-spacing: 0.3px;
+      color: #000000;
+      background: transparent;
+      padding: 1rem 0.5rem 1rem 0;
+      border-radius: 12px;
+      text-align: left;
+      z-index: 1;
+    }
+
+    .block.active {
+      opacity: 1;
+    }
+
+    .block strong {
+      font-weight: 700;
+    }
+
+    .segment {
+      margin: 0;
+      color: #000000;
+      opacity: 0;
+      transform: translateY(6px);
+      white-space: normal;
+    }
+
+    .segment.is-visible {
+      animation: lineFadeIn 500ms ease forwards;
+    }
+
+    @keyframes lineFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .skip-container {
-      position: absolute;
-      bottom: 35px;
-      right: 35px;
+      position: relative;
+      grid-column: 2;
+      grid-row: 4;
+      justify-self: end;
+      align-self: end;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 0.5rem;
+      gap: 0.4rem;
       z-index: 10;
     }
 
-    #skip {
-      background: rgba(20, 20, 20, 0.8);
-      border: 1px solid #6a746a;
-      color: #a8b5a8;
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+    .progress-indicator {
+      order: 2;
+      display: flex;
+      gap: 0.45rem;
+      margin-bottom: 0;
+      padding: 0.3rem 0.45rem;
+      border-radius: 999px;
+      background: rgba(244, 241, 232, 0.42);
+      border: 1px solid rgba(74, 67, 56, 0.08);
+      backdrop-filter: blur(4px);
     }
 
-    #skip:hover {
-      color: #e8e8e8;
-      border-color: #8a9d8a;
-      background: rgba(30, 30, 30, 0.9);
+    .progress-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: rgba(74, 67, 56, 0.14);
+      border: 1px solid rgba(74, 67, 56, 0.14);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+      transition: all 0.3s ease;
+    }
+
+    .progress-dot.active {
+      width: 22px;
+      border-radius: 999px;
+      background-color: #7f927f;
+      border-color: rgba(74, 67, 56, 0.22);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
+    }
+
+    .progress-dot.completed {
+      background-color: rgba(106, 116, 106, 0.88);
+      border-color: rgba(74, 67, 56, 0.2);
+    }
+
+    #skipIntroButton {
+      order: 1;
+      background: rgba(74, 67, 56, 0.14);
+      border: 1px solid rgba(74, 67, 56, 0.18);
+      color: #544d42;
+      padding: 0.5rem 0.95rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      font-family: 'Manrope', Arial, Helvetica, sans-serif;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    #skipIntroButton:hover {
+      color: #1f1b16;
+      border-color: rgba(74, 67, 56, 0.34);
+      background: rgba(244, 241, 232, 0.72);
       transform: translateY(-1px);
     }
 
-    #skip:focus {
+    #skipIntroButton:focus {
       outline: 2px solid #8a9d8a;
       outline-offset: 2px;
     }
 
-    .progress-indicator {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .progress-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: #3a3a3a;
-      transition: background-color 0.3s ease;
-    }
-
-    .progress-dot.active {
-      background-color: #8a9d8a;
-    }
-
-    .progress-dot.completed {
-      background-color: #6a746a;
-    }
-
-    /* Accessibility improvements */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -215,234 +340,330 @@
       border: 0;
     }
 
-    /* Responsive design */
     @media (max-width: 1200px) {
+      .stage {
+        width: min(94vmin, 820px);
+      }
+
       .block {
-        font-size: 1.3rem;
-        width: 85%;
+        font-size: 1.1rem;
       }
     }
 
     @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem;
+      body {
+        padding: 14px;
       }
-      
+
+      .stage {
+        width: min(calc(100vw - 28px), calc(100vh - 28px), 760px);
+        aspect-ratio: auto;
+        min-height: calc(100vh - 28px);
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 18px 20px 18px;
+        align-content: start;
+      }
+
+      .background-graphic,
+      .background-graphic::after {
+        width: min(100%, 420px);
+        aspect-ratio: 921 / 614;
+        height: auto;
+        background-position: center;
+      }
+
+      .background-graphic {
+        position: relative;
+        grid-column: 1;
+        grid-row: 2;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 2px 0 0;
+      }
+
       .block {
-        font-size: 1.1rem;
-        line-height: 1.5;
-        width: 90%;
+        max-width: none;
+        padding: 0;
+        font-size: 1rem;
+        line-height: 1.42;
       }
-      
+
+      .hero-wordmark {
+        position: relative;
+        grid-column: 1;
+        grid-row: 1;
+        left: auto;
+        top: auto;
+        margin: 0 0 4px;
+      }
+
+      .hero-wordmark-title {
+        font-size: clamp(1.45rem, 5.3vw, 2.2rem);
+      }
+
+      .background-graphic-label {
+        top: 7.5%;
+        left: 6.5%;
+        font-size: clamp(0.62rem, 1.8vw, 0.82rem);
+        letter-spacing: 0.12em;
+      }
+
       .controls {
-        top: 20px;
-        right: 20px;
-        gap: 1rem;
-        font-size: 0.9rem;
+        position: relative;
+        grid-column: 1;
+        grid-row: 1;
+        top: auto;
+        right: auto;
+        justify-self: end;
+        align-self: start;
+        gap: 0.8rem;
       }
-      
+
+      .container {
+        position: relative;
+        grid-column: 1;
+        grid-row: 3;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: auto;
+        max-width: 430px;
+      }
+
+      .container::before {
+        inset: -12px -10px -10px -14px;
+        filter: blur(10px);
+        opacity: 0.62;
+      }
+
       .skip-container {
-        bottom: 20px;
-        right: 20px;
-      }
-      
-      #skip {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.85rem;
+        position: relative;
+        grid-column: 1;
+        grid-row: 4;
+        right: auto;
+        justify-self: end;
+        align-self: end;
       }
     }
 
     @media (max-width: 480px) {
-      .block {
-        font-size: 1rem;
-        line-height: 1.5;
-        width: 95%;
-      }
-      
       .controls {
         flex-direction: column;
-        gap: 0.5rem;
+        align-items: flex-end;
       }
-    }
 
-    /* Fade-in animation for initial load */
-    .container {
-      animation: fadeIn 1s ease-out;
-    }
-
-    .controls, .skip-container {
-      animation: fadeIn 1.5s ease-out 0.5s both;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+      .block {
+        font-size: 0.95rem;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      .stage {
+        padding-left: 16px;
+        padding-right: 16px;
       }
     }
   </style>
 </head>
 <body>
-  <nav class="controls" role="navigation" aria-label="Account access">
-    <a href="login.php" aria-label="Login to existing account">Login</a>
-    <a href="register.php" aria-label="Create new account">Register</a>
-  </nav>
+  <div class="stage">
+    <div class="hero-wordmark" aria-hidden="true">
+      <p class="hero-wordmark-title">Intrachange</p>
+    </div>
 
-  <main class="container" role="main">
-    <h1 class="sr-only">Intrachange: The Ancient Game Reunited</h1>
-    
-    <div class="block active" role="region" aria-live="polite" data-block="0">
-  In&nbsp;an&nbsp;age&nbsp;when&nbsp;the&nbsp;world&nbsp;was&nbsp;whole,<br>
-  there&nbsp;was&nbsp;a&nbsp;game&nbsp;of&nbsp;such&nbsp;perfect&nbsp;proportions<br>
-  that&nbsp;it&nbsp;could&nbsp;capture&nbsp;any&nbsp;idea.
+    <div class="background-graphic" aria-hidden="true">
+      <p class="background-graphic-label">I Ching Chess</p>
     </div>
-    
-    <div class="block" role="region" aria-live="polite" data-block="1">
-  Art,&nbsp;science,&nbsp;and&nbsp;religion&nbsp;were&nbsp;understood&nbsp;as&nbsp;one,<br>
-  woven&nbsp;together&nbsp;by&nbsp;a&nbsp;pattern&nbsp;<br>that&nbsp;mirrored&nbsp;life&nbsp;and&nbsp;mind&nbsp;itself.
-    </div>
-    
-    <div class="block" role="region" aria-live="polite" data-block="2">
-  Yet&nbsp;wholeness&nbsp;did&nbsp;not&nbsp;last.
-    </div>
-    
-    <div class="block" role="region" aria-live="polite" data-block="3">
-  Division&nbsp;entered&nbsp;the&nbsp;world,<br>
-  and&nbsp;with&nbsp;it&nbsp;the&nbsp;Game&nbsp;split&nbsp;itself&nbsp;in&nbsp;two:
-    </div>
-    
-    <div class="block" role="region" aria-live="polite" data-block="4">
-  Its&nbsp;body&nbsp;journeyed&nbsp;West&nbsp;and&nbsp;<br>became&nbsp;known&nbsp;as&nbsp;<strong>Chess</strong>,<br>
-  while&nbsp;its&nbsp;spirit&nbsp;traveled&nbsp;East&nbsp;and&nbsp;<br>was&nbsp;called&nbsp;the&nbsp;<strong>I&nbsp;Ching</strong>.
-    </div>
-    
-    <div class="block" role="region" aria-live="polite" data-block="5">
-  Now,&nbsp;at&nbsp;last,&nbsp;their&nbsp;long&nbsp;<br>separation&nbsp;draws&nbsp;to&nbsp;a&nbsp;close.<br>
-  In&nbsp;Intrachange,&nbsp;body&nbsp;and&nbsp;spirit&nbsp;meet&nbsp;again.<br>
-  The&nbsp;Game&nbsp;returns&nbsp;to&nbsp;itself.
-    </div>
-  </main>
 
-  <div class="skip-container">
-    <div class="progress-indicator" aria-label="Story progress">
-      <div class="progress-dot active"></div>
-      <div class="progress-dot"></div>
-      <div class="progress-dot"></div>
-      <div class="progress-dot"></div>
-      <div class="progress-dot"></div>
-      <div class="progress-dot"></div>
+    <nav class="controls" aria-label="Account access">
+        <a href="login.php">Login</a>
+        <a href="register.php">Register</a>
+    </nav>
+
+    <main class="container" role="main">
+      <h1 class="sr-only">Intrachange: The Ancient Game Reunited</h1>
+      <div class="block active" id="introSegments" aria-live="polite"></div>
+    </main>
+
+    <div class="skip-container">
+      <div class="progress-indicator" aria-label="Story progress">
+        <div class="progress-dot active"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+      </div>
+      <button id="skipIntroButton" type="button">Skip Intro</button>
     </div>
-    <button id="skip" aria-label="Skip introduction and go to dashboard">Skip Intro</button>
   </div>
 
   <script>
-    const blocks = document.querySelectorAll('.block');
-    const progressDots = document.querySelectorAll('.progress-dot');
-    let current = 0;
-    // Different timing for each block: blocks 1,2,5,6 = 3.5s, blocks 3,4 = 2.5s
-    const displayDurations = [3500, 3500, 2500, 2500, 3500, 3500]; // milliseconds for each block
-    const fadeDuration = 800; // 800ms for fade transitions (matches CSS)
-    const pauseBetweenBlocks = 500; // 500ms pause between blocks
-    let timeoutId;
+    const INTRO_SEGMENTS = [
+      [
+        "In an age when the world was whole,",
+        "there was a game of such perfect proportions",
+        "that it could capture any idea."
+      ],
+      [
+        "Art, science, and religion were understood as one,",
+        "woven together by the patterns",
+        "that mirrored life and mind itself."
+      ],
+      [
+        "Yet wholeness did not last."
+      ],
+      [
+        "Division entered the world,",
+        "and with it the Game split itself in two:"
+      ],
+      [
+        "Its body journeyed West and",
+        "became known as <strong>Chess</strong>,"
+      ],
+      [
+        "while its spirit traveled East and",
+        "was called the <strong>I Ching</strong>."
+      ],
+      [
+        "Now, at last, their long",
+        "separation draws to a close."
+      ],
+      [
+        "In Intrachange, body and spirit meet again.",
+        "The Game returns to itself."
+      ]
+    ];
+
+    const INITIAL_DELAY_MS = 500;
+    const SEGMENT_DISPLAY_DURATIONS_MS = [5040, 5040, 1800, 3600, 3600, 3600, 4200, 4200];
+    const SEGMENT_BREAK_DURATIONS_MS = [1400, 1400, 1800, 1800, 1800, 1800, 1800];
+    const LINE_STAGGER_MS = 0;
+
+    const introSegments = document.getElementById("introSegments");
+    const skipIntroButton = document.getElementById("skipIntroButton");
+    const progressDots = Array.from(document.querySelectorAll(".progress-dot"));
+    let nextSegmentIndex = 0;
+    let introTimerId = null;
+    let isShowingBreak = true;
 
     function updateProgress() {
       progressDots.forEach((dot, index) => {
-        dot.classList.remove('active', 'completed');
-        if (index < current) {
-          dot.classList.add('completed');
-        } else if (index === current) {
-          dot.classList.add('active');
+        dot.classList.remove("active", "completed");
+        if (index < nextSegmentIndex) {
+          dot.classList.add("completed");
+        } else if (!isShowingBreak && index === nextSegmentIndex) {
+          dot.classList.add("active");
         }
       });
     }
 
-    function showNextBlock() {
-      if (current < blocks.length - 1) {
-        // Fade out current block
-        blocks[current].classList.add('exiting');
-        
-        setTimeout(() => {
-          // Remove current block and move to next
-          blocks[current].classList.remove('active', 'exiting');
-          current++;
-          
-          // Pause before showing next block
-          setTimeout(() => {
-            if (current < blocks.length) {
-              blocks[current].classList.add('active');
-              updateProgress();
-              
-              // Schedule next transition using current block's duration
-              const currentDuration = displayDurations[current] || 2500;
-              timeoutId = setTimeout(showNextBlock, currentDuration);
-            }
-          }, pauseBetweenBlocks);
-          
-        }, fadeDuration);
-      } else {
-        // Final block - wait then redirect to login index
-        setTimeout(() => {
-          window.location.href = 'login_index.html';
-        }, 3000);
-      }
+    function renderSegment(segmentLines) {
+      introSegments.replaceChildren();
+
+      segmentLines.forEach((line, index) => {
+        const paragraph = document.createElement("p");
+        paragraph.className = "segment";
+        paragraph.style.animationDelay = `${index * LINE_STAGGER_MS}ms`;
+        paragraph.innerHTML = line;
+        introSegments.appendChild(paragraph);
+      });
+
+      introSegments.classList.add("active");
+      updateProgress();
+
+      window.requestAnimationFrame(() => {
+        introSegments.querySelectorAll(".segment").forEach((segment) => {
+          segment.classList.add("is-visible");
+        });
+      });
     }
 
-    // Start the sequence
-    updateProgress();
-    const initialDuration = displayDurations[0] || 2500;
-    timeoutId = setTimeout(showNextBlock, initialDuration);
-
-    // Skip functionality
-    function skipIntro() {
-      clearTimeout(timeoutId);
-      window.location.href = 'login_index.html';
+    function clearSegmentDisplay() {
+      introSegments.replaceChildren();
+      updateProgress();
     }
 
-    document.getElementById('skip').addEventListener('click', skipIntro);
+    function queueNextStep(delay) {
+      introTimerId = window.setTimeout(runIntroStep, delay);
+    }
 
-    // Keyboard accessibility
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' || e.key === ' ') {
-        e.preventDefault();
-        skipIntro();
+    function getTotalIntroDuration() {
+      const displayDuration = SEGMENT_DISPLAY_DURATIONS_MS.reduce((sum, duration) => sum + duration, 0);
+      const breakDuration = SEGMENT_BREAK_DURATIONS_MS.reduce((sum, duration) => sum + duration, 0);
+      return INITIAL_DELAY_MS + displayDuration + breakDuration;
+    }
+
+    function runIntroStep() {
+      introTimerId = null;
+
+      if (isShowingBreak) {
+        isShowingBreak = false;
+
+        if (nextSegmentIndex >= INTRO_SEGMENTS.length) {
+          return;
+        }
+
+        renderSegment(INTRO_SEGMENTS[nextSegmentIndex]);
+
+        if (nextSegmentIndex < INTRO_SEGMENTS.length - 1) {
+          queueNextStep(SEGMENT_DISPLAY_DURATIONS_MS[nextSegmentIndex]);
+        }
+
+        nextSegmentIndex += 1;
+        return;
       }
-    });
 
-    // Pause on focus (accessibility)
-    let isPaused = false;
-    let remainingTime;
-    let pauseStartTime;
-
-    document.addEventListener('focusin', () => {
-      if (!isPaused) {
-        clearTimeout(timeoutId);
-        pauseStartTime = Date.now();
-        remainingTime = displayDurations[current] || 2500;
-        isPaused = true;
+      if (nextSegmentIndex >= INTRO_SEGMENTS.length) {
+        return;
       }
-    });
 
-    document.addEventListener('focusout', () => {
-      if (isPaused) {
-        const elapsed = Date.now() - pauseStartTime;
-        remainingTime = Math.max(500, remainingTime - elapsed);
-        timeoutId = setTimeout(showNextBlock, remainingTime);
-        isPaused = false;
-      }
-    });
+      clearSegmentDisplay();
+      isShowingBreak = true;
+      queueNextStep(SEGMENT_BREAK_DURATIONS_MS[nextSegmentIndex - 1]);
+    }
 
-    // Prevent accidental navigation away
-    window.addEventListener('beforeunload', (e) => {
-      // Only show warning if user is in middle of story
-      if (current > 0 && current < blocks.length - 1) {
-        e.preventDefault();
-        e.returnValue = '';
+    function showAllSegments() {
+      if (introTimerId !== null) {
+        window.clearTimeout(introTimerId);
+        introTimerId = null;
       }
-    });
+
+      introSegments.replaceChildren();
+
+      INTRO_SEGMENTS.forEach((segmentLines, segmentIndex) => {
+        segmentLines.forEach((line) => {
+          const paragraph = document.createElement("p");
+          paragraph.className = "segment is-visible";
+          paragraph.style.animationDelay = "0ms";
+          paragraph.innerHTML = line;
+          introSegments.appendChild(paragraph);
+        });
+
+        if (segmentIndex < INTRO_SEGMENTS.length - 1) {
+          const spacer = document.createElement("p");
+          spacer.className = "segment is-visible";
+          spacer.innerHTML = "&nbsp;";
+          introSegments.appendChild(spacer);
+        }
+      });
+
+      nextSegmentIndex = INTRO_SEGMENTS.length;
+      isShowingBreak = false;
+      progressDots.forEach((dot) => {
+        dot.classList.remove("active");
+        dot.classList.add("completed");
+      });
+    }
+
+    skipIntroButton.addEventListener("click", showAllSegments);
+
+    document.documentElement.style.setProperty("--graphic-settle-duration", `${getTotalIntroDuration()}ms`);
+
+    queueNextStep(INITIAL_DELAY_MS);
   </script>
 </body>
 </html>

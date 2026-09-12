@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
         <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutorial - Intrachange</title>
     <link rel="icon" type="image/jpeg" href="../img/icon.jpg">
     <link rel="stylesheet" href="tutorial.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 <body>
+    <button class="back-button" onclick="exitTutorial()">← Back to Dashboard</button>
+
     <div class="tutorial-container">
         <!-- Main Content -->
         <div class="main-content">
@@ -40,7 +71,7 @@
             <ul class="tutorial-toc">
                 <li>
                     <a href="pages/01a_explore_now.html" class="toc-link">
-                        Explore Now – Grasp Later
+                        Understanding the Game
                     </a>
                 </li>
                 <li>
@@ -51,6 +82,11 @@
                 <li>
                     <a href="pages/03_symbolism_of_the_move.html" class="toc-link">
                         Symbolism of the Move
+                    </a>
+                </li>
+                <li>
+                    <a href="pages/lesson1.html" class="toc-link">
+                        Follow Game Flow
                     </a>
                 </li>
                 <li>
@@ -73,24 +109,21 @@
             <h3>Master Lessons</h3>
             <ul class="tutorial-toc">
                 <li>
-                    <span class="toc-link">
+                    <a href="pages/07.html" class="toc-link">
                         I Ching and Chess Correlation
-                    </span>
+                    </a>
                 </li>
                 <li>
-                    <span class="toc-link">
-                        Esoteric Moves
-                    </span>
+                    <a href="pages/16.html" class="toc-link">
+                        Pattern of Esoteric Moves
+                    </a>
                 </li>
                 <li>
-                    <span class="toc-link">
+                    <a href="pages/22.html" class="toc-link">
                         Higher Levels of Play
-                    </span>
+                    </a>
                 </li>
             </ul>
-            
-            <!-- Dashboard Exit Button -->
-            <button class="dashboard-button" onclick="exitTutorial()">&lt; Dashboard &gt;</button>
         </div>
     </div>
 

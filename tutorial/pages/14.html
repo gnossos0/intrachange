@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <link rel="stylesheet" href="../correlations/shared/correlations.css">
+    <link rel="stylesheet" href="../correlations/4-4/module.css?v=2">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            min-height: 0;
+            overflow: auto;
+        }
+
+        .main-content {
+            padding: 28px;
+        }
+
+        .module-container {
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            min-height: 0;
+            background: transparent;
+        }
+
+        .module-header {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .module-header h2 {
+            margin: 0;
+            font-size: 1.7rem;
+            line-height: 1.2;
+        }
+
+        .module-content {
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 1rem;
+            margin-bottom: 0;
+            align-items: start;
+        }
+
+        .move-viewer {
+            gap: 0.75rem;
+        }
+
+        .sandbox-instruction-text {
+            font-size: 0.98rem;
+            line-height: 1.45;
+        }
+
+        .move-image-container {
+            min-height: 0;
+            padding: 0.75rem;
+        }
+
+        .sandbox-layout {
+            gap: 12px;
+        }
+
+        .notice-column {
+            width: 132px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: stretch;
+        }
+
+        .notice-box {
+            color: #f4e79c;
+            font-size: 0.86rem;
+            line-height: 1.45;
+            padding: 0.6rem 0.65rem;
+            border: 1px solid rgba(244, 231, 156, 0.28);
+            border-radius: 8px;
+            background: rgba(244, 231, 156, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+        }
+
+        .notice-box p {
+            margin: 0;
+            color: inherit;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .notice-label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+            color: #fff2ad;
+        }
+
+        .notice-yinyang {
+            color: #fff2ad;
+            font-size: 1rem;
+        }
+
+        .notice-orange {
+            color: orange;
+        }
+
+        .board-column,
+        .board-container {
+            padding: 0.35rem;
+        }
+
+        #reviewChessboard {
+            width: 400px;
+            height: 400px;
+        }
+
+        #reviewChessboard td {
+            width: 50px;
+            height: 50px;
+        }
+
+        .square-hexagram {
+            width: 74%;
+            height: 74%;
+        }
+
+        .pieces-column {
+            min-width: 80px;
+            padding-top: 4px;
+        }
+
+        .sandbox-piece {
+            width: 38px;
+            height: 38px;
+        }
+
+        .explanation-panel {
+            gap: 1rem;
+        }
+
+        .corr-section {
+            margin: 0;
+        }
+
+        .corr-card,
+        .interp {
+            padding: 0.75rem;
+        }
+
+        .lesson-content .corr-section-title {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .corr-card p,
+        #pieceContextMessage,
+        .corr-section-body {
+            font-size: 0.98rem;
+            line-height: 1.5;
+        }
+
+        .corr-card-title-inline {
+            display: block;
+            margin-bottom: 0.45rem;
+            color: #d4af37;
+            font-family: 'Space Grotesk', Arial, Helvetica, sans-serif; /* Swapped Georgia to Space Grotesk to unify header styles */
+            font-weight: 700;
+            font-size: 1.15rem; /* Enlarger slightly to balance look */
+            line-height: 1.3;
+        }
+
+        #pieceContextMessage {
+            min-height: 4.5rem;
+        }
+
+        .hexagram-img {
+            max-width: 84px;
+        }
+
+        @media (max-width: 1100px) {
+            .module-content {
+                grid-template-columns: 1fr;
+            }
+
+            .board-column,
+            .board-container {
+                width: fit-content;
+            }
+
+            .notice-column {
+                width: 120px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .main-content {
+                padding: 20px;
+            }
+
+            #reviewChessboard {
+                width: 320px;
+                height: 320px;
+            }
+
+            #reviewChessboard td {
+                width: 40px;
+                height: 40px;
+            }
+
+            .sandbox-piece {
+                width: 34px;
+                height: 34px;
+            }
+
+            .notice-column {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "I Ching and Chess Correlation (8 of 9) - 4 :: 4 — Enantiodromia Sandbox";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation</h1>
+                <p class="subtitle">8 of 9</p>
+            </div>
+
+            <div class="content">
+                <div class="tutorial-content lesson-content">
+                    <div class="module-container">
+                        <div class="module-header">
+                            <h2 class="text-white text-2xl font-semibold" id="correlation-header">4 :: 4 — Enantiodromia</h2>
+                        </div>
+
+                        <main class="module-content" role="main">
+                            <section class="move-viewer" aria-labelledby="correlation-header">
+                                <p class="sandbox-instruction-text">Hover a selected piece over the board to reveal its hidden <strong>esoteric moves</strong>.</p>
+                                <div id="move-image" class="move-image-container gov-chess" aria-label="Interactive chess sandbox"></div>
+                            </section>
+
+                            <aside class="explanation-panel" role="complementary" aria-label="Move explanation">
+                                <section id="keywords-section" class="corr-section">
+                                    <div id="keywords-list" class="corr-section-body" role="list">
+                                        <div class="keywords-grid">
+                                            <div class="corr-card">
+                                                <p><span class="corr-card-title-inline">Underlying Principle</span>As energy flows between the system's Dipoles, it does not simply move; it transforms. This process — <strong>Enantiodromia</strong> — is the phenomenon of one thing turning into its opposite. Within Intrachange, this is the mechanism by which the very identity of a piece, in relation to its square, can provoke a shift in position.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section id="interpretation-section" class="corr-section interp">
+                                    <h2 class="corr-section-title">Interpretation</h2>
+                                    <div id="interpretation-text" class="corr-section-body">
+                                        <p id="pieceContextMessage"></p>
+                                        <div id="hexagramPanel"></div>
+                                    </div>
+                                </section>
+                            </aside>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        const appBasePath = window.location.pathname === '/intrachange.net/tutorial/pages/14.html' || window.location.pathname.startsWith('/intrachange.net/')
+            ? '/intrachange.net'
+            : '';
+
+        function getHexagramImagePath(hexNum) {
+            return `${appBasePath}/img/hex/hexagram${hexNum}.svg`;
+        }
+
+        const boardHexes = [
+            [49, 50, 52, 55, 48, 51, 53, 54],
+            [41, 42, 44, 47, 40, 43, 45, 46],
+            [25, 26, 28, 31, 24, 27, 29, 30],
+            [1, 2, 4, 7, 0, 3, 5, 6],
+            [57, 58, 60, 63, 56, 59, 61, 62],
+            [33, 34, 36, 39, 32, 35, 37, 38],
+            [17, 18, 20, 23, 16, 19, 21, 22],
+            [9, 10, 12, 15, 8, 11, 13, 14]
+        ];
+
+        const pieceRows = [
+            [
+                { file: "chess_kdt45.svg", alt: "Black King", piece: "BK", color: "black", line: 6 },
+                { file: "chess_klt45.svg", alt: "White King", piece: "WK", color: "white", line: 6 }
+            ],
+            [
+                { file: "chess_qdt45.svg", alt: "Black Queen", piece: "BQ", color: "black", line: 5 },
+                { file: "chess_qlt45.svg", alt: "White Queen", piece: "WQ", color: "white", line: 5 }
+            ],
+            [
+                { file: "chess_bdt45.svg", alt: "Black Bishop", piece: "BB", color: "black", line: 4 },
+                { file: "chess_blt45.svg", alt: "White Bishop", piece: "WB", color: "white", line: 4 }
+            ],
+            [
+                { file: "chess_ndt45.svg", alt: "Black Knight", piece: "BN", color: "black", line: 3 },
+                { file: "chess_nlt45.svg", alt: "White Knight", piece: "WN", color: "white", line: 3 }
+            ],
+            [
+                { file: "chess_rdt45.svg", alt: "Black Rook", piece: "BR", color: "black", line: 2 },
+                { file: "chess_rlt45.svg", alt: "White Rook", piece: "WR", color: "white", line: 2 }
+            ],
+            [
+                { file: "chess_pdt45.svg", alt: "Black Pawn", piece: "BP", color: "black", line: 1 },
+                { file: "chess_plt45.svg", alt: "White Pawn", piece: "WP", color: "white", line: 1 }
+            ]
+        ];
+
+        function chessCoord(rowIndex, colIndex) {
+            const file = String.fromCharCode(97 + colIndex);
+            const rank = 8 - rowIndex;
+            return `${file}${rank}`;
+        }
+
+        function renderSandboxBoard() {
+            const container = document.getElementById("move-image");
+            if (!container) {
+                return;
+            }
+
+            const boardRows = boardHexes.map((row, rowIndex) => {
+                const cells = row.map((hexNum, colIndex) => {
+                    const squareClass = (rowIndex + colIndex) % 2 === 0 ? "white" : "black";
+                    const coord = chessCoord(rowIndex, colIndex);
+                    const dataIndex = rowIndex * 8 + colIndex;
+                    const hexagramSrc = getHexagramImagePath(hexNum);
+
+                    return `
+                        <td class="${squareClass}" data-row="${rowIndex}" data-col="${colIndex}" data-index="${dataIndex}">
+                            <div class="sandbox-square">
+                                <img src="${hexagramSrc}" alt="Hexagram ${hexNum}" class="square-hexagram">
+                                <div class="coord-label">${coord}</div>
+                                <div class="hexNum">${hexNum}</div>
+                            </div>
+                        </td>
+                    `;
+                }).join("");
+
+                return `<tr>${cells}</tr>`;
+            }).join("");
+
+            const pieceMarkup = pieceRows.map(row => {
+                const cells = row.map(piece => `
+                    <td class="piece-cell">
+                        <img src="../images/pieces/${piece.file}" alt="${piece.alt}" class="sandbox-piece" data-piece="${piece.piece}" data-color="${piece.color}" data-line="${piece.line}">
+                    </td>
+                `).join("");
+
+                return `<tr>${cells}</tr>`;
+            }).join("");
+
+            container.innerHTML = `
+                <div class="sandbox-layout">
+                    <div class="board-column">
+                        <div class="board-container">
+                            <table id="reviewChessboard">${boardRows}</table>
+                        </div>
+                    </div>
+                    <div class="pieces-column">
+                        <table class="piece-table">${pieceMarkup}</table>
+                    </div>
+                    <div class="notice-column">
+                        <div class="notice-box">
+                            <p><span class="notice-label">What to notice:</span>Pieces placed on <span class="notice-yinyang" aria-hidden="true">☯</span> trigger an esoteric move to the square that glows <span class="notice-orange">orange</span>, adding a dynamic change to the game of Chess.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        renderSandboxBoard();
+
+        function nextPage() {
+            window.location.href = '15.html';
+        }
+
+        function prevPage() {
+            window.location.href = '13.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+    <script type="module" src="../js/sandbox_esoteric_moves.mjs?v=2"></script>
+</body>
+</html>

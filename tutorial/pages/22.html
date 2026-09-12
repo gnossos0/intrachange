@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tutorial-header {
+            margin-bottom: 4px;
+            padding-bottom: 4px;
+        }
+
+        .tutorial-header img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 2px;
+        }
+
+        .tutorial-header h1 {
+            font-size: 1.6rem;
+            line-height: 1.1;
+        }
+
+        .tutorial-header .subtitle {
+            margin: 2px 0 0;
+            line-height: 1.1;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 8px 20px 0;
+            margin-left: 0;
+            margin-right: 0;
+            overflow-y: auto;
+            font-size: 10.8pt;
+            line-height: 1.6;
+            letter-spacing: 0.01em;
+        }
+
+        .lesson-content h3 {
+            margin: 0 0 18px 0;
+            font-size: 12pt;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        .lesson-content p {
+            margin: 0 0 9px 0;
+        }
+
+        .lesson-content > p {
+            font-size: 12.5pt;
+        }
+
+        .lesson-content summary {
+            font-family: inherit;
+            font-size: 12.5pt !important;
+            font-weight: normal;
+            line-height: 1.6;
+        }
+
+        .lesson-content > details > summary {
+            color: #d4af37;
+        }
+
+        .lesson-content summary::marker {
+            font-size: 12.5pt;
+        }
+
+        .lesson-content > details > summary::marker {
+            color: #d4af37;
+        }
+
+        .compact-archetype-table {
+            border-collapse: collapse;
+            margin: 8px 0 12px;
+        }
+
+        .compact-archetype-table td {
+            padding: 1px 12px 1px 0;
+            line-height: 1.2;
+            vertical-align: top;
+        }
+
+        .compact-archetype-table td:first-child {
+            white-space: nowrap;
+        }
+
+        .compact-piece-archetype-table {
+            border-collapse: collapse;
+            margin: 8px 0 12px;
+        }
+
+        .compact-piece-archetype-table td {
+            padding: 1px 12px 1px 0;
+            line-height: 1.2;
+            vertical-align: top;
+        }
+
+        .compact-piece-archetype-table td:first-child,
+        .compact-piece-archetype-table td:nth-child(2) {
+            white-space: nowrap;
+        }
+
+        .compact-situations-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0 12px;
+            font-size: 10pt;
+        }
+
+        .compact-situations-table td {
+            width: 25%;
+            padding: 1px 10px 1px 0;
+            line-height: 1.15;
+            vertical-align: top;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "Review - Layout Archetypes and Situations (Summary)";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Higher Levels of Play</h1>
+                <p class="subtitle">1 of 1</p>
+            </div>
+
+            <div class="content">
+                <div class="tutorial-content lesson-content">
+                    <p>
+
+                    The Rules of Play describe Intrachange as a cooperative game between two Players. The Higher Levels of Play use the same Board, Pieces, Correlations, and Esoteric Moves, but set aside the objective of capturing the king. Here the Board becomes a symbolic field of exploration rather than a battlefield. The Pieces need not begin in the traditional arrangement of Chess, nor move according to the rules of Chess, nor be employed toward victory or defeat. They become symbols through which Players investigate ideas, create works of imagination, consult the Oracle, or explore the relationships expressed by the Correlations.
+
+                    </p>
+
+                    <p>
+
+                    One rule alone remains immutable. Every Piece placed upon the Board occupies an Exoteric Square and must therefore obey the law governing Esoteric Moves. Whenever the correspondence between Piece and Line requires an Esoteric Move, the Piece must yield to that transformation. However freely the Player arranges the Board, the principle of Change continues to govern the Game.
+
+                    </p>
+
+                    <details>
+
+                    <summary>1. Oracle Mode</summary>
+
+                    <p>
+
+                    The Board may be used to spatialize an Oracle of the I Ching.
+
+                    </p>
+
+                    <p>
+
+                    A reading obtained by coins or yarrow stalks is first located on its corresponding Square on the Game Board. The six Lines of the Hexagram determine the six Pieces placed upon that Square according to Correlation 4::4. Pieces representing Changing Lines then perform their Esoteric Moves while Pieces representing Unchanging Lines remain upon the original Square.
+
+                    </p>
+
+                    <details>
+
+                    <summary>Worked Example: Hexagram 8</summary>
+
+                    <pre>
+
+Hexagram 8 = Square 61
+
+6th line = 8 = unchanging broken line = Black King
+
+5th line = 9 = changing solid line = Black Queen → Square 63
+
+4th line = 8 = unchanging broken line = Black Bishop
+
+3rd line = 6 = changing broken line = White Knight → Square 53
+
+2nd line = 8 = unchanging broken line = Black Rook
+
+1st line = 6 = changing broken line = White Pawn → Square 29
+
+Result:
+
+Square 61
+
+    Black King
+
+    Black Bishop
+
+    Black Rook
+
+Square 63
+
+    Black Queen
+
+Square 53
+
+    White Knight
+
+Square 29
+
+    White Pawn
+
+Resulting Hexagrams:
+
+Square 61 = Hexagram 8
+
+Square 63 = Hexagram 2
+
+Square 53 = Hexagram 39
+
+Square 29 = Hexagram 3
+
+                    </pre>
+
+                    <p>
+
+                    The original Hexagram becomes the Root Square from which each Changing Line branches into its own Esoteric destination. Rather than producing only a single transformed Hexagram, the Board reveals a constellation of related Hexagrams that may be contemplated together.
+
+                    </p>
+
+                    </details>
+
+                    <p>
+
+                    The completed arrangement reveals the network of relationships between the original Hexagram and the Hexagrams reached by each Esoteric Move. Instead of considering only a transformed Hexagram, the Player contemplates a constellation of related Hexagrams made visible upon the Board.
+
+                    </p>
+
+                    <p>
+
+                    The process may also be reversed. By selecting a Square and determining the six Pieces by chance, the resulting arrangement may be transposed back into an I Ching reading. In either direction, the Board serves as a visible body of the Oracle, expressing the movement of Change through the language of the Pieces.
+
+                    </p>
+
+                    </details>
+
+                    <details>
+
+                    <summary>2. Symbolic Composition</summary>
+
+                    <p>
+
+                    The Correlations provide a symbolic vocabulary from which each Player may construct a personal world of meaning.
+
+                    </p>
+
+                    <p>
+
+                    The Pieces need not represent only the traditional Chess archetypes. A King may become an Adept, a Queen a Sovereign, a Bishop a Bureaucrat, or any other symbolic role consistent with the Theme of the work. Likewise, the Squares may be understood not merely as Hexagrams, but as named Situations through which the Pieces travel.
+
+                    </p>
+
+                    <details>
+
+                    <summary>Traditional Piece Archetypes</summary>
+
+                    <table class="compact-piece-archetype-table">
+                        <tr><td>King</td><td>=</td><td>Adept, holding a lamp</td></tr>
+                        <tr><td>Queen</td><td>=</td><td>Sovereign, holding a scepter</td></tr>
+                        <tr><td>Bishop</td><td>=</td><td>Bureaucrat, holding a scroll</td></tr>
+                        <tr><td>Knight</td><td>=</td><td>Merchant, holding scales</td></tr>
+                        <tr><td>Rook</td><td>=</td><td>Warrior, holding a sword</td></tr>
+                        <tr><td>Pawn</td><td>=</td><td>Folk</td></tr>
+                        <tr><td>Queen Rook Pawn</td><td>=</td><td>Child</td></tr>
+                        <tr><td>Queen Knight Pawn</td><td>=</td><td>Madman</td></tr>
+                        <tr><td>Queen Bishop Pawn</td><td>=</td><td>Farmer</td></tr>
+                        <tr><td>Queen Pawn</td><td>=</td><td>Ambassador</td></tr>
+                        <tr><td>King Pawn</td><td>=</td><td>Vagabond</td></tr>
+                        <tr><td>King Bishop Pawn</td><td>=</td><td>Worker</td></tr>
+                        <tr><td>King Knight Pawn</td><td>=</td><td>Thief</td></tr>
+                        <tr><td>King Rook Pawn</td><td>=</td><td>Elder</td></tr>
+                    </table>
+
+                    </details>
+
+                    <details>
+
+                    <summary>The Eight Archetypes</summary>
+
+                    <table class="compact-archetype-table">
+                        <tr><td>Sun</td><td>Acting</td></tr>
+                        <tr><td>Moon</td><td>Reacting</td></tr>
+                        <tr><td>Fire</td><td>Seeking</td></tr>
+                        <tr><td>Water</td><td>Hiding</td></tr>
+                        <tr><td>Lightning</td><td>Striving</td></tr>
+                        <tr><td>Wind</td><td>Thriving</td></tr>
+                        <tr><td>Lake</td><td>Sharing</td></tr>
+                        <tr><td>Mountain</td><td>Parting</td></tr>
+                    </table>
+
+                    </details>
+
+                    <details>
+
+                    <summary>The Sixty-Four Situations</summary>
+
+                    <p>
+
+                    One traditional Theme assigns symbolic names to each of the sixty-four Squares of the Board.
+
+                    These names are intended only as an example of what may be created.
+
+                    Players are encouraged to develop Situations of their own.
+
+                    </p>
+
+                    <table class="compact-situations-table">
+                        <tr><td>0 The Compass of Time</td><td>16 The Illuminati</td><td>32 The Current of Chance</td><td>48 The Dreamer</td></tr>
+                        <tr><td>1 The Myth Maker</td><td>17 The Balance of Tecology</td><td>33 The Fete of Panmixia</td><td>49 The Exoteric Formula</td></tr>
+                        <tr><td>2 The Seer</td><td>18 The Salamander</td><td>34 The Age of Play</td><td>50 The Ancestral Memory</td></tr>
+                        <tr><td>3 The Magician</td><td>19 The Initiator</td><td>35 The Gamut Monks</td><td>51 The Invocation Formula</td></tr>
+                        <tr><td>4 The Healer</td><td>20 The Generations</td><td>36 The Interloper</td><td>52 The Aborigine</td></tr>
+                        <tr><td>5 The Poet</td><td>21 The Banishment Formula</td><td>37 The Age of Dreaming</td><td>53 The Breaking Dam</td></tr>
+                        <tr><td>6 The Guardian</td><td>22 The Spectator</td><td>38 The Plague</td><td>54 The Room Without Walls</td></tr>
+                        <tr><td>7 The Lord of Cycles</td><td>23 The Referee</td><td>39 The Imago</td><td>55 The Axolotl</td></tr>
+                        <tr><td>8 The Spellstone</td><td>24 The Player</td><td>40 The Anarchist</td><td>56 The Arch Chimera</td></tr>
+                        <tr><td>9 The Magical Child</td><td>25 The Novitiate</td><td>41 The Anachronist</td><td>57 The Cynosure Ritual</td></tr>
+                        <tr><td>10 The Paradox</td><td>26 The Age of Waking</td><td>42 The Evocation Formula</td><td>58 The Law</td></tr>
+                        <tr><td>11 The Fanatic</td><td>27 The Harbinger</td><td>43 The Synchronist</td><td>59 The Muse</td></tr>
+                        <tr><td>12 The Esoteric Formula</td><td>28 The Transmutation</td><td>44 The Ladder of Time</td><td>60 The Plumed Serpent</td></tr>
+                        <tr><td>13 The Initiation</td><td>29 The Age of Sleep</td><td>45 The Pymander</td><td>61 The Cocoon</td></tr>
+                        <tr><td>14 The Sacrifice</td><td>30 The Eye of the Storm</td><td>46 The Rift in Time</td><td>62 The Smoking Mirror</td></tr>
+                        <tr><td>15 The Spellbinder</td><td>31 The Phoenix</td><td>47 The Synergist</td><td>63 The Compass of Nature</td></tr>
+                    </table>
+
+                    </details>
+
+                    <p>
+
+                    Players often extend the Correlations further by assigning their own Keywords, symbolic attributes, and relationships to the Pieces, the Squares, or the Eight Archetypes. The Board thus becomes a language capable of expressing ideas unique to each Player while remaining rooted in the underlying mathematical structure of the Correlations.
+
+                    </p>
+
+                    <p>
+
+                    Nothing requires a Player to adopt the traditional symbolism. One Theme might cast the King as a philosopher and the Queen as wisdom itself. Another might reinterpret the Pieces as characters in a novel, archetypes within the psyche, historical figures, mythological beings, or entirely original creations. So long as the underlying Correlations remain intact, each Theme becomes its own symbolic world.
+
+                    </p>
+
+                    </details>
+
+                    <details>
+
+                    <summary>3. Creative Applications</summary>
+
+                    <p>
+
+                    Upon this symbolic foundation, Intrachange may be employed in many forms of creative work.
+
+                    </p>
+
+                    <p>
+
+                    Some Players use the Board as a contemplative instrument for self-realization. Others employ it as a means of developing stories, poetry, music, visual art, philosophical inquiry, or dream work. Themes establish the world in which the Game unfolds, assigning identities to the opposing forces, the classes of Pieces, the Eight Archetypes, and the Sixty-Four Situations.
+
+                    </p>
+
+                    <p>
+
+                    The Board may also serve as a creative sandbox. Writers may use it to develop characters, generate plots, explore relationships, or overcome creative blocks. Game designers may employ it as a framework for constructing worlds, quests, or role-playing campaigns whose events unfold according to the symbolism of the Correlations. Artists and composers may use the movement of the Pieces as a source of unexpected associations and inspiration. Because the Board provides an objective structure while allowing complete symbolic freedom, it often reveals relationships that might otherwise remain unnoticed.
+
+                    </p>
+
+                    <p>
+
+                    In this manner, the Board becomes not only a Game, but a medium of imagination. The same principles that govern competitive play also govern the creation of symbolic worlds, allowing each Move to participate simultaneously in structure, narrative, and Change.
+
+                    </p>
+
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        const topLevelDetails = document.querySelectorAll('.lesson-content > details');
+        const symbolicCompositionDetails = document.querySelectorAll('.lesson-content > details:nth-of-type(2) > details');
+
+        function applyAccordionBehavior(detailsList) {
+            detailsList.forEach(function(detail) {
+                detail.addEventListener('toggle', function() {
+                    if (!detail.open) {
+                        return;
+                    }
+
+                    detailsList.forEach(function(otherDetail) {
+                        if (otherDetail !== detail) {
+                            otherDetail.open = false;
+                        }
+                    });
+                });
+            });
+        }
+
+        applyAccordionBehavior(topLevelDetails);
+        applyAccordionBehavior(symbolicCompositionDetails);
+
+        function nextPage() {
+            window.location.href = '../index.html';
+        }
+
+        function prevPage() {
+            window.location.href = '21.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

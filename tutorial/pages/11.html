@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            line-height: 1.75;
+        }
+
+        .lesson-content p,
+        .lesson-content li {
+            font-size: 1.35rem !important;
+            line-height: 1.55;
+        }
+
+        .split-layout {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .text-column {
+            flex: 0 1 38%;
+            min-width: 0;
+        }
+
+        .lesson-title {
+            white-space: nowrap;
+        }
+
+        .image-column {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            min-width: 0;
+        }
+
+        .board-panel {
+            width: min(80%, 608px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .board-stage {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hex-board-shell {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+            overflow: hidden;
+        }
+
+        .hex-board-shell {
+            background: #f4efe6;
+            border: 2px solid #34495e;
+            padding: 10px;
+        }
+
+        .hex-board {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            background: #2c2c2c;
+            border: 1px solid #2c2c2c;
+        }
+
+        .hex-cell {
+            aspect-ratio: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1px;
+            overflow: hidden;
+        }
+
+        .hex-cell.light {
+            background: #f0d9b5;
+        }
+
+        .hex-cell.dark {
+            background: #b58863;
+        }
+
+        .hex-cell img {
+            width: 48%;
+            height: 48%;
+            object-fit: contain;
+            opacity: 0.88;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.25));
+        }
+
+        .hexagram-art {
+            display: block;
+        }
+
+        .hex-label {
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            font-size: 0.62rem;
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(30, 30, 30, 0.72);
+        }
+
+        .hex-cell.dark .hex-label {
+            color: rgba(255,255,255,0.82);
+        }
+
+        .coord-label {
+            position: absolute;
+            top: 4px;
+            left: 5px;
+            font-size: 0.62rem;
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(30, 30, 30, 0.68);
+        }
+
+        .hex-cell.dark .coord-label {
+            color: rgba(255,255,255,0.78);
+        }
+
+        .keyword-label {
+            display: none;
+        }
+
+        .keyword-label {
+            position: absolute;
+            top: 50%;
+            left: 6%;
+            right: 6%;
+            transform: translateY(-50%);
+            text-align: center;
+            font-style: normal;
+            font-weight: 700;
+            font-size: clamp(0.62rem, 1.16vw, 0.88rem);
+            line-height: 1.16;
+            color: rgba(35, 35, 35, 0.88);
+            word-break: break-word;
+        }
+
+        .hex-cell.dark .keyword-label {
+            color: rgba(35, 35, 35, 0.88);
+        }
+
+        .hex-board-shell.show-keywords {
+            width: 155%;
+            max-width: none;
+        }
+
+        .hex-board-shell.show-keywords .hexgram-art {
+            display: none;
+        }
+
+        .hex-board-shell.show-keywords .keyword-label {
+            display: block;
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #e0e0e0;
+            font-size: 0.98rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 54px;
+            height: 30px;
+            display: inline-block;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: #505050;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background 0.25s ease;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 3px;
+            width: 22px;
+            height: 22px;
+            background: #ffffff;
+            border-radius: 50%;
+            transition: transform 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: #8c6b2f;
+        }
+
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(24px);
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "I Ching and Chess Correlation (5 of 9) - 64 :: 64 — Contexts";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation</h1>
+                <p class="subtitle">5 of 9</p>
+            </div>
+
+            <div class="content">
+                <div class="lesson-content split-layout">
+                    <div class="tutorial-content text-column">
+                        <h2 class="lesson-title">64 :: 64 — Contexts</h2>
+
+                        <p>The 64 hexagrams of the I Ching established on the 64 squares of the chessboard result from the combination of 8 horizontal rows and 8 vertical columns populated by their trigrams.</p>
+
+                        <p>They keywords are derived from the meanings of the hexagrams.</p>
+
+                        <div style="margin-top: 24px;">
+                            <label class="toggle-row" for="keywordToggle" style="justify-content: flex-start;">
+                                <span>Show Keywords</span>
+                                <span class="toggle-switch">
+                                    <input id="keywordToggle" type="checkbox" aria-controls="hexBoardShell">
+                                    <span class="toggle-slider"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="image-column">
+                        <div class="board-panel">
+                            <div class="board-stage">
+                                <div id="hexBoardShell" class="hex-board-shell">
+                                    <div id="hexBoard" class="hex-board" aria-label="Chessboard with all 64 hexagrams displayed"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        const boardHexes = [
+            [49, 50, 52, 55, 48, 51, 53, 54],
+            [41, 42, 44, 47, 40, 43, 45, 46],
+            [25, 26, 28, 31, 24, 27, 29, 30],
+            [1, 2, 4, 7, 0, 3, 5, 6],
+            [57, 58, 60, 63, 56, 59, 61, 62],
+            [33, 34, 36, 39, 32, 35, 37, 38],
+            [17, 18, 20, 23, 16, 19, 21, 22],
+            [9, 10, 12, 15, 8, 11, 13, 14]
+        ];
+
+        const keywordRows = [
+            ['Communication', 'Recollection', 'Self-Sufficiency', 'Nonspecialization', 'Internalization', 'Concentration', 'Disorientation', 'Extinction'],
+            ['Gratification', 'Irrationality', 'Improvisation', 'Synchronization', 'Confrontation', 'Nonsublimation', 'Uncertainty', 'Specialization'],
+            ['Persuasion', 'Ambition', 'Regeneration', 'Transcendence', 'Participation', 'Provocation', 'Eradication', 'Evolution'],
+            ['Revelation', 'Intuition', 'Identification', 'Orientation', 'Essence', 'Emanation', 'Interpretation', 'Cultivation'],
+            ['Celebration', 'Compliance', 'Reintegration', 'Existence', 'Recapitulation', 'Inspiration', 'Habituation', 'Disintegration'],
+            ['Compulsion', 'Reflection', 'Resilience', 'Individuation', 'Experience', 'Propagation', 'Potentiality', 'Utilization'],
+            ['Congruity', 'Certainty', 'Tradition', 'Noninterference', 'Conceptualization', 'Instruction', 'Rationality', 'Preconception'],
+            ['Sensitization', 'Incongruity', 'Authenticity', 'Emancipation', 'Devotion', 'Projection', 'Induction', 'Inhibition']
+        ];
+
+        function chessCoord(rowIndex, colIndex) {
+            const file = String.fromCharCode(97 + colIndex);
+            const rank = 8 - rowIndex;
+            return `${file}${rank}`;
+        }
+
+        const appBasePath = window.location.pathname === '/intrachange.net/tutorial/pages/11.html' || window.location.pathname.startsWith('/intrachange.net/')
+            ? '/intrachange.net'
+            : '';
+
+        function getHexagramImagePath(hexNum) {
+            return `${appBasePath}/img/hex/hexagram${hexNum}.svg`;
+        }
+
+        function renderHexBoard() {
+            const board = document.getElementById('hexBoard');
+            if (!board) {
+                return;
+            }
+
+            const cells = [];
+
+            boardHexes.forEach((row, rowIndex) => {
+                row.forEach((hexNum, colIndex) => {
+                    const squareClass = (rowIndex + colIndex) % 2 === 0 ? 'light' : 'dark';
+                    const keyword = keywordRows[rowIndex][colIndex];
+                    const coord = chessCoord(rowIndex, colIndex);
+
+                    cells.push(`
+                        <div class="hex-cell ${squareClass}">
+                            <img class="hexagram-art" src="${getHexagramImagePath(hexNum)}" alt="Hexagram ${hexNum}">
+                            <span class="coord-label">${coord}</span>
+                            <span class="hex-label">${hexNum}</span>
+                            <span class="keyword-label">${keyword}</span>
+                        </div>
+                    `);
+                });
+            });
+
+            board.innerHTML = cells.join('');
+        }
+
+        function initializeKeywordToggle() {
+            const toggle = document.getElementById('keywordToggle');
+            const hexBoardShell = document.getElementById('hexBoardShell');
+
+            if (!toggle || !hexBoardShell) {
+                return;
+            }
+
+            toggle.addEventListener('change', () => {
+                hexBoardShell.classList.toggle('show-keywords', toggle.checked);
+            });
+        }
+
+        renderHexBoard();
+        initializeKeywordToggle();
+
+        function nextPage() {
+            window.location.href = '12.html';
+        }
+
+        function prevPage() {
+            window.location.href = '10.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

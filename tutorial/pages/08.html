@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            line-height: 1.75;
+        }
+
+        .lesson-content p,
+        .lesson-content li {
+            font-size: 1.35rem !important;
+            line-height: 1.55;
+        }
+
+        .lesson-figure {
+            float: right;
+            margin: 180px 30px 14px 6px;
+            width: min(29%, 210px);
+        }
+
+        .lesson-figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .closing-note {
+            margin-top: 70px;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "I Ching and Chess Correlation (2 of 9) - 2 :: 2 — Duality";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation</h1>
+                <p class="subtitle">2 of 9</p>
+            </div>
+
+            <div class="content">
+                <div class="tutorial-content lesson-content">
+                    <div class="lesson-figure">
+                        <img src="../images/identity1.png" alt="Identity illustration">
+                    </div>
+
+                    <h2>2 :: 2 — Duality</h2>
+
+                    <h2 class="subhead">Yin :: Yang — Black :: White</h2>
+
+                    <p>At the root of the system is a single polarity expressed two ways.</p>
+
+                    <p>In the I Ching, <strong>Yang</strong> is the solid line and <strong>Yin</strong> is the broken line.<br>
+                    In Chess, <strong>White</strong> embodies Yang and <strong>Black</strong> embodies Yin.</p>
+
+                    <p>The correspondence is one-to-one:</p>
+
+                    <ul>
+                        <li>Yang ↔ White ↔ Solid line</li>
+                        <li>Yin ↔ Black ↔ Broken line</li>
+                    </ul>
+
+                    <p></p>
+
+                    <p></p>
+
+                    <p class="closing-note">This duality energizes the whole Game and underlies every square, every piece, and every change.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '09.html';
+        }
+
+        function prevPage() {
+            window.location.href = '07.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .tutorial-header h1 {
+            font-size: 1.5rem !important;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-container {
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            line-height: 1.75;
+        }
+
+        .lesson-content p,
+        .lesson-content li {
+            font-size: 1.18rem !important; /* Calibrated 1 size smaller than standard Novice list (~42px cell ratio) */
+            line-height: 1.5;
+        }
+
+        .split-layout {
+            display: flex;
+            align-items: stretch;
+            gap: 18px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .text-column {
+            flex: 0 1 36%;
+            min-width: 0;
+        }
+
+        .lesson-title {
+            white-space: normal;
+        }
+
+        .animation-column {
+            flex: 1 1 auto;
+            min-width: 630px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .animation-frame {
+            width: 556px;
+            height: 480px;
+            border: 0;
+            background: transparent;
+            display: block;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .replay-button {
+            padding: 8px 16px;
+            background: #4a4a4a;
+            color: #ffffff;
+            border: 1px solid #d4af37;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .replay-button:hover {
+            background: #d4af37;
+            color: #2a2a2a;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "I Ching and Chess Correlation (3 of 9) - 8 :: 8 — Archetypes in Motion";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>I Ching and Chess Correlation</h1>
+                <p class="subtitle">3 of 9</p>
+            </div>
+
+            <div class="content">
+                <div class="lesson-content split-layout">
+                    <div class="tutorial-content text-column">
+                        <h2 class="lesson-title">8 :: 8 — Archetypes in Motion</h2>
+
+                        <h2 class="subhead">Ranks and Trigrams</h2>
+
+                        <p>The eight I Ching trigrams map to the eight columns and rows of the Intrachange board. Each column carries the energy of its top-trigram archetype, and each row follows the bottom-trigram pattern, creating a lattice of systemic energy.</p>
+
+                        <p>These eight Types are dynamic exchanges of energy, marking the transitional relationships between states. The intersection of files and rows gives each square a unique energetic signature, guiding piece movement and shaping the flow of the Game.</p>
+                    </div>
+
+                    <div class="animation-column">
+                        <iframe id="trigramAnimation" class="animation-frame page-09-frame" src="../correlations/animate.html" title="Correlation 8 by 8 animation" scrolling="no"></iframe>
+                        <button class="replay-button" type="button" onclick="replayAnimation()">REPLAY</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+
+        function nextPage() {
+            window.location.href = '10.html';
+        }
+
+        function prevPage() {
+            window.location.href = '08.html';
+        }
+
+        function sizeAnimationFrame() {
+            // Disabled: CSS Layout B controls responsive sizing directly
+            return;
+        }
+
+        function replayAnimation() {
+            const frame = document.getElementById('trigramAnimation');
+            frame.src = frame.src;
+        }
+    </script>
+</body>
+</html>

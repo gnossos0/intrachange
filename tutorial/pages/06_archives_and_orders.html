@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>06. Archives and Orders - Intrachange Tutorial</title>
@@ -57,6 +65,13 @@
         .tutorial-container {
             position: relative;
         }
+
+        /* 14pt-equivalent (~1.18rem) responsive font size test */
+        .tutorial-content p,
+        .tutorial-content li {
+            font-size: 1.35rem !important; /* Increased to next level (~16pt/1.35rem) */
+            line-height: 1.55;
+        }
     </style>
 </head>
 <body>
@@ -71,7 +86,6 @@
             </div>
             
             <div class="tutorial-content">
-                <h2>Archives and Orders</h2>
                 <p>All Games are recorded automatically, allowing Players to review the archives of others. Past Games, played in secrecy, remain protected — a matter of utmost importance to current and former Masters.</p>
                 
                 <p>The Game is ancient and has spawned numerous Orders. Ours is the oldest and largest, distinguished by the Three Levels: Game, Self-Realization, and Artistic-Creative.</p>
@@ -83,7 +97,7 @@
                     <li>New Moon School: Focus on magic, power, and shamanic faculties.</li>
                     <li>Illuminati: Attempted to harness the Game's forces to govern humanity.</li>
                 </ul>
-                
+                <P></P>
                 <p>All Orders share a common purpose: engaging in the perpetual exchange of ideas in pursuit of deeper insight.</p>
                 
                 <p>With the Archives and Orders in mind, you are now ready to test your comprehension with a brief quiz.</p>
@@ -101,7 +115,7 @@
         }
 
         function prevPage() {
-            window.location.href = '05b_nature_of_the_game.html';
+            window.location.href = '05_nature_of_the_game.html';
         }
 
         function goBack() {

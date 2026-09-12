@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrachange Tutorial</title>
+    <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
+    <link rel="stylesheet" href="../tutorial.css">
+    <style>
+        .main-content {
+            background-color: #4a4a4a !important;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: #6a6a6a;
+            color: #ffffff;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background-color: #d4af37;
+            color: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+            color: #d4af37;
+            z-index: 100;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow:hover {
+            color: #f4d03f;
+            transform: translateY(-50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-content {
+            flex: 1;
+            width: 100%;
+            padding: 6px 8px 0;
+            font-size: 10pt;
+        }
+
+        .lesson-content h2 {
+            font-size: 12pt;
+        }
+
+        .move-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 5px 0;
+            border: 1px solid #d4af37;
+        }
+
+        .move-table td {
+            padding: 6px;
+            border: 1px solid #d4af37;
+            text-align: left;
+            font-size: 10pt;
+        }
+
+        .move-text-cell {
+            width: 70%;
+        }
+
+        .move-image-cell {
+            width: 30%;
+            text-align: center !important;
+            vertical-align: middle;
+            background-color: #5a5a5a;
+        }
+
+        .move-image-cell img {
+            width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+
+        .notes {
+            margin: 8px 0;
+            padding: 8px;
+            background-color: #dcdcdc;
+            border-left: 4px solid #d4af37;
+            font-size: 10pt;
+            line-height: 1;
+        }
+
+        .notes p {
+            margin: 0 0 4px 0;
+            font-size: 10pt;
+        }
+
+        .notes h3 {
+            margin: 0;
+            color: #6a102f;
+            font-size: 10pt;
+            font-weight: normal;
+        }
+
+        .historical {
+            margin-top: 8px;
+            padding: 6px;
+            background-color: #6a6a6a;
+            border-left: 3px solid #6a102f;
+            font-size: 10pt;
+            line-height: 1;
+        }
+
+        .historical p {
+            margin: 0;
+        }
+
+        .intro {
+            font-size: 10pt;
+            font-weight: 500;
+            margin: 6px 0;
+        }
+
+        section section {
+            margin-left: 10px;
+            font-size: 10pt;
+        }
+    </style>
+    <!-- TEMPORARY FEEDBACK PAGE CONTEXT -->
+    <script>
+    const tutorialPageContext = "Pattern of Esoteric Moves (Page 3 of 6)";
+    </script>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">← Back to Contents</button>
+
+    <div class="tutorial-container">
+        <div class="main-content">
+            <div class="tutorial-header">
+                <img src="../../img/icon.jpg" alt="Intrachange Icon">
+                <h1>Pattern of Esoteric Moves</h1>
+                <p class="subtitle">3 of 6</p>
+            </div>
+
+            <div class="content">
+                <div class="tutorial-content lesson-content">
+
+                    <section id="knights">
+                        <h2>Knights</h2>
+
+                        <table class="move-table">
+                            <tbody>
+                                <tr>
+                                    <td class="move-text-cell"><strong>1st Esoteric: 5th</strong></td>
+                                    <td class="move-image-cell" rowspan="8">
+                                        <img src="../images/pieces/knights.png" alt="Knight move pattern">
+                                    </td>
+                                </tr>
+                                <tr><td class="move-text-cell">2nd Exoteric</td></tr>
+                                <tr><td class="move-text-cell">3rd Exoteric</td></tr>
+                                <tr><td class="move-text-cell"><strong>4th Esoteric: 8th</strong></td></tr>
+                                <tr><td class="move-text-cell">5th Exoteric</td></tr>
+                                <tr><td class="move-text-cell"><strong>6th Esoteric: 2nd</strong></td></tr>
+                                <tr><td class="move-text-cell"><strong>7th Esoteric: 3rd</strong></td></tr>
+                                <tr><td class="move-text-cell">8th Exoteric</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="notes">
+                            <h2 class="notes-title">Notes</h2>
+
+                            <aside class="historical">
+                                <p>
+                                    First and foremost, the Knight is an essential offensive due to its Esoteric Move into the opponent's home rank from its own 4th rank, which it can, of course, reach in two Exoteric Moves. Knights occupying Exoteric Squares in their 2nd rank, particularly those immediately in front of their King's and Queen's starting squares, are perpetual threats to the opponent's major Pieces. Players will find that loss of one or both their Knights significantly decreases their chances for victory; for this reason, many Players find the exchange of another major Piece, especially the Rook, for an opponent's Knight to be highly advantageous. Because the Knight cannot pass through other pieces standing between their Exoteric Square and Esoteric Square, it is essential that Players maintain other Pieces in front of their Kings, especially when they remain in their home rank. The Knight's offensive capabilities are enhanced further by the fact that, once it has moved off its home rank, an Exoteric Move back into the 1st rank results in an Esoteric Move into the 5th rank. But Knights also constitute a significant defensive force since Exoteric Moves into the 6th and 7th ranks result in Esoteric Moves back to the 2nd and 3rd ranks, respectively.
+                                </p>
+                            </aside>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
+        <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
+    </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = '19.html';
+        }
+
+        function prevPage() {
+            window.location.href = '17.html';
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

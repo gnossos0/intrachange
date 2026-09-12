@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>05. Nature of the Game - Intrachange Tutorial</title>
@@ -57,6 +65,36 @@
         .tutorial-container {
             position: relative;
         }
+
+        /* Increase font sizing for Novice Lesson */
+        .tutorial-content p,
+        .tutorial-content li {
+            font-size: 1.35rem !important;
+            line-height: 1.55;
+        }
+
+        .tutorial-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .footnote-block {
+            margin-top: auto;
+            padding-top: 18px;
+            font-size: 0.88em;
+            line-height: 1.4;
+            color: #d8d0b7;
+        }
+
+        .footnote-block p {
+            margin: 0;
+        }
+
+        .footnote-block a {
+            color: #d4af37;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -68,27 +106,39 @@
             <div class="tutorial-header">
                 <img src="../../img/icon.jpg" alt="Intrachange Icon">
                 <h1>Nature of the Game</h1>
-                <p class="subtitle">Page 1 of 2</p>
+                <p class="subtitle">Page 1 of 1</p>
             </div>
             
             <div class="tutorial-content">
-                <h2>Nature of the Game</h2>
                 <p>Intrachange is not merely a game; it is a living system where space, time, and consciousness converge. It preserves the cosmological insights of our prehistoric forebears, whose observations of natural forces mirrored those shaping human nature. These forces manifest as rules, patterns, and correspondences governing every move, line, and hexagram on the board.</p>
                 
                 <p>Esoteric Chess crystallizes this insight — a microcosm of the world encoded in squares, pieces, and moves. Its structure mirrors the I Ching, and its movement enacts it. The squares, pieces, and moves of Chess give form to the hexagrams, lines, and changes of the I Ching; the hexagrams, lines, and changes of the I Ching give meaning and value to the squares, pieces, and moves of Chess.</p>
                 
                 <p></p>
                 <p style="text-align: center;"><strong><em>Some have called it a philosophical sandbox.</em></strong></p>
+
+                <p>Every move, whether Exoteric or Esoteric, is a negotiation of alignment and transformation, a moment in which the Player participates in the living architecture of the system itself. To master the Game is to perceive the hidden currents that shape each interaction, to recognize the interplay of stability and flux, correspondence and displacement that governs every square of the board.</p>
+
+                <p>With the nature of the Game understood, the next lesson explains how the Archives preserve the wisdom of past Players and Orders.</p>
+
+                <div class="footnote-block">
+                    <p>To learn more about the nature of the game, see the Master Level: <a href="22.html">Higher Levels of Play</a>.</p>
+                </div>
             </div>
         </div>
 
         <!-- Navigation arrows -->
+        <div class="arrow arrow-left" onclick="prevPage()">&lt;</div>
         <div class="arrow arrow-right" onclick="nextPage()">&gt;</div>
     </div>
 
     <script>
         function nextPage() {
-            window.location.href = '05b_nature_of_the_game.html';
+            window.location.href = '06_archives_and_orders.html';
+        }
+
+        function prevPage() {
+            window.location.href = '04_concentration.html';
         }
 
         function goBack() {

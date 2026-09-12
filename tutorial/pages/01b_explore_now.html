@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01b. Explore Now - Intrachange Tutorial</title>
+    <title>01b. Understanding the Game - Intrachange Tutorial</title>
     <link rel="icon" type="image/jpeg" href="../../img/icon.jpg">
     <link rel="stylesheet" href="../tutorial.css">
     <style>
@@ -58,6 +66,47 @@
             position: relative;
         }
 
+        /* Increase font sizing for Novice Lesson */
+        .tutorial-content p,
+        .tutorial-content li {
+            font-size: 1.35rem !important;
+            line-height: 1.55;
+        }
+
+        .tutorial-content h2 {
+            font-family: 'Space Grotesk', Arial, Helvetica, sans-serif;
+            font-size: 1.45rem;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .fade-in-line {
+            opacity: 0;
+            animation: fadeInLine 1.8s ease forwards;
+        }
+
+        .fade-in-line.delay-1 {
+            animation-delay: 0.4s;
+        }
+
+        .fade-in-line.delay-2 {
+            animation-delay: 1.8s;
+        }
+
+        .fade-in-line.delay-3 {
+            animation-delay: 3.2s;
+        }
+
+        @keyframes fadeInLine {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
         /* Lesson Image positioning */
         .lesson-image {
             position: absolute;
@@ -80,18 +129,19 @@
         <div class="main-content">
             <div class="tutorial-header">
                 <img src="../../img/icon.jpg" alt="Intrachange Icon">
-                <h1>Explore Now – Grasp Later</h1>
+                <h1>Understanding the Game</h1>
                 <p class="subtitle">Page 2 of 3</p>
             </div>
             
             <div class="tutorial-content">
                 <h2>Symbolism of the Move</h2>
                 <p>After each move, you'll be prompted to write a short reflection inspired by the hexagram keywords your piece touched. These are called the Symbolism of the Move and often begin with phrases like:</p>
-                <p><em>"This reminds me of…"</em></p>
-                <p><em>"I see similarities between…"</em></p>
-                <p><em>"Sometimes I marvel that…"</em></p>
-                <p>Your reflections are entirely subjective — meant to capture your personal insight.</p>
+                <p class="fade-in-line delay-1"><em>"This reminds me of…"</em></p>
+                <p class="fade-in-line delay-2"><em>"I see similarities between…"</em></p>
+                <p class="fade-in-line delay-3"><em>"Sometimes I marvel that…"</em></p>
+                <p>Your reflections are entirely subjective — <br>&nbsp;&nbsp;&nbsp;&nbsp;meant to capture your personal insight.</p>
                 <p>You can also include links or images that expand on your idea.</p>
+                <p>You can use the Reference link to find inspiration.</p>
             </div>
             
             <!-- Lesson Image positioned in bottom right -->

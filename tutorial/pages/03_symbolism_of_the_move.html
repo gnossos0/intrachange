@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HQRDF2FZBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HQRDF2FZBV');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>03. Symbolism of the Move - Intrachange Tutorial</title>
@@ -57,6 +65,32 @@
         .tutorial-container {
             position: relative;
         }
+
+        /* Increase font sizing for Novice Lesson */
+        .tutorial-content p,
+        .tutorial-content li {
+            font-size: 1.35rem !important;
+            line-height: 1.55;
+        }
+
+        .tutorial-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        .text-column {
+            flex: 1;
+        }
+
+        .lesson-image {
+            width: 290px;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            flex: 0 0 290px;
+        }
     </style>
 </head>
 <body>
@@ -71,14 +105,21 @@
             </div>
             
             <div class="tutorial-content">
-                <h2>Symbolism of the Move</h2>
-                <p>The true product of Intrachange is not victory or defeat, but the symbolic record of each Move — a reflection of the Player's heart and mind. This is the lasting treasure preserved in the Archive.</p>
-                
-                <p>Among all elements of the Game, none is more significant than the Player's symbolic record. The <strong>Symbolism of the Move</strong> is the sole enduring product of play.</p>
-                
-                <p>Many Players discover that selecting a theme for their Game beforehand sharpens focus and guides the symbolic narrative that unfolds, move by move.</p>
-                
-                <p>Now that you appreciate the meaning behind each Move, the next lesson explores the mental skill that allows you to hold multiple layers of significance at once.</p>
+                <div class="text-column">
+                    <p>The true product of Intrachange is not victory or defeat, but the symbolic record of each Move — a reflection of the Player's heart and mind.</p>
+                    
+                    <p>This is the lasting treasure preserved in the Archive.</p>
+                    
+                    <p>Many Players discover that selecting a theme for their Game beforehand sharpens focus and guides the symbolic narrative that unfolds, move by move.</p>
+
+                    <p>This game was themed around Star Trek episodes.</p>
+
+                    <p>As the game continues, players can scroll through the Game History to review posts and follow links.</p>
+                    
+                    <p>Now that you appreciate the meaning behind each Move, the next lesson explores the mental skill that allows you to hold multiple layers of significance at once.</p>
+                </div>
+
+                <img src="../images/game_timeline.png" alt="Game timeline" class="lesson-image">
             </div>
         </div>
 
